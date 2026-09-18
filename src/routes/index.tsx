@@ -189,54 +189,6 @@ function Hero() {
 /* Featured showcase — The Johannesburg Campus Connect                 */
 /* ------------------------------------------------------------------ */
 
-const mockEvents = [
-  {
-    title: "AI & Machine Learning Society — Kickoff",
-    source: "UJ Events Portal",
-    location: "UJ Auckland Park Kingsway Campus — Sanlam Auditorium",
-    campus: "APK",
-    time: "Fri 18 Sep · 18:00",
-    status: "Live",
-    url: "https://www.uj.ac.za/events/",
-  },
-  {
-    title: "Career Fair: Tech & Finance Recruiters",
-    source: "Instagram @uj_careerservices",
-    location: "UJ Auckland Park Bunting Road Campus — Main Hall",
-    campus: "APB",
-    time: "Sat 19 Sep · 09:30",
-    status: "Live",
-    url: "https://www.instagram.com/uj_careerservices/",
-  },
-  {
-    title: "Postgrad Research Methods Workshop",
-    source: "Faculty Portal",
-    location: "UJ Soweto Campus — Library Seminar Room 2",
-    campus: "SWC",
-    time: "Sat 19 Sep · 13:00",
-    status: "Verified",
-    url: "https://www.uj.ac.za/events/",
-  },
-  {
-    title: "Entrepreneurship Pitch Night",
-    source: "X / @go2uj",
-    location: "UJ Auckland Park Kingsway Campus — UJ Arts Theatre",
-    campus: "APK",
-    time: "Sun 20 Sep · 17:00",
-    status: "Pending",
-    url: "https://x.com/go2uj",
-  },
-  {
-    title: "Open Day — Faculty of Engineering",
-    source: "UJ Events Portal",
-    location: "UJ Auckland Park Kingsway Campus — Engineering Building, D-Lab",
-    campus: "APK",
-    time: "Mon 21 Sep · 10:00",
-    status: "Live",
-    url: "https://www.uj.ac.za/events/",
-  },
-];
-
 function statusClass(status: string) {
   switch (status) {
     case "Live":
@@ -248,7 +200,48 @@ function statusClass(status: string) {
   }
 }
 
+const campusOptions: Array<{ value: string; label: string }> = [
+  { value: "all", label: "All campuses" },
+  ...(Object.keys(campusLabels) as Array<keyof typeof campusLabels>).map((code) => ({
+    value: code,
+    label: `${code} — ${campusLabels[code]}`,
+  })),
+];
+
+const windowOptions: Array<{ value: TimeWindow; label: string }> = [
+  { value: "week", label: "This week" },
+  { value: "today", label: "Today" },
+  { value: "month", label: "This month" },
+  { value: "any", label: "Any date" },
+];
+
+const selectClass =
+  "rounded-md border border-border bg-background px-3 py-2 font-mono text-xs text-muted-foreground outline-none transition-colors focus:border-primary/60";
+
 function Showcase() {
+  const [query, setQuery] = useState("");
+  const [campus, setCampus] = useState("all");
+  const [window, setWindow] = useState<TimeWindow>("week");
+  const [source, setSource] = useState("any");
+  const [showAll, setShowAll] = useState(false);
+
+  const results = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    return campusEvents
+      .filter((event) => (campus === "all" ? true : event.campus === campus))
+      .filter((event) => (source === "any" ? true : event.source === source))
+      .filter((event) => (showAll ? true : withinWindow(event, window)))
+      .filter((event) =>
+        q
+          ? [event.title, event.location, event.source, event.category, event.campus]
+              .join(" ")
+              .toLowerCase()
+              .includes(q)
+          : true,
+      )
+      .sort((a, b) => `${a.date}${a.time}`.localeCompare(`${b.date}${b.time}`));
+  }, [query, campus, window, source, showAll]);
+
   return (
     <section id="showcase" className="border-b border-border">
       <div className="mx-auto max-w-6xl px-6 py-24 sm:py-32">
@@ -258,7 +251,7 @@ function Showcase() {
           intro="Campus Connect, provided by Leteane Industries — an automated, multi-source data pipeline that scrapes, cleans, and centralises fragmented university and social media event data, surfacing everything students need in one real-time, searchable interface."
         />
 
-        {/* Dashboard mock */}
+        {/* Dashboard */}
         <div className="panel-sheen mt-10 overflow-hidden rounded-xl border border-border bg-surface">
           {/* Window chrome */}
           <div className="flex items-center justify-between border-b border-border bg-surface-2 px-5 py-3">
@@ -278,22 +271,77 @@ function Showcase() {
 
           {/* Toolbar */}
           <div className="flex flex-wrap items-center gap-3 border-b border-border px-5 py-4">
-            <div className="flex min-w-56 flex-1 items-center gap-2 rounded-md border border-border bg-background px-3 py-2 text-muted-foreground">
+            <div className="flex min-w-56 flex-1 items-center gap-2 rounded-md border border-border bg-background px-3 py-2 text-muted-foreground focus-within:border-primary/60">
               <Search className="size-4" />
-              <span className="text-sm">Search events, venues, societies…</span>
+              <input
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+                placeholder="Search events, venues, societies…"
+                aria-label="Search events"
+                className="w-full bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
+              />
             </div>
-            {["All campuses", "This week", "Source: any"].map((chip) => (
-              <span
-                key={chip}
-                className="rounded-md border border-border bg-background px-3 py-2 font-mono text-xs text-muted-foreground"
-              >
-                {chip}
-              </span>
-            ))}
+
+            <select
+              value={campus}
+              onChange={(event) => setCampus(event.target.value)}
+              aria-label="Filter by campus"
+              className={selectClass}
+            >
+              {campusOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+
+            <select
+              value={window}
+              onChange={(event) => {
+                setWindow(event.target.value as TimeWindow);
+                setShowAll(false);
+              }}
+              aria-label="Filter by date"
+              disabled={showAll}
+              className={`${selectClass} disabled:opacity-50`}
+            >
+              {windowOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+
+            <select
+              value={source}
+              onChange={(event) => setSource(event.target.value)}
+              aria-label="Filter by source"
+              className={selectClass}
+            >
+              <option value="any">Source: any</option>
+              {eventSources.map((item) => (
+                <option key={item} value={item}>
+                  {item}
+                </option>
+              ))}
+            </select>
+
+            <button
+              type="button"
+              onClick={() => setShowAll((value) => !value)}
+              className={`inline-flex items-center gap-1.5 rounded-md border px-3 py-2 font-mono text-xs transition-colors ${
+                showAll
+                  ? "border-primary/50 bg-primary/10 text-primary"
+                  : "border-border bg-background text-muted-foreground hover:border-primary/40 hover:text-primary"
+              }`}
+            >
+              <ChevronDown className={`size-3.5 ${showAll ? "rotate-180" : ""}`} />
+              {showAll ? "Showing all indexed" : "View all indexed events"}
+            </button>
           </div>
 
           {/* Table */}
-          <div className="overflow-x-auto">
+          <div className={`overflow-x-auto ${showAll ? "max-h-96 overflow-y-auto" : ""}`}>
             <table className="w-full min-w-160 text-left text-sm">
               <thead>
                 <tr className="border-b border-border font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
@@ -306,7 +354,7 @@ function Showcase() {
                 </tr>
               </thead>
               <tbody>
-                {mockEvents.map((event) => (
+                {results.map((event) => (
                   <tr
                     key={event.title}
                     className="border-b border-border/60 transition-colors last:border-0 hover:bg-surface-2/60"
@@ -330,7 +378,7 @@ function Showcase() {
                       {event.campus}
                     </td>
                     <td className="hidden px-5 py-3.5 font-mono text-xs text-muted-foreground md:table-cell">
-                      {event.time}
+                      {formatEventWhen(event)}
                     </td>
                     <td className="px-5 py-3.5">
                       <span
@@ -344,17 +392,46 @@ function Showcase() {
                     </td>
                   </tr>
                 ))}
+                {results.length === 0 ? (
+                  <tr>
+                    <td
+                      colSpan={6}
+                      className="px-5 py-10 text-center text-sm text-muted-foreground"
+                    >
+                      No events match those filters yet — try a different campus, date range
+                      or source.
+                    </td>
+                  </tr>
+                ) : null}
               </tbody>
             </table>
           </div>
 
           <div className="flex items-center justify-between border-t border-border px-5 py-3 font-mono text-[11px] text-muted-foreground">
-            <span>1,284 events indexed</span>
+            <span>
+              {results.length} of {campusEvents.length} indexed events shown
+            </span>
             <span className="flex items-center gap-1.5">
               <Terminal className="size-3" />
               pipeline: healthy
             </span>
           </div>
+        </div>
+
+        {/* AI assistant */}
+        <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-[1fr_1.15fr]">
+          <div>
+            <Eyebrow>Ask the assistant</Eyebrow>
+            <h3 className="mt-3 font-display text-2xl font-semibold tracking-tight text-foreground">
+              Not sure which events are for you?
+            </h3>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              The Campus Connect assistant reads the same live index the table above serves.
+              Tell it your campus, year of study or interests and it will recommend events
+              with dates, venues and links back to the original post.
+            </p>
+          </div>
+          <CampusAssistant />
         </div>
       </div>
     </section>
