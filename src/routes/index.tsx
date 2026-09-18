@@ -491,10 +491,15 @@ function About() {
 /* ------------------------------------------------------------------ */
 
 function Footer() {
-  const columns = [
+  const columns: { heading: string; links: { label: string; href: string }[] }[] = [
     {
       heading: "Company",
-      links: ["Showcase", "Services", "About", "Careers"],
+      links: [
+        { label: "Showcase", href: "#showcase" },
+        { label: "Services", href: "#services" },
+        { label: "About", href: "#company" },
+        { label: "Careers", href: "#" },
+      ],
     },
     {
       heading: "Legal",
