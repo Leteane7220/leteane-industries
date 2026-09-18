@@ -4,17 +4,17 @@ import { ArrowLeft } from "lucide-react";
 export const Route = createFileRoute("/terms")({
   head: () => ({
     meta: [
-      { title: "Terms of Service — Letane Industries" },
+      { title: "Terms of Service — Leteane Industries" },
       {
         name: "description",
         content:
-          "Terms of Service for Letane Industries (Pty) Ltd — governing use of our data engineering, API, and analytics services.",
+          "Terms of Service for Leteane Industries (Pty) Ltd — governing use of our data engineering, API, and analytics services.",
       },
-      { property: "og:title", content: "Terms of Service — Letane Industries" },
+      { property: "og:title", content: "Terms of Service — Leteane Industries" },
       {
         property: "og:description",
         content:
-          "Terms of Service for Letane Industries (Pty) Ltd — governing use of our data engineering, API, and analytics services.",
+          "Terms of Service for Leteane Industries (Pty) Ltd — governing use of our data engineering, API, and analytics services.",
       },
       { property: "og:type", content: "website" },
     ],
@@ -25,11 +25,11 @@ export const Route = createFileRoute("/terms")({
 const sections = [
   {
     title: "1. Agreement to these terms",
-    body: "These Terms of Service govern your access to and use of the services provided by Letane Industries (Pty) Ltd, a registered South African company, including data engineering, data aggregation, database architecture, and API deployment services, as well as this website. By engaging our services or using this website, you agree to be bound by these terms.",
+    body: "These Terms of Service govern your access to and use of the services provided by Leteane Industries (Pty) Ltd, a registered South African company, including data engineering, data aggregation, database architecture, and API deployment services, as well as this website. By engaging our services or using this website, you agree to be bound by these terms.",
   },
   {
     title: "2. Services",
-    body: "Letane Industries provides automated data ingestion and web scraping, relational database architecture, and API development and integration services. The specific scope, deliverables, timelines, and fees for any engagement will be set out in a separate written agreement, statement of work, or service-level agreement signed by both parties.",
+    body: "Leteane Industries provides automated data ingestion and web scraping, relational database architecture, and API development and integration services. The specific scope, deliverables, timelines, and fees for any engagement will be set out in a separate written agreement, statement of work, or service-level agreement signed by both parties.",
   },
   {
     title: "3. Data collection and lawful use",
@@ -41,7 +41,7 @@ const sections = [
   },
   {
     title: "5. Intellectual property",
-    body: "All pipelines, schemas, software, documentation, and other deliverables created by Letane Industries remain the intellectual property of Letane Industries unless expressly assigned in writing. Upon full payment, clients receive a perpetual, non-exclusive licence to use the deliverables for their internal business purposes. Pre-existing tools, libraries, and methodologies retained by Letane Industries remain our sole property.",
+    body: "All pipelines, schemas, software, documentation, and other deliverables created by Leteane Industries remain the intellectual property of Leteane Industries unless expressly assigned in writing. Upon full payment, clients receive a perpetual, non-exclusive licence to use the deliverables for their internal business purposes. Pre-existing tools, libraries, and methodologies retained by Leteane Industries remain our sole property.",
   },
   {
     title: "6. Data accuracy and availability",
@@ -49,7 +49,7 @@ const sections = [
   },
   {
     title: "7. Limitation of liability",
-    body: "To the maximum extent permitted by law, Letane Industries shall not be liable for any indirect, incidental, special, or consequential damages, including loss of profits, data, or business opportunities, arising from the use of or inability to use our services. Our total aggregate liability for any claim shall not exceed the fees paid by you for the services giving rise to the claim in the twelve months preceding it.",
+    body: "To the maximum extent permitted by law, Leteane Industries shall not be liable for any indirect, incidental, special, or consequential damages, including loss of profits, data, or business opportunities, arising from the use of or inability to use our services. Our total aggregate liability for any claim shall not exceed the fees paid by you for the services giving rise to the claim in the twelve months preceding it.",
   },
   {
     title: "8. Confidentiality",
@@ -79,7 +79,7 @@ function TermsPage() {
               L
             </span>
             <span className="font-display text-sm font-semibold tracking-wide text-foreground">
-              Letane Industries
+              Leteane Industries
             </span>
           </Link>
           <Link
@@ -100,7 +100,7 @@ function TermsPage() {
           Terms of Service
         </h1>
         <p className="mt-4 text-sm text-muted-foreground">
-          Effective date: 18 September 2026 · Letane Industries (Pty) Ltd, Johannesburg, South
+          Effective date: 18 September 2026 · Leteane Industries (Pty) Ltd, Johannesburg, South
           Africa
         </p>
 
@@ -118,14 +118,14 @@ function TermsPage() {
         </div>
 
         <p className="mt-8 font-mono text-xs text-muted-foreground/70">
-          Questions about these terms? Contact hello@letane.industries.
+          Questions about these terms? Contact hello@leteane.industries.
         </p>
       </main>
 
       <footer className="border-t border-border bg-surface/40">
         <div className="mx-auto flex max-w-4xl flex-col justify-between gap-2 px-6 py-8 sm:flex-row sm:items-center">
           <p className="text-sm text-muted-foreground">
-            © 2026 Letane Industries (Pty) Ltd. All rights reserved.
+            © 2026 Leteane Industries (Pty) Ltd. All rights reserved.
           </p>
           <p className="font-mono text-xs text-muted-foreground/70">
             Privacy Policy &amp; Data Scraping Compliance — pending legal review

@@ -15,16 +15,16 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       {
-        title: "Letane Industries — Data Engineering & Analytics",
+        title: "Leteane Industries — Data Engineering & Analytics",
       },
       {
         name: "description",
         content:
-          "Letane Industries builds automated data aggregation systems, custom APIs, and intelligent data architecture for African enterprises and platforms.",
+          "Leteane Industries builds automated data aggregation systems, custom APIs, and intelligent data architecture for African enterprises and platforms.",
       },
       {
         property: "og:title",
-        content: "Letane Industries — Engineering the Data Pipelines of Tomorrow",
+        content: "Leteane Industries — Engineering the Data Pipelines of Tomorrow",
       },
       {
         property: "og:description",
@@ -89,7 +89,7 @@ function Nav() {
             L
           </span>
           <span className="font-display text-sm font-semibold tracking-wide text-foreground">
-            Letane Industries
+            Leteane Industries
           </span>
         </a>
         <nav className="hidden items-center gap-8 md:flex">
@@ -150,7 +150,7 @@ function Hero() {
         </h1>
 
         <p className="mt-8 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-          Letane Industries builds automated data aggregation systems, custom APIs, and
+          Leteane Industries builds automated data aggregation systems, custom APIs, and
           intelligent data architecture for African enterprises and platforms.
         </p>
 
@@ -447,7 +447,7 @@ function About() {
           />
           <div className="mt-6 space-y-5 text-base leading-relaxed text-muted-foreground">
             <p>
-              Letane Industries is a registered South African technology umbrella firm
+              Leteane Industries is a registered South African technology umbrella firm
               focused on turning raw, unstructured web data into structured, monetisable
               business intelligence assets.
             </p>
@@ -512,7 +512,7 @@ function Footer() {
     {
       heading: "Contact",
       links: [
-        { label: "hello@letane.industries", href: "#" },
+        { label: "hello@leteane.industries", href: "#" },
         { label: "Johannesburg, ZA", href: "#" },
         { label: "LinkedIn", href: "#" },
       ],
@@ -528,7 +528,7 @@ function Footer() {
                 L
               </span>
               <span className="font-display text-sm font-semibold tracking-wide text-foreground">
-                Letane Industries
+                Leteane Industries
               </span>
             </a>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
@@ -567,7 +567,7 @@ function Footer() {
         </div>
         <div className="flex flex-col items-start justify-between gap-4 pt-8 sm:flex-row sm:items-center">
           <p className="text-sm text-muted-foreground">
-            © 2026 Letane Industries (Pty) Ltd. All rights reserved.
+            © 2026 Leteane Industries (Pty) Ltd. All rights reserved.
           </p>
           <p className="font-mono text-xs text-muted-foreground/70">
             Privacy Policy &amp; Data Scraping Compliance — placeholder pending legal review
