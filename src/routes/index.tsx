@@ -18,19 +18,22 @@ export const Route = createFileRoute("/")({
     meta: [
       {
         title: "Letane Industries — Data Engineering & Analytics",
-        description:
-          "Letane Industries builds automated data aggregation systems, custom APIs, and intelligent data architecture for African enterprises and platforms.",
-        property: {
-          "og:title": "Letane Industries — Engineering the Data Pipelines of Tomorrow",
-          "og:description":
-            "Automated data aggregation, custom APIs, and intelligent data architecture for African enterprises and platforms.",
-          "og:type": "website",
-        },
-        name: {
-          description:
-            "Letane Industries builds automated data aggregation systems, custom APIs, and intelligent data architecture for African enterprises and platforms.",
-        },
       },
+      {
+        name: "description",
+        content:
+          "Letane Industries builds automated data aggregation systems, custom APIs, and intelligent data architecture for African enterprises and platforms.",
+      },
+      {
+        property: "og:title",
+        content: "Letane Industries — Engineering the Data Pipelines of Tomorrow",
+      },
+      {
+        property: "og:description",
+        content:
+          "Automated data aggregation, custom APIs, and intelligent data architecture for African enterprises and platforms.",
+      },
+      { property: "og:type", content: "website" },
     ],
   }),
   component: Index,
