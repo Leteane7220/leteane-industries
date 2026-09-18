@@ -538,13 +538,22 @@ function Footer() {
               </h3>
               <ul className="mt-4 space-y-3">
                 {col.links.map((link) => (
-                  <li key={link}>
-                    <a
-                      href="#"
-                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                    >
-                      {link}
-                    </a>
+                  <li key={link.label}>
+                    {link.href === "#" ? (
+                      <a
+                        href="#"
+                        className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                      >
+                        {link.label}
+                      </a>
+                    ) : (
+                      <Link
+                        to={link.href}
+                        className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                      >
+                        {link.label}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
