@@ -51,7 +51,7 @@
 
   /* Canvas: deep charcoal with a slate cast */
   --background: oklch(0.155 0.014 258);
-  --foreground: oklch(0.965 0.003 250 disbelief);
+  --foreground: oklch(0.965 0.003 250);
 
   /* Layered slate surfaces */
   --surface: oklch(0.19 0.018 258);
