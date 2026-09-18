@@ -15,16 +15,16 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       {
-        title: "Letane Industries — Data Engineering & Analytics",
+        title: "Leteane Industries — Data Engineering & Analytics",
       },
       {
         name: "description",
         content:
-          "Letane Industries builds automated data aggregation systems, custom APIs, and intelligent data architecture for African enterprises and platforms.",
+          "Leteane Industries builds automated data aggregation systems, custom APIs, and intelligent data architecture for African enterprises and platforms.",
       },
       {
         property: "og:title",
-        content: "Letane Industries — Engineering the Data Pipelines of Tomorrow",
+        content: "Leteane Industries — Engineering the Data Pipelines of Tomorrow",
       },
       {
         property: "og:description",
@@ -89,7 +89,7 @@ function Nav() {
             L
           </span>
           <span className="font-display text-sm font-semibold tracking-wide text-foreground">
-            Letane Industries
+            Leteane Industries
           </span>
         </a>
         <nav className="hidden items-center gap-8 md:flex">
@@ -150,7 +150,7 @@ function Hero() {
         </h1>
 
         <p className="mt-8 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-          Letane Industries builds automated data aggregation systems, custom APIs, and
+          Leteane Industries builds automated data aggregation systems, custom APIs, and
           intelligent data architecture for African enterprises and platforms.
         </p>
 
@@ -193,37 +193,47 @@ const mockEvents = [
   {
     title: "AI & Machine Learning Society — Kickoff",
     source: "UJ Events Portal",
+    location: "UJ Auckland Park Kingsway Campus — Sanlam Auditorium",
     campus: "APK",
     time: "Fri 18 Sep · 18:00",
     status: "Live",
+    url: "https://www.uj.ac.za/events/",
   },
   {
     title: "Career Fair: Tech & Finance Recruiters",
-    source: "Instagram @uj_career",
+    source: "Instagram @uj_careerservices",
+    location: "UJ Auckland Park Bunting Road Campus — Main Hall",
     campus: "APB",
     time: "Sat 19 Sep · 09:30",
     status: "Live",
+    url: "https://www.instagram.com/uj_careerservices/",
   },
   {
     title: "Postgrad Research Methods Workshop",
     source: "Faculty Portal",
+    location: "UJ Soweto Campus — Library Seminar Room 2",
     campus: "SWC",
     time: "Sat 19 Sep · 13:00",
     status: "Verified",
+    url: "https://www.uj.ac.za/events/",
   },
   {
     title: "Entrepreneurship Pitch Night",
-    source: "X / @UJLibrary",
+    source: "X / @go2uj",
+    location: "UJ Auckland Park Kingsway Campus — UJ Arts Theatre",
     campus: "APK",
     time: "Sun 20 Sep · 17:00",
     status: "Pending",
+    url: "https://x.com/go2uj",
   },
   {
     title: "Open Day — Faculty of Engineering",
     source: "UJ Events Portal",
+    location: "UJ Auckland Park Kingsway Campus — Engineering Building, D-Lab",
     campus: "APK",
     time: "Mon 21 Sep · 10:00",
     status: "Live",
+    url: "https://www.uj.ac.za/events/",
   },
 ];
 
@@ -244,8 +254,8 @@ function Showcase() {
       <div className="mx-auto max-w-6xl px-6 py-24 sm:py-32">
         <SectionHeading
           eyebrow="Featured Project — Flagship POC"
-          title="The Johannesburg Campus Connect"
-          intro="An automated, multi-source data pipeline that scrapes, cleans, and centralises fragmented university and social media event data — surfacing everything students need in one real-time, searchable interface."
+          title="Campus Connect"
+          intro="Campus Connect, provided by Leteane Industries — an automated, multi-source data pipeline that scrapes, cleans, and centralises fragmented university and social media event data, surfacing everything students need in one real-time, searchable interface."
         />
 
         {/* Dashboard mock */}
@@ -289,6 +299,7 @@ function Showcase() {
                 <tr className="border-b border-border font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
                   <th className="px-5 py-3 font-medium">Event</th>
                   <th className="px-5 py-3 font-medium">Source</th>
+                  <th className="hidden px-5 py-3 font-medium lg:table-cell">Location</th>
                   <th className="hidden px-5 py-3 font-medium sm:table-cell">Campus</th>
                   <th className="hidden px-5 py-3 font-medium md:table-cell">Time</th>
                   <th className="px-5 py-3 font-medium">Status</th>
@@ -300,8 +311,21 @@ function Showcase() {
                     key={event.title}
                     className="border-b border-border/60 transition-colors last:border-0 hover:bg-surface-2/60"
                   >
-                    <td className="px-5 py-3.5 font-medium text-foreground">{event.title}</td>
+                    <td className="px-5 py-3.5 font-medium text-foreground">
+                      <a
+                        href={event.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group inline-flex items-center gap-1.5 transition-colors hover:text-primary"
+                      >
+                        {event.title}
+                        <ArrowUpRight className="size-3.5 text-muted-foreground/60 transition-colors group-hover:text-primary" />
+                      </a>
+                    </td>
                     <td className="px-5 py-3.5 text-muted-foreground">{event.source}</td>
+                    <td className="hidden max-w-56 px-5 py-3.5 text-muted-foreground lg:table-cell">
+                      <span className="line-clamp-1">{event.location}</span>
+                    </td>
                     <td className="hidden px-5 py-3.5 font-mono text-xs text-muted-foreground sm:table-cell">
                       {event.campus}
                     </td>
@@ -447,7 +471,7 @@ function About() {
           />
           <div className="mt-6 space-y-5 text-base leading-relaxed text-muted-foreground">
             <p>
-              Letane Industries is a registered South African technology umbrella firm
+              Leteane Industries is a registered South African technology umbrella firm
               focused on turning raw, unstructured web data into structured, monetisable
               business intelligence assets.
             </p>
@@ -512,7 +536,7 @@ function Footer() {
     {
       heading: "Contact",
       links: [
-        { label: "hello@letane.industries", href: "#" },
+        { label: "hello@leteane.industries", href: "#" },
         { label: "Johannesburg, ZA", href: "#" },
         { label: "LinkedIn", href: "#" },
       ],
@@ -528,7 +552,7 @@ function Footer() {
                 L
               </span>
               <span className="font-display text-sm font-semibold tracking-wide text-foreground">
-                Letane Industries
+                Leteane Industries
               </span>
             </a>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
@@ -567,7 +591,7 @@ function Footer() {
         </div>
         <div className="flex flex-col items-start justify-between gap-4 pt-8 sm:flex-row sm:items-center">
           <p className="text-sm text-muted-foreground">
-            © 2026 Letane Industries (Pty) Ltd. All rights reserved.
+            © 2026 Leteane Industries (Pty) Ltd. All rights reserved.
           </p>
           <p className="font-mono text-xs text-muted-foreground/70">
             Privacy Policy &amp; Data Scraping Compliance — placeholder pending legal review
