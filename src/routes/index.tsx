@@ -299,6 +299,7 @@ function Showcase() {
                 <tr className="border-b border-border font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
                   <th className="px-5 py-3 font-medium">Event</th>
                   <th className="px-5 py-3 font-medium">Source</th>
+                  <th className="hidden px-5 py-3 font-medium lg:table-cell">Location</th>
                   <th className="hidden px-5 py-3 font-medium sm:table-cell">Campus</th>
                   <th className="hidden px-5 py-3 font-medium md:table-cell">Time</th>
                   <th className="px-5 py-3 font-medium">Status</th>
@@ -310,8 +311,21 @@ function Showcase() {
                     key={event.title}
                     className="border-b border-border/60 transition-colors last:border-0 hover:bg-surface-2/60"
                   >
-                    <td className="px-5 py-3.5 font-medium text-foreground">{event.title}</td>
+                    <td className="px-5 py-3.5 font-medium text-foreground">
+                      <a
+                        href={event.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group inline-flex items-center gap-1.5 transition-colors hover:text-primary"
+                      >
+                        {event.title}
+                        <ArrowUpRight className="size-3.5 text-muted-foreground/60 transition-colors group-hover:text-primary" />
+                      </a>
+                    </td>
                     <td className="px-5 py-3.5 text-muted-foreground">{event.source}</td>
+                    <td className="hidden max-w-56 px-5 py-3.5 text-muted-foreground lg:table-cell">
+                      <span className="line-clamp-1">{event.location}</span>
+                    </td>
                     <td className="hidden px-5 py-3.5 font-mono text-xs text-muted-foreground sm:table-cell">
                       {event.campus}
                     </td>
