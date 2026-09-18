@@ -193,37 +193,47 @@ const mockEvents = [
   {
     title: "AI & Machine Learning Society — Kickoff",
     source: "UJ Events Portal",
+    location: "UJ Auckland Park Kingsway Campus — Sanlam Auditorium",
     campus: "APK",
     time: "Fri 18 Sep · 18:00",
     status: "Live",
+    url: "https://www.uj.ac.za/events/",
   },
   {
     title: "Career Fair: Tech & Finance Recruiters",
-    source: "Instagram @uj_career",
+    source: "Instagram @uj_careerservices",
+    location: "UJ Auckland Park Bunting Road Campus — Main Hall",
     campus: "APB",
     time: "Sat 19 Sep · 09:30",
     status: "Live",
+    url: "https://www.instagram.com/uj_careerservices/",
   },
   {
     title: "Postgrad Research Methods Workshop",
     source: "Faculty Portal",
+    location: "UJ Soweto Campus — Library Seminar Room 2",
     campus: "SWC",
     time: "Sat 19 Sep · 13:00",
     status: "Verified",
+    url: "https://www.uj.ac.za/events/",
   },
   {
     title: "Entrepreneurship Pitch Night",
-    source: "X / @UJLibrary",
+    source: "X / @go2uj",
+    location: "UJ Auckland Park Kingsway Campus — UJ Arts Theatre",
     campus: "APK",
     time: "Sun 20 Sep · 17:00",
     status: "Pending",
+    url: "https://x.com/go2uj",
   },
   {
     title: "Open Day — Faculty of Engineering",
     source: "UJ Events Portal",
+    location: "UJ Auckland Park Kingsway Campus — Engineering Building, D-Lab",
     campus: "APK",
     time: "Mon 21 Sep · 10:00",
     status: "Live",
+    url: "https://www.uj.ac.za/events/",
   },
 ];
 
@@ -244,8 +254,8 @@ function Showcase() {
       <div className="mx-auto max-w-6xl px-6 py-24 sm:py-32">
         <SectionHeading
           eyebrow="Featured Project — Flagship POC"
-          title="The Johannesburg Campus Connect"
-          intro="An automated, multi-source data pipeline that scrapes, cleans, and centralises fragmented university and social media event data — surfacing everything students need in one real-time, searchable interface."
+          title="Campus Connect"
+          intro="Campus Connect, provided by Leteane Industries — an automated, multi-source data pipeline that scrapes, cleans, and centralises fragmented university and social media event data, surfacing everything students need in one real-time, searchable interface."
         />
 
         {/* Dashboard mock */}
