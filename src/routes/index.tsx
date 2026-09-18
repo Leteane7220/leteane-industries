@@ -1,12 +1,10 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
   ArrowUpRight,
   Database,
-  Filter,
   Layers,
   Network,
-  Radio,
   RefreshCw,
   Search,
   ShieldCheck,
@@ -191,46 +189,40 @@ function Hero() {
 /* Featured showcase — The Johannesburg Campus Connect                 */
 /* ------------------------------------------------------------------ */
 
-const pipelineStages = [
-  { icon: Radio, label: "Multi-source scraping", detail: "University portals & social feeds" },
-  { icon: Filter, label: "Cleaning & normalisation", detail: "Dedup, tagging, enrichment" },
-  { icon: Database, label: "Centralised warehouse", detail: "Single queryable source of truth" },
-];
-
 const mockEvents = [
   {
     title: "AI & Machine Learning Society — Kickoff",
     source: "UJ Events Portal",
     campus: "APK",
-    time: "Fri 18:00",
+    time: "Fri 18 Sep · 18:00",
     status: "Live",
   },
   {
     title: "Career Fair: Tech & Finance Recruiters",
     source: "Instagram @uj_career",
     campus: "APB",
-    time: "Sat 09:30",
+    time: "Sat 19 Sep · 09:30",
     status: "Live",
   },
   {
     title: "Postgrad Research Methods Workshop",
     source: "Faculty Portal",
     campus: "SWC",
-    time: "Sat 13:00",
+    time: "Sat 19 Sep · 13:00",
     status: "Verified",
   },
   {
     title: "Entrepreneurship Pitch Night",
     source: "X / @UJLibrary",
     campus: "APK",
-    time: "Sun 17:00",
+    time: "Sun 20 Sep · 17:00",
     status: "Pending",
   },
   {
     title: "Open Day — Faculty of Engineering",
     source: "UJ Events Portal",
     campus: "APK",
-    time: "Mon 10:00",
+    time: "Mon 21 Sep · 10:00",
     status: "Live",
   },
 ];
@@ -255,24 +247,6 @@ function Showcase() {
           title="The Johannesburg Campus Connect"
           intro="An automated, multi-source data pipeline that scrapes, cleans, and centralises fragmented university and social media event data — surfacing everything students need in one real-time, searchable interface."
         />
-
-        {/* Pipeline strip */}
-        <ol className="mt-12 grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-border bg-border md:grid-cols-3">
-          {pipelineStages.map((stage, i) => (
-            <li key={stage.label} className="relative flex items-start gap-4 bg-surface px-6 py-5">
-              <span className="flex size-9 shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary">
-                <stage.icon className="size-4.5" />
-              </span>
-              <div>
-                <p className="font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
-                  Stage 0{i + 1}
-                </p>
-                <p className="mt-1 text-sm font-semibold text-foreground">{stage.label}</p>
-                <p className="mt-0.5 text-sm text-muted-foreground">{stage.detail}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
 
         {/* Dashboard mock */}
         <div className="panel-sheen mt-10 overflow-hidden rounded-xl border border-border bg-surface">
@@ -517,18 +491,31 @@ function About() {
 /* ------------------------------------------------------------------ */
 
 function Footer() {
-  const columns = [
+  const columns: { heading: string; links: { label: string; href: string }[] }[] = [
     {
       heading: "Company",
-      links: ["Showcase", "Services", "About", "Careers"],
+      links: [
+        { label: "Showcase", href: "#showcase" },
+        { label: "Services", href: "#services" },
+        { label: "About", href: "#company" },
+        { label: "Careers", href: "#" },
+      ],
     },
     {
       heading: "Legal",
-      links: ["Privacy Policy & Data Scraping Compliance", "Terms of Service", "PAIA Manual"],
+      links: [
+        { label: "Privacy Policy & Data Scraping Compliance", href: "#" },
+        { label: "Terms of Service", href: "/terms" },
+        { label: "PAIA Manual", href: "#" },
+      ],
     },
     {
       heading: "Contact",
-      links: ["hello@letane.industries", "Johannesburg, ZA", "LinkedIn"],
+      links: [
+        { label: "hello@letane.industries", href: "#" },
+        { label: "Johannesburg, ZA", href: "#" },
+        { label: "LinkedIn", href: "#" },
+      ],
     },
   ];
   return (
@@ -556,13 +543,22 @@ function Footer() {
               </h3>
               <ul className="mt-4 space-y-3">
                 {col.links.map((link) => (
-                  <li key={link}>
-                    <a
-                      href="#"
-                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                    >
-                      {link}
-                    </a>
+                  <li key={link.label}>
+                    {link.href === "#" ? (
+                      <a
+                        href="#"
+                        className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                      >
+                        {link.label}
+                      </a>
+                    ) : (
+                      <Link
+                        to={link.href}
+                        className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                      >
+                        {link.label}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
