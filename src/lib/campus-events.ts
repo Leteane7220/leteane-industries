@@ -102,8 +102,8 @@ export function formatEventWhen(event: CampusEvent) {
   return `${formatEventDate(event.date)} · ${event.time}`;
 }
 
-/** Reference "today" for the demo index. */
-export const indexToday = "2026-09-18";
+/** Reference "today" for the index. */
+export const indexToday = "2026-09-19";
 
 export type TimeWindow = "any" | "today" | "week" | "month";
 
