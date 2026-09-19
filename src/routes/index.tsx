@@ -1,6 +1,7 @@
 import { CampusAssistant } from "@/components/CampusAssistant";
 import {
   campusEvents,
+  campusLabels,
   eventSources,
   formatEventWhen,
   withinWindow,
