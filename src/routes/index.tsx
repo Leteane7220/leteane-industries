@@ -1,7 +1,17 @@
+import { CampusAssistant } from "@/components/CampusAssistant";
+import {
+  campusEvents,
+  campusLabels,
+  eventSources,
+  formatEventWhen,
+  withinWindow,
+  type TimeWindow,
+} from "@/lib/campus-events";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
   ArrowUpRight,
+  ChevronDown,
   Database,
   Layers,
   Network,
@@ -10,6 +20,7 @@ import {
   ShieldCheck,
   Terminal,
 } from "lucide-react";
+import { useMemo, useState } from "react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
