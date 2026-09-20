@@ -11,7 +11,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
   ArrowUpRight,
-  ChevronDown,
   Database,
   Layers,
   Network,
@@ -200,15 +199,10 @@ function Hero() {
 /* Featured showcase — The Johannesburg Campus Connect                 */
 /* ------------------------------------------------------------------ */
 
-function statusClass(status: string) {
-  switch (status) {
-    case "Live":
-      return "border-primary/40 bg-primary/10 text-primary";
-    case "Verified":
-      return "border-emerald-400/30 bg-emerald-400/10 text-emerald-300";
-    default:
-      return "border-border bg-surface-2 text-muted-foreground";
-  }
+function entryClass(free: boolean) {
+  return free
+    ? "border-emerald-400/30 bg-emerald-400/10 text-emerald-300"
+    : "border-border bg-surface-2 text-muted-foreground";
 }
 
 const campusOptions: Array<{ value: string; label: string }> = [
@@ -232,16 +226,15 @@ const selectClass =
 function Showcase() {
   const [query, setQuery] = useState("");
   const [campus, setCampus] = useState("all");
-  const [window, setWindow] = useState<TimeWindow>("week");
+  const [window, setWindow] = useState<TimeWindow>("any");
   const [source, setSource] = useState("any");
-  const [showAll, setShowAll] = useState(false);
 
   const results = useMemo(() => {
     const q = query.trim().toLowerCase();
     return campusEvents
       .filter((event) => (campus === "all" ? true : event.campus === campus))
       .filter((event) => (source === "any" ? true : event.source === source))
-      .filter((event) => (showAll ? true : withinWindow(event, window)))
+      .filter((event) => withinWindow(event, window))
       .filter((event) =>
         q
           ? [event.title, event.location, event.source, event.category, event.campus]
@@ -251,7 +244,7 @@ function Showcase() {
           : true,
       )
       .sort((a, b) => `${a.date}${a.time}`.localeCompare(`${b.date}${b.time}`));
-  }, [query, campus, window, source, showAll]);
+  }, [query, campus, window, source]);
 
   return (
     <section id="showcase" className="border-b border-border">
@@ -308,13 +301,9 @@ function Showcase() {
 
             <select
               value={window}
-              onChange={(event) => {
-                setWindow(event.target.value as TimeWindow);
-                setShowAll(false);
-              }}
+              onChange={(event) => setWindow(event.target.value as TimeWindow)}
               aria-label="Filter by date"
-              disabled={showAll}
-              className={`${selectClass} disabled:opacity-50`}
+              className={selectClass}
             >
               {windowOptions.map((option) => (
                 <option key={option.value} value={option.value}>
@@ -336,40 +325,31 @@ function Showcase() {
                 </option>
               ))}
             </select>
-
-            <button
-              type="button"
-              onClick={() => setShowAll((value) => !value)}
-              className={`inline-flex items-center gap-1.5 rounded-md border px-3 py-2 font-mono text-xs transition-colors ${
-                showAll
-                  ? "border-primary/50 bg-primary/10 text-primary"
-                  : "border-border bg-background text-muted-foreground hover:border-primary/40 hover:text-primary"
-              }`}
-            >
-              <ChevronDown className={`size-3.5 ${showAll ? "rotate-180" : ""}`} />
-              {showAll ? "Showing all indexed" : "View all indexed events"}
-            </button>
           </div>
 
           {/* Table */}
-          <div className={`overflow-x-auto ${showAll ? "max-h-96 overflow-y-auto" : ""}`}>
+          <div className="max-h-[26rem] overflow-auto">
             <table className="w-full min-w-160 text-left text-sm">
               <thead>
                 <tr className="border-b border-border font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
+                  <th className="px-5 py-3 font-medium">#</th>
                   <th className="px-5 py-3 font-medium">Event</th>
                   <th className="px-5 py-3 font-medium">Source</th>
                   <th className="hidden px-5 py-3 font-medium lg:table-cell">Location</th>
                   <th className="hidden px-5 py-3 font-medium sm:table-cell">Campus</th>
                   <th className="hidden px-5 py-3 font-medium md:table-cell">Time</th>
-                  <th className="px-5 py-3 font-medium">Status</th>
+                  <th className="px-5 py-3 font-medium">Entry</th>
                 </tr>
               </thead>
               <tbody>
-                {results.map((event) => (
+                {results.map((event, index) => (
                   <tr
                     key={event.title}
                     className="border-b border-border/60 transition-colors last:border-0 hover:bg-surface-2/60"
                   >
+                    <td className="px-5 py-3.5 font-mono text-xs text-muted-foreground">
+                      {String(index + 1).padStart(2, "0")}
+                    </td>
                     <td className="px-5 py-3.5 font-medium text-foreground">
                       <a
                         href={event.url}
@@ -392,13 +372,21 @@ function Showcase() {
                       {formatEventWhen(event)}
                     </td>
                     <td className="px-5 py-3.5">
-                      <span
-                        className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 font-mono text-[11px] ${statusClass(event.status)}`}
-                      >
-                        {event.status === "Live" ? (
-                          <span className="size-1.5 rounded-full bg-primary" />
-                        ) : null}
-                        {event.status}
+                      <span className="flex items-center gap-2.5">
+                        <span
+                          className={`inline-flex items-center rounded-full border px-2.5 py-0.5 font-mono text-[11px] ${entryClass(event.free)}`}
+                        >
+                          {event.free ? "Free" : "Paid"}
+                        </span>
+                        <a
+                          href={event.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group inline-flex items-center gap-1 font-mono text-[11px] text-muted-foreground transition-colors hover:text-primary"
+                        >
+                          {event.free ? "Get free ticket" : "Buy tickets"}
+                          <ArrowUpRight className="size-3 transition-colors group-hover:text-primary" />
+                        </a>
                       </span>
                     </td>
                   </tr>
@@ -406,7 +394,7 @@ function Showcase() {
                 {results.length === 0 ? (
                   <tr>
                     <td
-                      colSpan={6}
+                      colSpan={7}
                       className="px-5 py-10 text-center text-sm text-muted-foreground"
                     >
                       No events match those filters yet — try a different campus, date range

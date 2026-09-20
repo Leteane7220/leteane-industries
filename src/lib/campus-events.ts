@@ -8,6 +8,8 @@ export type CampusEvent = {
   time: string;
   status: "Live" | "Verified" | "Pending";
   category: string;
+  /** Whether entry is free or tickets are paid. */
+  free: boolean;
   url: string;
 };
 
@@ -28,7 +30,44 @@ export const campusEvents: CampusEvent[] = [
     time: "18:00",
     status: "Verified",
     category: "Culture",
+    free: false,
     url: "https://www.quicket.co.za/organisers/76480-uj-arts-culture",
+  },
+  {
+    title: "Career Services Pop-Up: CV & LinkedIn Clinic",
+    source: "Instagram — @uj_careerservices",
+    location: "UJ Soweto Campus — Student Centre",
+    campus: "SWC",
+    date: "2026-09-23",
+    time: "12:00",
+    status: "Live",
+    category: "Careers",
+    free: true,
+    url: "https://www.instagram.com/uj_careerservices/",
+  },
+  {
+    title: "UJ Library Research Bootcamp — Postgrad Week",
+    source: "Facebook — UJ Events",
+    location: "UJ Auckland Park Kingsway Campus — Main Library Auditorium",
+    campus: "APK",
+    date: "2026-09-24",
+    time: "10:00",
+    status: "Live",
+    category: "Academic",
+    free: true,
+    url: "https://www.facebook.com/go2uj/",
+  },
+  {
+    title: "UJ Sport Fan Zone — Varsity Hockey Watch Party",
+    source: "X — @go2uj",
+    location: "UJ Auckland Park Kingsway Campus — Student Piazza",
+    campus: "APK",
+    date: "2026-09-25",
+    time: "19:00",
+    status: "Live",
+    category: "Sport",
+    free: true,
+    url: "https://x.com/go2uj",
   },
   {
     title: "UJ Future Forward Fun Run 2026 (10km / 5km / 2.5km)",
@@ -39,6 +78,7 @@ export const campusEvents: CampusEvent[] = [
     time: "08:00",
     status: "Verified",
     category: "Sport",
+    free: false,
     url: "https://secure.onreg.com/onreg2/front/step1.php?id=7913",
   },
   {
@@ -50,7 +90,44 @@ export const campusEvents: CampusEvent[] = [
     time: "09:00",
     status: "Verified",
     category: "Careers",
+    free: false,
     url: "https://www.quicket.co.za/events/393331-educonnect-media-future-economy-career-expo-2026/",
+  },
+  {
+    title: "TikTok Takeover — Student Creator Meet-Up",
+    source: "TikTok — @go2uj",
+    location: "UJ Auckland Park Kingsway Campus — Media Hub, D Ring",
+    campus: "APK",
+    date: "2026-09-29",
+    time: "14:00",
+    status: "Pending",
+    category: "Culture",
+    free: true,
+    url: "https://www.tiktok.com/@go2uj",
+  },
+  {
+    title: "Student Founders Night — Entrepreneurship & Innovation Meetup",
+    source: "LinkedIn — University of Johannesburg",
+    location: "UJ Doornfontein Campus — CRESTA Innovation Hub",
+    campus: "DFC",
+    date: "2026-10-01",
+    time: "17:30",
+    status: "Verified",
+    category: "Careers",
+    free: true,
+    url: "https://www.linkedin.com/school/university-of-johannesburg/",
+  },
+  {
+    title: "UJ Health & Wellness 5K Campus Walk",
+    source: "Facebook — UJ Events",
+    location: "UJ Doornfontein Campus — Sports Grounds Gate 2",
+    campus: "DFC",
+    date: "2026-10-03",
+    time: "08:00",
+    status: "Verified",
+    category: "Sport",
+    free: false,
+    url: "https://www.facebook.com/go2uj/",
   },
   {
     title: "Relational Trans_Positions — FADA Creative Research Exhibition (until 9 Oct)",
@@ -61,6 +138,7 @@ export const campusEvents: CampusEvent[] = [
     time: "09:00",
     status: "Live",
     category: "Culture",
+    free: true,
     url: "https://arts.uj.ac.za/whats-on/fada-gallery-presents-relational-trans-positions-a-creative-research-exhibition/",
   },
   {
@@ -72,6 +150,7 @@ export const campusEvents: CampusEvent[] = [
     time: "16:30",
     status: "Verified",
     category: "Culture",
+    free: true,
     url: "https://www.quicket.co.za/organisers/76480-uj-arts-culture",
   },
   {
@@ -83,6 +162,7 @@ export const campusEvents: CampusEvent[] = [
     time: "18:00",
     status: "Verified",
     category: "Culture",
+    free: false,
     url: "https://www.quicket.co.za/events/397037-arts-academy-showcase-2026/",
   },
 ];
@@ -103,7 +183,7 @@ export function formatEventWhen(event: CampusEvent) {
 }
 
 /** Reference "today" for the index. */
-export const indexToday = "2026-09-19";
+export const indexToday = "2026-09-20";
 
 export type TimeWindow = "any" | "today" | "week" | "month";
 
