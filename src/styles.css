@@ -44,6 +44,7 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-uni-blue: var(--uni-blue);
 }
 
 :root {
@@ -82,6 +83,9 @@
   --border: oklch(1 0 0 / 9%);
   --input: oklch(1 0 0 / 12%);
   --ring: oklch(0.62 0.21 279);
+
+  /* Deep royal blue — UNIFY wordmark */
+  --uni-blue: oklch(0.52 0.19 264);
 }
 
 @layer base {

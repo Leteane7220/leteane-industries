@@ -18,7 +18,7 @@ const eventCatalogue = campusEvents
   )
   .join("\n");
 
-const systemPrompt = `You are the Campus Connect assistant, provided by Leteane Industries.
+const systemPrompt = `You are the Unify assistant, provided by Leteane Industries.
 You help University of Johannesburg students find events that suit them.
 Today's date in the index is ${indexToday} (Africa/Johannesburg).
 

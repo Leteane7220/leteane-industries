@@ -19,7 +19,7 @@ import {
   ShieldCheck,
   Terminal,
 } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -65,7 +65,7 @@ function SectionHeading({
   intro,
 }: {
   eyebrow: string;
-  title: string;
+  title: ReactNode;
   intro?: string;
 }) {
   return (
@@ -196,7 +196,7 @@ function Hero() {
 }
 
 /* ------------------------------------------------------------------ */
-/* Featured showcase — The Johannesburg Campus Connect                 */
+/* Featured showcase — Unify by Leteane Industries                       */
 /* ------------------------------------------------------------------ */
 
 function entryClass(free: boolean) {
@@ -251,8 +251,12 @@ function Showcase() {
       <div className="mx-auto max-w-6xl px-6 py-24 sm:py-32">
         <SectionHeading
           eyebrow="Featured Project — Flagship POC"
-          title="Campus Connect"
-          intro="Campus Connect, provided by Leteane Industries — an automated, multi-source data pipeline that scrapes, cleans, and centralises fragmented university and social media event data, surfacing everything students need in one real-time, searchable interface."
+          title={
+            <>
+              <span className="text-uni-blue">UNI</span>FY
+            </>
+          }
+          intro="Unify, provided by Leteane Industries — an automated, multi-source data pipeline that scrapes, cleans, and centralises fragmented university and social media event data, surfacing everything students need in one real-time, searchable interface."
         />
 
         {/* Dashboard */}
@@ -265,7 +269,7 @@ function Showcase() {
               <span className="size-2.5 rounded-full bg-border" />
             </div>
             <p className="font-mono text-xs text-muted-foreground">
-              campus-connect / events — live index
+              unify / events — live index
             </p>
             <span className="flex items-center gap-1.5 font-mono text-[11px] text-primary">
               <RefreshCw className="size-3" />
@@ -425,7 +429,7 @@ function Showcase() {
               Not sure which events are for you?
             </h3>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              The Campus Connect assistant reads the same live index the table above serves.
+              The Unify assistant reads the same live index the table above serves.
               Tell it your campus, year of study or interests and it will recommend events
               with dates, venues and links back to the original post.
             </p>
