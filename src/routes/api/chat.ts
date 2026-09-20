@@ -14,7 +14,7 @@ type ChatRequestBody = { messages?: unknown };
 const eventCatalogue = campusEvents
   .map(
     (e) =>
-      `- ${e.title} | ${formatEventWhen(e)} | ${campusLabels[e.campus]} (${e.campus}) | ${e.location} | category: ${e.category} | source: ${e.source} | status: ${e.status} | link: ${e.url}`,
+      `- ${e.title} | ${formatEventWhen(e)} | ${campusLabels[e.campus]} (${e.campus}) | ${e.location} | category: ${e.category} | entry: ${e.free ? "Free" : "Paid tickets"} | source: ${e.source} | status: ${e.status} | link: ${e.url}`,
   )
   .join("\n");
 
