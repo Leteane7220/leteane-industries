@@ -4,6 +4,7 @@ import {
   campusLabels,
   eventSources,
   formatEventWhen,
+  mapsUrl,
   withinWindow,
   type TimeWindow,
 } from "@/lib/campus-events";
@@ -13,11 +14,13 @@ import {
   ArrowUpRight,
   Database,
   Layers,
+  MapPin,
   Network,
   RefreshCw,
   Search,
   ShieldCheck,
   Terminal,
+  Users,
 } from "lucide-react";
 import { useMemo, useState, type ReactNode } from "react";
 
@@ -342,6 +345,7 @@ function Showcase() {
                   <th className="hidden px-5 py-3 font-medium lg:table-cell">Location</th>
                   <th className="hidden px-5 py-3 font-medium sm:table-cell">Campus</th>
                   <th className="hidden px-5 py-3 font-medium md:table-cell">Time</th>
+                  <th className="px-5 py-3 font-medium">Going</th>
                   <th className="px-5 py-3 font-medium">Entry</th>
                 </tr>
               </thead>
@@ -366,14 +370,28 @@ function Showcase() {
                       </a>
                     </td>
                     <td className="px-5 py-3.5 text-muted-foreground">{event.source}</td>
-                    <td className="hidden max-w-56 px-5 py-3.5 text-muted-foreground lg:table-cell">
-                      <span className="line-clamp-1">{event.location}</span>
+                    <td className="hidden max-w-80 px-5 py-3.5 text-muted-foreground lg:table-cell">
+                      <a
+                        href={mapsUrl(event)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group inline-flex items-start gap-1.5 transition-colors hover:text-primary"
+                      >
+                        <MapPin className="mt-0.5 size-3.5 shrink-0 text-muted-foreground/60 transition-colors group-hover:text-primary" />
+                        <span>{event.location}</span>
+                      </a>
                     </td>
                     <td className="hidden px-5 py-3.5 font-mono text-xs text-muted-foreground sm:table-cell">
                       {event.campus}
                     </td>
                     <td className="hidden px-5 py-3.5 font-mono text-xs text-muted-foreground md:table-cell">
                       {formatEventWhen(event)}
+                    </td>
+                    <td className="px-5 py-3.5">
+                      <span className="inline-flex items-center gap-1.5 font-mono text-xs text-muted-foreground">
+                        <Users className="size-3.5 text-muted-foreground/60" />
+                        {event.attendees.toLocaleString("en-ZA")}
+                      </span>
                     </td>
                     <td className="px-5 py-3.5">
                       <span className="flex items-center gap-2.5">
@@ -398,7 +416,7 @@ function Showcase() {
                 {results.length === 0 ? (
                   <tr>
                     <td
-                      colSpan={7}
+                      colSpan={8}
                       className="px-5 py-10 text-center text-sm text-muted-foreground"
                     >
                       No events match those filters yet — try a different campus, date range
