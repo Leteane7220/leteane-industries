@@ -22,7 +22,7 @@ import {
   Terminal,
   Users,
 } from "lucide-react";
-import { useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -231,7 +231,7 @@ function Showcase() {
   const [campus, setCampus] = useState("all");
   const [window, setWindow] = useState<TimeWindow>("any");
   const [source, setSource] = useState("any");
-  const [lastRefreshed, setLastRefreshed] = useState(() => new Date());
+  const [lastRefreshed, setLastRefreshed] = useState<Date | null>(null);
   const [refreshing, setRefreshing] = useState(false);
 
   const handleRefresh = () => {
@@ -293,7 +293,9 @@ function Showcase() {
               <RefreshCw className={`size-3 ${refreshing ? "animate-spin" : ""}`} />
               {refreshing
                 ? "refreshing…"
-                : `last refreshed ${lastRefreshed.toLocaleTimeString("en-ZA", { hour: "2-digit", minute: "2-digit" })}`}
+                : lastRefreshed
+                  ? `last refreshed ${lastRefreshed.toLocaleTimeString("en-ZA", { hour: "2-digit", minute: "2-digit" })}`
+                  : "refresh index"}
             </button>
           </div>
 
