@@ -413,7 +413,7 @@ function Showcase() {
                 {results.length === 0 ? (
                   <tr>
                     <td
-                      colSpan={7}
+                      colSpan={8}
                       className="px-5 py-10 text-center text-sm text-muted-foreground"
                     >
                       No events match those filters yet — try a different campus, date range
