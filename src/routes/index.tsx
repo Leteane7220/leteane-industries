@@ -342,6 +342,7 @@ function Showcase() {
                   <th className="hidden px-5 py-3 font-medium lg:table-cell">Location</th>
                   <th className="hidden px-5 py-3 font-medium sm:table-cell">Campus</th>
                   <th className="hidden px-5 py-3 font-medium md:table-cell">Time</th>
+                  <th className="px-5 py-3 font-medium">Going</th>
                   <th className="px-5 py-3 font-medium">Entry</th>
                 </tr>
               </thead>
