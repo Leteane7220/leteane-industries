@@ -367,8 +367,16 @@ function Showcase() {
                       </a>
                     </td>
                     <td className="px-5 py-3.5 text-muted-foreground">{event.source}</td>
-                    <td className="hidden max-w-56 px-5 py-3.5 text-muted-foreground lg:table-cell">
-                      <span className="line-clamp-1">{event.location}</span>
+                    <td className="hidden max-w-80 px-5 py-3.5 text-muted-foreground lg:table-cell">
+                      <a
+                        href={mapsUrl(event)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group inline-flex items-start gap-1.5 transition-colors hover:text-primary"
+                      >
+                        <MapPin className="mt-0.5 size-3.5 shrink-0 text-muted-foreground/60 transition-colors group-hover:text-primary" />
+                        <span>{event.location}</span>
+                      </a>
                     </td>
                     <td className="hidden px-5 py-3.5 font-mono text-xs text-muted-foreground sm:table-cell">
                       {event.campus}
