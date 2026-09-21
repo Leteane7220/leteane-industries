@@ -385,6 +385,12 @@ function Showcase() {
                       {formatEventWhen(event)}
                     </td>
                     <td className="px-5 py-3.5">
+                      <span className="inline-flex items-center gap-1.5 font-mono text-xs text-muted-foreground">
+                        <Users className="size-3.5 text-muted-foreground/60" />
+                        {event.attendees.toLocaleString("en-ZA")}
+                      </span>
+                    </td>
+                    <td className="px-5 py-3.5">
                       <span className="flex items-center gap-2.5">
                         <span
                           className={`inline-flex items-center rounded-full border px-2.5 py-0.5 font-mono text-[11px] ${entryClass(event.free)}`}
