@@ -242,6 +242,10 @@ function Showcase() {
     }, 700);
   };
 
+  useEffect(() => {
+    setLastRefreshed(new Date());
+  }, []);
+
   const results = useMemo(() => {
     const q = query.trim().toLowerCase();
     return campusEvents
