@@ -20,6 +20,7 @@ import {
   Search,
   ShieldCheck,
   Terminal,
+  Users,
 } from "lucide-react";
 import { useMemo, useState, type ReactNode } from "react";
 
