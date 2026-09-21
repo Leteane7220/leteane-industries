@@ -22,7 +22,7 @@ import {
   Terminal,
   Users,
 } from "lucide-react";
-import { useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -231,6 +231,20 @@ function Showcase() {
   const [campus, setCampus] = useState("all");
   const [window, setWindow] = useState<TimeWindow>("any");
   const [source, setSource] = useState("any");
+  const [lastRefreshed, setLastRefreshed] = useState<Date | null>(null);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const handleRefresh = () => {
+    setRefreshing(true);
+    globalThis.setTimeout(() => {
+      setLastRefreshed(new Date());
+      setRefreshing(false);
+    }, 700);
+  };
+
+  useEffect(() => {
+    setLastRefreshed(new Date());
+  }, []);
 
   const results = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -274,10 +288,19 @@ function Showcase() {
             <p className="font-mono text-xs text-muted-foreground">
               unify / events — live index
             </p>
-            <span className="flex items-center gap-1.5 font-mono text-[11px] text-primary">
-              <RefreshCw className="size-3" />
-              synced 12s ago
-            </span>
+            <button
+              type="button"
+              onClick={handleRefresh}
+              disabled={refreshing}
+              className="flex items-center gap-1.5 rounded-md border border-border px-2.5 py-1 font-mono text-[11px] text-primary transition-colors hover:border-primary/60 hover:bg-primary/10 disabled:opacity-60"
+            >
+              <RefreshCw className={`size-3 ${refreshing ? "animate-spin" : ""}`} />
+              {refreshing
+                ? "refreshing…"
+                : lastRefreshed
+                  ? `last refreshed ${lastRefreshed.toLocaleTimeString("en-ZA", { hour: "2-digit", minute: "2-digit" })}`
+                  : "refresh index"}
+            </button>
           </div>
 
           {/* Toolbar */}
