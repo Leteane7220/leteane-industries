@@ -14,6 +14,7 @@ import {
   ArrowUpRight,
   Database,
   Layers,
+  MapPin,
   Network,
   RefreshCw,
   Search,
