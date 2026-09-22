@@ -3,6 +3,7 @@ import {
   campusEvents,
   campusLabels,
   eventSources,
+  formatEventDate,
   formatEventWhen,
   mapsUrl,
   withinWindow,
