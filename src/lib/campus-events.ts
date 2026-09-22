@@ -10,6 +10,8 @@ export type CampusEvent = {
   category: string;
   /** Whether entry is free or tickets are paid. */
   free: boolean;
+  /** Date (ISO) the free/paid status was re-checked on the source page. */
+  priceCheckedOn: string;
   /** Registered attendees reported by the source listing. */
   attendees: number;
   url: string;
@@ -33,6 +35,7 @@ export const campusEvents: CampusEvent[] = [
     status: "Verified",
     category: "Culture",
     free: false,
+    priceCheckedOn: "2026-09-22",
     attendees: 214,
     url: "https://www.quicket.co.za/organisers/76480-uj-arts-culture",
   },
@@ -46,6 +49,7 @@ export const campusEvents: CampusEvent[] = [
     status: "Verified",
     category: "Sport",
     free: false,
+    priceCheckedOn: "2026-09-22",
     attendees: 1250,
     url: "https://secure.onreg.com/onreg2/front/step1.php?id=7913",
   },
@@ -58,7 +62,8 @@ export const campusEvents: CampusEvent[] = [
     time: "09:00",
     status: "Verified",
     category: "Careers",
-    free: false,
+    free: true,
+    priceCheckedOn: "2026-09-22",
     attendees: 867,
     url: "https://www.quicket.co.za/events/393331-educonnect-media-future-economy-career-expo-2026/",
   },
@@ -72,6 +77,7 @@ export const campusEvents: CampusEvent[] = [
     status: "Live",
     category: "Culture",
     free: true,
+    priceCheckedOn: "2026-09-22",
     attendees: 284,
     url: "https://arts.uj.ac.za/whats-on/fada-gallery-presents-relational-trans-positions-a-creative-research-exhibition/",
   },
@@ -85,6 +91,7 @@ export const campusEvents: CampusEvent[] = [
     status: "Verified",
     category: "Culture",
     free: true,
+    priceCheckedOn: "2026-09-22",
     attendees: 156,
     url: "https://www.quicket.co.za/organisers/76480-uj-arts-culture",
   },
@@ -98,6 +105,7 @@ export const campusEvents: CampusEvent[] = [
     status: "Verified",
     category: "Culture",
     free: false,
+    priceCheckedOn: "2026-09-22",
     attendees: 241,
     url: "https://www.quicket.co.za/events/397037-arts-academy-showcase-2026/",
   },

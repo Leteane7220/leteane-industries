@@ -3,6 +3,7 @@ import {
   campusEvents,
   campusLabels,
   eventSources,
+  formatEventDate,
   formatEventWhen,
   mapsUrl,
   withinWindow,
@@ -417,21 +418,30 @@ function Showcase() {
                       </span>
                     </td>
                     <td className="px-5 py-3.5">
-                      <span className="flex items-center gap-2.5">
-                        <span
-                          className={`inline-flex items-center rounded-full border px-2.5 py-0.5 font-mono text-[11px] ${entryClass(event.free)}`}
-                        >
-                          {event.free ? "Free" : "Paid"}
+                      <span className="flex flex-col gap-1">
+                        <span className="flex items-center gap-2.5">
+                          <span
+                            className={`inline-flex items-center rounded-full border px-2.5 py-0.5 font-mono text-[11px] ${entryClass(event.free)}`}
+                          >
+                            {event.free ? "Free" : "Paid"}
+                          </span>
+                          <a
+                            href={event.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group inline-flex items-center gap-1 font-mono text-[11px] text-muted-foreground transition-colors hover:text-primary"
+                          >
+                            {event.free ? "Get free ticket" : "Buy tickets"}
+                            <ArrowUpRight className="size-3 transition-colors group-hover:text-primary" />
+                          </a>
                         </span>
-                        <a
-                          href={event.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="group inline-flex items-center gap-1 font-mono text-[11px] text-muted-foreground transition-colors hover:text-primary"
+                        <span
+                          className="inline-flex items-center gap-1 font-mono text-[10px] text-muted-foreground/70"
+                          title={`Price re-checked on the source page on ${formatEventDate(event.priceCheckedOn)}`}
                         >
-                          {event.free ? "Get free ticket" : "Buy tickets"}
-                          <ArrowUpRight className="size-3 transition-colors group-hover:text-primary" />
-                        </a>
+                          <ShieldCheck className="size-3 text-primary/70" />
+                          price checked {formatEventDate(event.priceCheckedOn)}
+                        </span>
                       </span>
                     </td>
                   </tr>
