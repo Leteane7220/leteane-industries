@@ -448,13 +448,48 @@ function Showcase() {
                             <ArrowUpRight className="size-3 transition-colors group-hover:text-primary" />
                           </a>
                         </span>
-                        <span
-                          className="inline-flex items-center gap-1 font-mono text-[10px] text-muted-foreground/70"
-                          title={`Price re-checked on the source page on ${formatEventDate(event.priceCheckedOn)}`}
-                        >
-                          <ShieldCheck className="size-3 text-primary/70" />
-                          price checked {formatEventDate(event.priceCheckedOn)}
-                        </span>
+                        {(() => {
+                          const check = checks[event.url];
+                          if (!check) {
+                            return (
+                              <span
+                                className="inline-flex items-center gap-1 font-mono text-[10px] text-muted-foreground/70"
+                                title={`Price re-checked on the source page on ${formatEventDate(event.priceCheckedOn)}`}
+                              >
+                                <ShieldCheck className="size-3 text-primary/70" />
+                                price checked {formatEventDate(event.priceCheckedOn)}
+                              </span>
+                            );
+                          }
+                          const time = new Date(check.checkedAt).toLocaleTimeString("en-ZA", {
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          });
+                          if (!check.reachable) {
+                            return (
+                              <span className="inline-flex items-center gap-1 font-mono text-[10px] text-amber-400/90">
+                                <AlertTriangle className="size-3" />
+                                source unreachable at {time}
+                              </span>
+                            );
+                          }
+                          const mismatch = check.free !== null && check.free !== event.free;
+                          return (
+                            <span
+                              className={`inline-flex items-center gap-1 font-mono text-[10px] ${mismatch ? "text-amber-400/90" : "text-muted-foreground/70"}`}
+                              title={`Source page re-checked live at ${time}`}
+                            >
+                              {mismatch ? (
+                                <AlertTriangle className="size-3" />
+                              ) : (
+                                <ShieldCheck className="size-3 text-primary/70" />
+                              )}
+                              {mismatch
+                                ? `source now reads ${check.free ? "free" : "paid"} — checked ${time}`
+                                : `re-verified ${time}`}
+                            </span>
+                          );
+                        })()}
                       </span>
                     </td>
                   </tr>
