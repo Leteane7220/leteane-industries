@@ -6,6 +6,7 @@ import {
   formatEventDate,
   formatEventWhen,
   mapsUrl,
+  isEventPast,
   withinWindow,
   type TimeWindow,
 } from "@/lib/campus-events";
