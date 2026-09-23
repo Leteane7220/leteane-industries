@@ -9,6 +9,8 @@ import {
   withinWindow,
   type TimeWindow,
 } from "@/lib/campus-events";
+import { verifyEvents, type EventVerification } from "@/lib/verify-events.functions";
+import { useServerFn } from "@tanstack/react-start";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
@@ -16,6 +18,7 @@ import {
   Database,
   Layers,
   MapPin,
+  AlertTriangle,
   Network,
   RefreshCw,
   Search,
