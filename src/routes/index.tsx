@@ -9,6 +9,8 @@ import {
   withinWindow,
   type TimeWindow,
 } from "@/lib/campus-events";
+import { verifyEvents, type EventVerification } from "@/lib/verify-events.functions";
+import { useServerFn } from "@tanstack/react-start";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
@@ -16,6 +18,7 @@ import {
   Database,
   Layers,
   MapPin,
+  AlertTriangle,
   Network,
   RefreshCw,
   Search,
@@ -234,17 +237,27 @@ function Showcase() {
   const [source, setSource] = useState("any");
   const [lastRefreshed, setLastRefreshed] = useState<Date | null>(null);
   const [refreshing, setRefreshing] = useState(false);
+  const [checks, setChecks] = useState<Record<string, EventVerification>>({});
+  const runVerification = useServerFn(verifyEvents);
 
-  const handleRefresh = () => {
+  const handleRefresh = async () => {
     setRefreshing(true);
-    globalThis.setTimeout(() => {
+    try {
+      const data = await runVerification({});
+      const next: Record<string, EventVerification> = {};
+      for (const result of data.results) next[result.url] = result;
+      setChecks(next);
+      setLastRefreshed(new Date(data.checkedAt));
+    } catch {
       setLastRefreshed(new Date());
+    } finally {
       setRefreshing(false);
-    }, 700);
+    }
   };
 
   useEffect(() => {
-    setLastRefreshed(new Date());
+    void handleRefresh();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const results = useMemo(() => {
@@ -435,13 +448,48 @@ function Showcase() {
                             <ArrowUpRight className="size-3 transition-colors group-hover:text-primary" />
                           </a>
                         </span>
-                        <span
-                          className="inline-flex items-center gap-1 font-mono text-[10px] text-muted-foreground/70"
-                          title={`Price re-checked on the source page on ${formatEventDate(event.priceCheckedOn)}`}
-                        >
-                          <ShieldCheck className="size-3 text-primary/70" />
-                          price checked {formatEventDate(event.priceCheckedOn)}
-                        </span>
+                        {(() => {
+                          const check = checks[event.url];
+                          if (!check) {
+                            return (
+                              <span
+                                className="inline-flex items-center gap-1 font-mono text-[10px] text-muted-foreground/70"
+                                title={`Price re-checked on the source page on ${formatEventDate(event.priceCheckedOn)}`}
+                              >
+                                <ShieldCheck className="size-3 text-primary/70" />
+                                price checked {formatEventDate(event.priceCheckedOn)}
+                              </span>
+                            );
+                          }
+                          const time = new Date(check.checkedAt).toLocaleTimeString("en-ZA", {
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          });
+                          if (!check.reachable) {
+                            return (
+                              <span className="inline-flex items-center gap-1 font-mono text-[10px] text-amber-400/90">
+                                <AlertTriangle className="size-3" />
+                                source unreachable at {time}
+                              </span>
+                            );
+                          }
+                          const mismatch = check.free !== null && check.free !== event.free;
+                          return (
+                            <span
+                              className={`inline-flex items-center gap-1 font-mono text-[10px] ${mismatch ? "text-amber-400/90" : "text-muted-foreground/70"}`}
+                              title={`Source page re-checked live at ${time}`}
+                            >
+                              {mismatch ? (
+                                <AlertTriangle className="size-3" />
+                              ) : (
+                                <ShieldCheck className="size-3 text-primary/70" />
+                              )}
+                              {mismatch
+                                ? `source now reads ${check.free ? "free" : "paid"} — checked ${time}`
+                                : `re-verified ${time}`}
+                            </span>
+                          );
+                        })()}
                       </span>
                     </td>
                   </tr>
