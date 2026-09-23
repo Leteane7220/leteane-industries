@@ -6,6 +6,7 @@ import {
   formatEventDate,
   formatEventWhen,
   mapsUrl,
+  isEventPast,
   withinWindow,
   type TimeWindow,
 } from "@/lib/campus-events";
@@ -263,6 +264,8 @@ function Showcase() {
   const results = useMemo(() => {
     const q = query.trim().toLowerCase();
     return campusEvents
+      // After each refresh, events whose date and time have passed are removed.
+      .filter((event) => (lastRefreshed ? !isEventPast(event, lastRefreshed) : true))
       .filter((event) => (campus === "all" ? true : event.campus === campus))
       .filter((event) => (source === "any" ? true : event.source === source))
       .filter((event) => withinWindow(event, window))
@@ -275,7 +278,12 @@ function Showcase() {
           : true,
       )
       .sort((a, b) => `${a.date}${a.time}`.localeCompare(`${b.date}${b.time}`));
-  }, [query, campus, window, source]);
+  }, [query, campus, window, source, lastRefreshed]);
+
+  const pastCount = useMemo(
+    () => (lastRefreshed ? campusEvents.filter((event) => isEventPast(event, lastRefreshed)).length : 0),
+    [lastRefreshed],
+  );
 
   return (
     <section id="showcase" className="border-b border-border">
@@ -512,6 +520,7 @@ function Showcase() {
           <div className="flex items-center justify-between border-t border-border px-5 py-3 font-mono text-[11px] text-muted-foreground">
             <span>
               {results.length} of {campusEvents.length} indexed events shown
+              {pastCount > 0 ? ` · ${pastCount} passed ${pastCount === 1 ? "event" : "events"} removed` : ""}
             </span>
             <span className="flex items-center gap-1.5">
               <Terminal className="size-3" />
