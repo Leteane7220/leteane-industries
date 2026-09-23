@@ -234,17 +234,27 @@ function Showcase() {
   const [source, setSource] = useState("any");
   const [lastRefreshed, setLastRefreshed] = useState<Date | null>(null);
   const [refreshing, setRefreshing] = useState(false);
+  const [checks, setChecks] = useState<Record<string, EventVerification>>({});
+  const runVerification = useServerFn(verifyEvents);
 
-  const handleRefresh = () => {
+  const handleRefresh = async () => {
     setRefreshing(true);
-    globalThis.setTimeout(() => {
+    try {
+      const data = await runVerification({});
+      const next: Record<string, EventVerification> = {};
+      for (const result of data.results) next[result.url] = result;
+      setChecks(next);
+      setLastRefreshed(new Date(data.checkedAt));
+    } catch {
       setLastRefreshed(new Date());
+    } finally {
       setRefreshing(false);
-    }, 700);
+    }
   };
 
   useEffect(() => {
-    setLastRefreshed(new Date());
+    void handleRefresh();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const results = useMemo(() => {
