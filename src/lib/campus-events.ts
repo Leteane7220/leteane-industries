@@ -131,8 +131,14 @@ export function mapsUrl(event: CampusEvent) {
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(event.location)}`;
 }
 
+/** True once the event's scheduled start time has passed (Africa/Johannesburg, UTC+02:00). */
+export function isEventPast(event: CampusEvent, at: Date = new Date()): boolean {
+  const start = new Date(`${event.date}T${event.time}:00+02:00`);
+  return start.getTime() < at.getTime();
+}
+
 /** Reference "today" for the index. */
-export const indexToday = "2026-09-20";
+export const indexToday = "2026-09-23";
 
 export type TimeWindow = "any" | "today" | "week" | "month";
 
