@@ -264,6 +264,8 @@ function Showcase() {
   const results = useMemo(() => {
     const q = query.trim().toLowerCase();
     return campusEvents
+      // After each refresh, events whose date and time have passed are removed.
+      .filter((event) => (lastRefreshed ? !isEventPast(event, lastRefreshed) : true))
       .filter((event) => (campus === "all" ? true : event.campus === campus))
       .filter((event) => (source === "any" ? true : event.source === source))
       .filter((event) => withinWindow(event, window))
@@ -276,7 +278,12 @@ function Showcase() {
           : true,
       )
       .sort((a, b) => `${a.date}${a.time}`.localeCompare(`${b.date}${b.time}`));
-  }, [query, campus, window, source]);
+  }, [query, campus, window, source, lastRefreshed]);
+
+  const pastCount = useMemo(
+    () => (lastRefreshed ? campusEvents.filter((event) => isEventPast(event, lastRefreshed)).length : 0),
+    [lastRefreshed],
+  );
 
   return (
     <section id="showcase" className="border-b border-border">
