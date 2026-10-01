@@ -75,10 +75,10 @@ function TermsPage() {
       <header className="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur-md">
         <div className="mx-auto flex h-16 max-w-4xl items-center justify-between px-6">
           <Link to="/" className="flex items-center gap-2.5">
-            <span className="flex size-7 items-center justify-center rounded-sm bg-primary font-display text-sm font-bold text-primary-foreground">
+            <span className="flex size-7 items-center justify-center rounded-sm bg-primary font-display text-sm font-normal text-primary-foreground">
               L
             </span>
-            <span className="font-display text-sm font-semibold tracking-wide text-foreground">
+            <span className="font-display text-sm font-normal tracking-wide text-foreground">
               Leteane Industries
             </span>
           </Link>
@@ -96,7 +96,7 @@ function TermsPage() {
         <p className="font-mono text-xs font-medium uppercase tracking-[0.22em] text-primary">
           Legal
         </p>
-        <h1 className="mt-4 font-display text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+        <h1 className="mt-4 font-display text-4xl font-normal tracking-tight text-foreground sm:text-5xl">
           Terms of Service
         </h1>
         <p className="mt-4 text-sm text-muted-foreground">
@@ -107,7 +107,7 @@ function TermsPage() {
         <div className="mt-12 space-y-px overflow-hidden rounded-xl border border-border bg-border">
           {sections.map((section) => (
             <section key={section.title} className="bg-surface px-6 py-6 sm:px-8">
-              <h2 className="font-display text-lg font-semibold tracking-tight text-foreground">
+              <h2 className="font-display text-lg font-normal tracking-tight text-foreground">
                 {section.title}
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
