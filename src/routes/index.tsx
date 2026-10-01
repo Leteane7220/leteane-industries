@@ -146,7 +146,6 @@ const heroStats = [
 function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-border">
-      <div className="grid-blueprint absolute inset-0" aria-hidden="true" />
       <div
         className="absolute inset-x-0 top-0 h-px accent-line opacity-60"
         aria-hidden="true"
@@ -678,7 +677,7 @@ function About() {
 
         <div className="flex flex-col gap-px overflow-hidden rounded-xl border border-border bg-border">
           {aboutTraits.map((trait) => (
-            <div key={trait.title} className="flex items-start gap-4 bg-surface px-6 py-6">
+            <div key={trait.title} className="flex flex-1 items-start gap-4 bg-surface px-6 py-6">
               <span className="mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary">
                 <trait.icon className="size-4" />
               </span>
