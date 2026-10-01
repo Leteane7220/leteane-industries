@@ -209,7 +209,7 @@ function Hero() {
 
 function entryClass(free: boolean) {
   return free
-    ? "border-emerald-400/30 bg-emerald-400/10 text-emerald-300"
+    ? "border-foreground bg-foreground text-foreground"
     : "border-border bg-surface-2 text-muted-foreground";
 }
 
@@ -475,7 +475,7 @@ function Showcase() {
                           });
                           if (!check.reachable) {
                             return (
-                              <span className="inline-flex items-center gap-1 font-mono text-[10px] text-amber-400/90">
+                              <span className="inline-flex items-center gap-1 font-mono text-[10px] text-foreground">
                                 <AlertTriangle className="size-3" />
                                 source unreachable at {time}
                               </span>
@@ -484,7 +484,7 @@ function Showcase() {
                           const mismatch = check.free !== null && check.free !== event.free;
                           return (
                             <span
-                              className={`inline-flex items-center gap-1 font-mono text-[10px] ${mismatch ? "text-amber-400/90" : "text-muted-foreground/70"}`}
+                              className={`inline-flex items-center gap-1 font-mono text-[10px] ${mismatch ? "text-foreground" : "text-muted-foreground/70"}`}
                               title={`Source page re-checked live at ${time}`}
                             >
                               {mismatch ? (
