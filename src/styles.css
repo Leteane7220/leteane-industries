@@ -84,6 +84,17 @@
 
   body {
     background-color: var(--color-background);
+    background-image:
+      linear-gradient(to right, oklch(1 0 0 / 5%) 1px, transparent 1px),
+      linear-gradient(to bottom, oklch(1 0 0 / 5%) 1px, transparent 1px),
+      linear-gradient(to right, oklch(1 0 0 / 9%) 1px, transparent 1px),
+      linear-gradient(to bottom, oklch(1 0 0 / 9%) 1px, transparent 1px);
+    background-size:
+      56px 56px,
+      56px 56px,
+      280px 280px,
+      280px 280px;
+    background-attachment: fixed;
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
@@ -98,11 +109,11 @@
 
 /* ---------- Custom utilities ---------- */
 
-/* Faint blueprint grid backdrop for the hero */
+/* Blueprint grid backdrop for panels that sit on the page paper */
 @utility grid-blueprint {
   background-image:
-    linear-gradient(to right, oklch(0 0 0 / 4%) 1px, transparent 1px),
-    linear-gradient(to bottom, oklch(0 0 0 / 4%) 1px, transparent 1px);
+    linear-gradient(to right, oklch(1 0 0 / 5%) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(1 0 0 / 5%) 1px, transparent 1px);
   background-size: 56px 56px;
 }
 

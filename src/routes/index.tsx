@@ -146,7 +146,6 @@ const heroStats = [
 function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-border">
-      <div className="grid-blueprint absolute inset-0" aria-hidden="true" />
       <div
         className="absolute inset-x-0 top-0 h-px accent-line opacity-60"
         aria-hidden="true"
