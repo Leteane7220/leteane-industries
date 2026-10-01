@@ -209,7 +209,7 @@ function Hero() {
 
 function entryClass(free: boolean) {
   return free
-    ? "border-foreground bg-foreground text-foreground"
+    ? "border-foreground bg-foreground text-background"
     : "border-border bg-surface-2 text-muted-foreground";
 }
 
