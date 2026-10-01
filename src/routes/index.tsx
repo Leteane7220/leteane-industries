@@ -677,7 +677,7 @@ function About() {
 
         <div className="flex flex-col gap-px overflow-hidden rounded-xl border border-border bg-border">
           {aboutTraits.map((trait) => (
-            <div key={trait.title} className="flex items-start gap-4 bg-surface px-6 py-6">
+            <div key={trait.title} className="flex flex-1 items-start gap-4 bg-surface px-6 py-6">
               <span className="mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary">
                 <trait.icon className="size-4" />
               </span>
