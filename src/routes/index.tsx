@@ -79,7 +79,7 @@ function SectionHeading({
   return (
     <div className="max-w-2xl">
       <Eyebrow>{eyebrow}</Eyebrow>
-      <h2 className="mt-4 font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+      <h2 className="mt-4 font-display text-3xl font-normal tracking-tight text-foreground sm:text-4xl">
         {title}
       </h2>
       {intro ? (
@@ -103,10 +103,10 @@ function Nav() {
     <header className="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
         <a href="/" className="flex items-center gap-2.5">
-          <span className="flex size-7 items-center justify-center rounded-sm bg-primary font-display text-sm font-bold text-primary-foreground">
+          <span className="flex size-7 items-center justify-center rounded-sm bg-primary font-display text-sm font-normal text-primary-foreground">
             L
           </span>
-          <span className="font-display text-sm font-semibold tracking-wide text-foreground">
+          <span className="font-display text-sm font-normal tracking-wide text-foreground">
             Leteane Industries
           </span>
         </a>
@@ -162,7 +162,7 @@ function Hero() {
           </p>
         </div>
 
-        <h1 className="mt-8 max-w-4xl font-display text-5xl font-semibold leading-[1.05] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
+        <h1 className="mt-8 max-w-4xl font-display text-5xl font-normal leading-[1.05] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
           Engineering the{" "}
           <span className="text-primary">Data Pipelines</span> of Tomorrow.
         </h1>
@@ -191,7 +191,7 @@ function Hero() {
         <dl className="mt-20 grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-3">
           {heroStats.map((stat) => (
             <div key={stat.label} className="bg-surface px-6 py-5">
-              <dt className="font-display text-2xl font-semibold text-foreground">
+              <dt className="font-display text-2xl font-normal text-foreground">
                 {stat.value}
               </dt>
               <dd className="mt-1 text-sm text-muted-foreground">{stat.label}</dd>
@@ -209,7 +209,7 @@ function Hero() {
 
 function entryClass(free: boolean) {
   return free
-    ? "border-emerald-400/30 bg-emerald-400/10 text-emerald-300"
+    ? "border-foreground bg-foreground text-background"
     : "border-border bg-surface-2 text-muted-foreground";
 }
 
@@ -475,7 +475,7 @@ function Showcase() {
                           });
                           if (!check.reachable) {
                             return (
-                              <span className="inline-flex items-center gap-1 font-mono text-[10px] text-amber-400/90">
+                              <span className="inline-flex items-center gap-1 font-mono text-[10px] text-foreground">
                                 <AlertTriangle className="size-3" />
                                 source unreachable at {time}
                               </span>
@@ -484,7 +484,7 @@ function Showcase() {
                           const mismatch = check.free !== null && check.free !== event.free;
                           return (
                             <span
-                              className={`inline-flex items-center gap-1 font-mono text-[10px] ${mismatch ? "text-amber-400/90" : "text-muted-foreground/70"}`}
+                              className={`inline-flex items-center gap-1 font-mono text-[10px] ${mismatch ? "text-foreground" : "text-muted-foreground/70"}`}
                               title={`Source page re-checked live at ${time}`}
                             >
                               {mismatch ? (
@@ -533,7 +533,7 @@ function Showcase() {
         <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-[1fr_1.15fr]">
           <div>
             <Eyebrow>Ask the assistant</Eyebrow>
-            <h3 className="mt-3 font-display text-2xl font-semibold tracking-tight text-foreground">
+            <h3 className="mt-3 font-display text-2xl font-normal tracking-tight text-foreground">
               Not sure which events are for you?
             </h3>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
@@ -601,7 +601,7 @@ function Services() {
                   /{service.num}
                 </span>
               </div>
-              <h3 className="mt-6 font-display text-xl font-semibold tracking-tight text-foreground">
+              <h3 className="mt-6 font-display text-xl font-normal tracking-tight text-foreground">
                 {service.title}
               </h3>
               <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
@@ -683,7 +683,7 @@ function About() {
                 <trait.icon className="size-4" />
               </span>
               <div>
-                <h3 className="font-display text-base font-semibold text-foreground">
+                <h3 className="font-display text-base font-normal text-foreground">
                   {trait.title}
                 </h3>
                 <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
@@ -736,10 +736,10 @@ function Footer() {
         <div className="grid grid-cols-1 gap-12 border-b border-border pb-14 md:grid-cols-[1.4fr_repeat(3,1fr)]">
           <div>
             <a href="/" className="flex items-center gap-2.5">
-              <span className="flex size-7 items-center justify-center rounded-sm bg-primary font-display text-sm font-bold text-primary-foreground">
+              <span className="flex size-7 items-center justify-center rounded-sm bg-primary font-display text-sm font-normal text-primary-foreground">
                 L
               </span>
-              <span className="font-display text-sm font-semibold tracking-wide text-foreground">
+              <span className="font-display text-sm font-normal tracking-wide text-foreground">
                 Leteane Industries
               </span>
             </a>
