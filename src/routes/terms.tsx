@@ -78,7 +78,7 @@ function TermsPage() {
             <span className="flex size-7 items-center justify-center rounded-sm bg-primary font-display text-sm font-normal text-primary-foreground">
               L
             </span>
-            <span className="font-display text-sm font-normal tracking-wide text-foreground">
+            <span className="font-display text-sm font-semibold tracking-wide text-foreground">
               Leteane Industries
             </span>
           </Link>
@@ -93,10 +93,10 @@ function TermsPage() {
       </header>
 
       <main className="mx-auto max-w-4xl px-6 pb-24 pt-16">
-        <p className="font-mono text-xs font-medium uppercase tracking-[0.22em] text-primary">
+        <p className="font-mono text-xs font-semibold uppercase tracking-[0.22em] text-primary">
           Legal
         </p>
-        <h1 className="mt-4 font-display text-4xl font-normal tracking-tight text-foreground sm:text-5xl">
+        <h1 className="mt-4 font-display text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
           Terms of Service
         </h1>
         <p className="mt-4 text-sm text-muted-foreground">
@@ -107,7 +107,7 @@ function TermsPage() {
         <div className="mt-12 space-y-px overflow-hidden rounded-xl border border-border bg-border">
           {sections.map((section) => (
             <section key={section.title} className="bg-surface px-6 py-6 sm:px-8">
-              <h2 className="font-display text-lg font-normal tracking-tight text-foreground">
+              <h2 className="font-display text-lg font-semibold tracking-tight text-foreground">
                 {section.title}
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
@@ -117,7 +117,7 @@ function TermsPage() {
           ))}
         </div>
 
-        <p className="mt-8 font-mono text-xs text-muted-foreground/70">
+        <p className="mt-8 font-mono text-xs font-medium text-muted-foreground">
           Questions about these terms? Contact hello@leteane.industries.
         </p>
       </main>
@@ -127,7 +127,7 @@ function TermsPage() {
           <p className="text-sm text-muted-foreground">
             © 2026 Leteane Industries (Pty) Ltd. All rights reserved.
           </p>
-          <p className="font-mono text-xs text-muted-foreground/70">
+          <p className="font-mono text-xs font-medium text-muted-foreground">
             Privacy Policy &amp; Data Scraping Compliance — pending legal review
           </p>
         </div>

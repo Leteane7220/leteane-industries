@@ -37,11 +37,11 @@ export function CampusAssistant() {
   return (
     <div className="panel-sheen overflow-hidden rounded-xl border border-border bg-surface">
       <div className="flex items-center justify-between border-b border-border bg-surface-2 px-5 py-3">
-        <span className="flex items-center gap-2 font-display text-sm font-normal text-foreground">
+        <span className="flex items-center gap-2 font-display text-sm font-semibold text-foreground">
           <Sparkles className="size-4 text-primary" />
           Unify Assistant
         </span>
-        <span className="font-mono text-[11px] text-muted-foreground">
+        <span className="font-mono text-[11px] font-medium text-muted-foreground">
           AI · indexed events only
         </span>
       </div>
@@ -82,7 +82,7 @@ export function CampusAssistant() {
         ))}
 
         {status === "submitted" ? (
-          <p className="font-mono text-xs text-muted-foreground">thinking…</p>
+          <p className="font-mono text-xs font-medium text-muted-foreground">thinking…</p>
         ) : null}
         {error ? (
           <p className="font-mono text-xs text-destructive">
@@ -98,7 +98,7 @@ export function CampusAssistant() {
               key={suggestion}
               type="button"
               onClick={() => send(suggestion)}
-              className="rounded-md border border-border bg-background px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:border-primary/50 hover:text-primary"
+              className="rounded-md border border-border bg-background px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:border-primary/50 hover:text-primary"
             >
               {suggestion}
             </button>
@@ -117,7 +117,7 @@ export function CampusAssistant() {
           value={input}
           onChange={(event) => setInput(event.target.value)}
           placeholder="Ask which events suit you…"
-          className="flex-1 rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground outline-none placeholder:text-muted-foreground focus:border-primary/60"
+          className="flex-1 rounded-md border border-border bg-background px-3 py-2 text-sm font-medium text-foreground outline-none placeholder:text-foreground/75 focus:border-primary/60"
         />
         <button
           type="submit"
