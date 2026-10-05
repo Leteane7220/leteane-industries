@@ -37,11 +37,11 @@ export function CampusAssistant() {
   return (
     <div className="panel-sheen overflow-hidden rounded-xl border border-border bg-surface">
       <div className="flex items-center justify-between border-b border-border bg-surface-2 px-5 py-3">
-        <span className="flex items-center gap-2 font-display text-sm font-normal text-foreground">
+        <span className="flex items-center gap-2 font-display text-sm font-semibold text-foreground">
           <Sparkles className="size-4 text-primary" />
           Unify Assistant
         </span>
-        <span className="font-mono text-[11px] text-muted-foreground">
+        <span className="font-mono text-[11px] font-medium text-muted-foreground">
           AI · indexed events only
         </span>
       </div>

@@ -61,7 +61,7 @@ export const Route = createFileRoute("/")({
 
 function Eyebrow({ children }: { children: string }) {
   return (
-    <p className="font-mono text-xs font-medium uppercase tracking-[0.22em] text-primary">
+    <p className="font-mono text-xs font-semibold uppercase tracking-[0.22em] text-primary">
       {children}
     </p>
   );
@@ -79,7 +79,7 @@ function SectionHeading({
   return (
     <div className="max-w-2xl">
       <Eyebrow>{eyebrow}</Eyebrow>
-      <h2 className="mt-4 font-display text-3xl font-normal tracking-tight text-foreground sm:text-4xl">
+      <h2 className="mt-4 font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
         {title}
       </h2>
       {intro ? (
@@ -103,10 +103,10 @@ function Nav() {
     <header className="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
         <a href="/" className="flex items-center gap-2.5">
-          <span className="flex size-7 items-center justify-center rounded-sm bg-primary font-display text-sm font-normal text-primary-foreground">
+          <span className="flex size-7 items-center justify-center rounded-sm bg-primary font-display text-sm font-semibold text-primary-foreground">
             L
           </span>
-          <span className="font-display text-sm font-normal tracking-wide text-foreground">
+          <span className="font-display text-sm font-semibold tracking-wide text-foreground">
             Leteane Industries
           </span>
         </a>
@@ -115,7 +115,7 @@ function Nav() {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
               {link.label}
             </a>
@@ -164,12 +164,12 @@ function Hero() {
             <span className="absolute inline-flex size-full animate-ping rounded-full bg-primary opacity-60" />
             <span className="relative inline-flex size-2 rounded-full bg-primary" />
           </span>
-          <p className="font-mono text-xs uppercase tracking-[0.22em] text-muted-foreground">
+          <p className="font-mono text-xs font-semibold uppercase tracking-[0.22em] text-muted-foreground">
             Data Engineering — Johannesburg, ZA
           </p>
         </div>
 
-        <h1 className="mt-8 max-w-4xl font-display text-5xl font-normal leading-[1.05] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
+        <h1 className="mt-8 max-w-4xl font-display text-5xl font-semibold leading-[1.05] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
           Engineering the{" "}
           <span className="text-primary">Data Pipelines</span> of Tomorrow.
         </h1>
@@ -399,15 +399,15 @@ function Showcase() {
           <div className="max-h-[26rem] overflow-auto">
             <table className="w-full min-w-160 text-left text-sm">
               <thead>
-                <tr className="border-b border-border font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
-                  <th className="px-5 py-3 font-medium">#</th>
-                  <th className="px-5 py-3 font-medium">Event</th>
-                  <th className="px-5 py-3 font-medium">Source</th>
-                  <th className="hidden px-5 py-3 font-medium lg:table-cell">Location</th>
-                  <th className="hidden px-5 py-3 font-medium sm:table-cell">Campus</th>
-                  <th className="hidden px-5 py-3 font-medium md:table-cell">Time</th>
-                  <th className="px-5 py-3 font-medium">Going</th>
-                  <th className="px-5 py-3 font-medium">Entry</th>
+                <tr className="border-b border-border font-mono text-[11px] font-semibold uppercase tracking-widest text-foreground">
+                  <th className="px-5 py-3 font-semibold">#</th>
+                  <th className="px-5 py-3 font-semibold">Event</th>
+                  <th className="px-5 py-3 font-semibold">Source</th>
+                  <th className="hidden px-5 py-3 font-semibold lg:table-cell">Location</th>
+                  <th className="hidden px-5 py-3 font-semibold sm:table-cell">Campus</th>
+                  <th className="hidden px-5 py-3 font-semibold md:table-cell">Time</th>
+                  <th className="px-5 py-3 font-semibold">Going</th>
+                  <th className="px-5 py-3 font-semibold">Entry</th>
                 </tr>
               </thead>
               <tbody>
@@ -416,10 +416,10 @@ function Showcase() {
                     key={event.title}
                     className="border-b border-border/60 transition-colors last:border-0 hover:bg-surface-2/60"
                   >
-                    <td className="px-5 py-3.5 font-mono text-xs text-muted-foreground">
+                    <td className="px-5 py-3.5 font-mono text-xs font-medium text-muted-foreground">
                       {String(index + 1).padStart(2, "0")}
                     </td>
-                    <td className="px-5 py-3.5 font-medium text-foreground">
+                    <td className="px-5 py-3.5 font-semibold text-foreground">
                       <a
                         href={event.url}
                         target="_blank"
@@ -427,30 +427,30 @@ function Showcase() {
                         className="group inline-flex items-center gap-1.5 transition-colors hover:text-primary"
                       >
                         {event.title}
-                        <ArrowUpRight className="size-3.5 text-muted-foreground/60 transition-colors group-hover:text-primary" />
+                        <ArrowUpRight className="size-3.5 text-muted-foreground transition-colors group-hover:text-primary" />
                       </a>
                     </td>
-                    <td className="px-5 py-3.5 text-muted-foreground">{event.source}</td>
-                    <td className="hidden max-w-80 px-5 py-3.5 text-muted-foreground lg:table-cell">
+                    <td className="px-5 py-3.5 font-medium text-foreground">{event.source}</td>
+                    <td className="hidden max-w-80 px-5 py-3.5 font-medium text-foreground lg:table-cell">
                       <a
                         href={mapsUrl(event)}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="group inline-flex items-start gap-1.5 transition-colors hover:text-primary"
                       >
-                        <MapPin className="mt-0.5 size-3.5 shrink-0 text-muted-foreground/60 transition-colors group-hover:text-primary" />
+                        <MapPin className="mt-0.5 size-3.5 shrink-0 text-muted-foreground transition-colors group-hover:text-primary" />
                         <span>{event.location}</span>
                       </a>
                     </td>
-                    <td className="hidden px-5 py-3.5 font-mono text-xs text-muted-foreground sm:table-cell">
+                    <td className="hidden px-5 py-3.5 font-mono text-xs font-medium text-foreground sm:table-cell">
                       {event.campus}
                     </td>
-                    <td className="hidden px-5 py-3.5 font-mono text-xs text-muted-foreground md:table-cell">
+                    <td className="hidden px-5 py-3.5 font-mono text-xs font-medium text-foreground md:table-cell">
                       {formatEventWhen(event)}
                     </td>
                     <td className="px-5 py-3.5">
-                      <span className="inline-flex items-center gap-1.5 font-mono text-xs text-muted-foreground">
-                        <Users className="size-3.5 text-muted-foreground/60" />
+                      <span className="inline-flex items-center gap-1.5 font-mono text-xs font-medium text-foreground">
+                        <Users className="size-3.5 text-muted-foreground" />
                         {event.attendees.toLocaleString("en-ZA")}
                       </span>
                     </td>
@@ -466,7 +466,7 @@ function Showcase() {
                             href={event.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="group inline-flex items-center gap-1 font-mono text-[11px] text-muted-foreground transition-colors hover:text-primary"
+                            className="group inline-flex items-center gap-1 font-mono text-[11px] font-medium text-muted-foreground transition-colors hover:text-primary"
                           >
                             {event.free ? "Get free ticket" : "Buy tickets"}
                             <ArrowUpRight className="size-3 transition-colors group-hover:text-primary" />
@@ -477,7 +477,7 @@ function Showcase() {
                           if (!check) {
                             return (
                               <span
-                                className="inline-flex items-center gap-1 font-mono text-[10px] text-muted-foreground/70"
+                                className="inline-flex items-center gap-1 font-mono text-[10px] font-medium text-muted-foreground"
                                 title={`Price re-checked on the source page on ${formatEventDate(event.priceCheckedOn)}`}
                               >
                                 <ShieldCheck className="size-3 text-primary/70" />
@@ -500,7 +500,7 @@ function Showcase() {
                           const mismatch = check.free !== null && check.free !== event.free;
                           return (
                             <span
-                              className={`inline-flex items-center gap-1 font-mono text-[10px] ${mismatch ? "text-foreground" : "text-muted-foreground/70"}`}
+                              className={`inline-flex items-center gap-1 font-mono text-[10px] font-medium ${mismatch ? "text-foreground" : "text-muted-foreground"}`}
                               title={`Source page re-checked live at ${time}`}
                             >
                               {mismatch ? (
@@ -533,7 +533,7 @@ function Showcase() {
             </table>
           </div>
 
-          <div className="flex items-center justify-between border-t border-border px-5 py-3 font-mono text-[11px] text-muted-foreground">
+          <div className="flex items-center justify-between border-t border-border px-5 py-3 font-mono text-[11px] font-medium text-muted-foreground">
             <span>
               {results.length} of {campusEvents.length} indexed events shown
               {pastCount > 0 ? ` · ${pastCount} passed ${pastCount === 1 ? "event" : "events"} removed` : ""}
@@ -549,7 +549,7 @@ function Showcase() {
         <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-[1fr_1.15fr]">
           <div>
             <Eyebrow>Ask the assistant</Eyebrow>
-            <h3 className="mt-3 font-display text-2xl font-normal tracking-tight text-foreground">
+            <h3 className="mt-3 font-display text-2xl font-semibold tracking-tight text-foreground">
               Not sure which events are for you?
             </h3>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
@@ -613,11 +613,11 @@ function Services() {
                 <span className="flex size-11 items-center justify-center rounded-md bg-primary/10 text-primary">
                   <service.icon className="size-5" />
                 </span>
-                <span className="font-mono text-xs text-muted-foreground/60">
+                <span className="font-mono text-xs font-medium text-muted-foreground">
                   /{service.num}
                 </span>
               </div>
-              <h3 className="mt-6 font-display text-xl font-normal tracking-tight text-foreground">
+              <h3 className="mt-6 font-display text-xl font-semibold tracking-tight text-foreground">
                 {service.title}
               </h3>
               <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
@@ -627,7 +627,7 @@ function Services() {
                 {service.points.map((point) => (
                   <li
                     key={point}
-                    className="flex items-center gap-2.5 font-mono text-xs text-muted-foreground"
+                    className="flex items-center gap-2.5 font-mono text-xs font-medium text-muted-foreground"
                   >
                     <span className="size-1 rounded-full bg-primary" />
                     {point}
@@ -754,10 +754,10 @@ function Footer() {
         <div className="grid grid-cols-1 gap-12 border-b border-border pb-14 md:grid-cols-[1.4fr_repeat(3,1fr)]">
           <div>
             <a href="/" className="flex items-center gap-2.5">
-              <span className="flex size-7 items-center justify-center rounded-sm bg-primary font-display text-sm font-normal text-primary-foreground">
+              <span className="flex size-7 items-center justify-center rounded-sm bg-primary font-display text-sm font-semibold text-primary-foreground">
                 L
               </span>
-              <span className="font-display text-sm font-normal tracking-wide text-foreground">
+              <span className="font-display text-sm font-semibold tracking-wide text-foreground">
                 Leteane Industries
               </span>
             </a>
@@ -768,7 +768,7 @@ function Footer() {
           </div>
           {columns.map((col) => (
             <div key={col.heading}>
-              <h3 className="font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
+              <h3 className="font-mono text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
                 {col.heading}
               </h3>
               <ul className="mt-4 space-y-3">
@@ -777,14 +777,14 @@ function Footer() {
                     {link.href === "#" ? (
                       <a
                         href="#"
-                        className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                        className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
                       >
                         {link.label}
                       </a>
                     ) : (
                       <Link
                         to={link.href}
-                        className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                        className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
                       >
                         {link.label}
                       </Link>
