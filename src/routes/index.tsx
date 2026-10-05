@@ -195,7 +195,14 @@ function Hero() {
           </a>
         </div>
 
-        <dl className="mt-20 grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-3">
+        <div
+          className="draft-rule-dashed-h relative mt-20 hidden items-end sm:flex"
+          aria-hidden="true"
+        >
+          <span className="draft-cross absolute -left-2 -top-2 size-4" aria-hidden="true" />
+          <span className="draft-cross absolute -right-2 -top-2 size-4" aria-hidden="true" />
+        </div>
+        <dl className="mt-6 grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-3">
           {heroStats.map((stat) => (
             <div key={stat.label} className="bg-surface px-6 py-5">
               <dt className="font-display text-2xl font-normal text-foreground">
@@ -293,7 +300,9 @@ function Showcase() {
   );
 
   return (
-    <section id="showcase" className="border-b border-border">
+    <section id="showcase" className="relative border-b border-border">
+      <span className="draft-cross absolute left-6 -top-2 size-4" aria-hidden="true" />
+      <span className="draft-cross absolute right-6 -top-2 size-4" aria-hidden="true" />
       <div className="mx-auto max-w-6xl px-6 py-24 sm:py-32">
         <SectionHeading
           eyebrow="Featured Project — Flagship POC"
@@ -657,7 +666,9 @@ const aboutTraits = [
 
 function About() {
   return (
-    <section id="company" className="border-b border-border">
+    <section id="company" className="relative border-b border-border">
+      <span className="draft-cross absolute left-6 -top-2 size-4" aria-hidden="true" />
+      <span className="draft-cross absolute right-6 -top-2 size-4" aria-hidden="true" />
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-16 px-6 py-24 sm:py-32 lg:grid-cols-[1.1fr_1fr] lg:gap-20">
         <div>
           <SectionHeading
