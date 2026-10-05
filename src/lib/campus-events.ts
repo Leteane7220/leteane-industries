@@ -118,9 +118,10 @@ const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "
 
 /** "Sat 26 Sep" — built from fixed tables so the server and the browser render identically. */
 export function formatEventDate(date: string) {
-  const [year, month, day] = date.split("-").map(Number);
-  const weekday = WEEKDAYS[new Date(Date.UTC(year, month - 1, day)).getUTCDay()];
-  return `${weekday} ${day} ${MONTHS[month - 1]}`;
+  const [year = 1970, month = 1, day = 1] = date.split("-").map(Number);
+  const weekday = WEEKDAYS[new Date(Date.UTC(year, month - 1, day)).getUTCDay()] ?? "Mon";
+  const monthName = MONTHS[month - 1] ?? "";
+  return `${weekday} ${day} ${monthName}`;
 }
 
 /** Thousands-grouped count, identical on server and browser. */
