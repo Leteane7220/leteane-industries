@@ -117,7 +117,7 @@ export function CampusAssistant() {
           value={input}
           onChange={(event) => setInput(event.target.value)}
           placeholder="Ask which events suit you…"
-          className="flex-1 rounded-md border border-border bg-background px-3 py-2 text-sm font-medium text-foreground outline-none placeholder:text-foreground/60 focus:border-primary/60"
+          className="flex-1 rounded-md border border-border bg-background px-3 py-2 text-sm font-medium text-foreground outline-none placeholder:text-foreground/75 focus:border-primary/60"
         />
         <button
           type="submit"

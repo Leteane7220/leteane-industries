@@ -100,7 +100,7 @@ function Nav() {
     { label: "Company", href: "#company" },
   ];
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-border bg-background">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
         <a href="/" className="flex items-center gap-2.5">
           <span className="flex size-7 items-center justify-center rounded-sm bg-primary font-display text-sm font-semibold text-primary-foreground">
@@ -477,7 +477,7 @@ function Showcase() {
                           if (!check) {
                             return (
                               <span
-                                className="inline-flex items-center gap-1 font-mono text-[10px] font-medium text-foreground"
+                                className="inline-flex items-center gap-1 font-mono text-[11px] font-medium text-foreground"
                                 title={`Price re-checked on the source page on ${formatEventDate(event.priceCheckedOn)}`}
                               >
                                 <ShieldCheck className="size-3 text-primary" />
@@ -500,7 +500,7 @@ function Showcase() {
                           const mismatch = check.free !== null && check.free !== event.free;
                           return (
                             <span
-                              className="inline-flex items-center gap-1 font-mono text-[10px] font-medium text-foreground"
+                              className="inline-flex items-center gap-1 font-mono text-[11px] font-medium text-foreground"
                               title={`Source page re-checked live at ${time}`}
                             >
                               {mismatch ? (
@@ -799,7 +799,7 @@ function Footer() {
           <p className="text-sm font-medium text-muted-foreground">
             © 2026 Leteane Industries (Pty) Ltd. All rights reserved.
           </p>
-          <p className="font-mono text-xs font-medium text-muted-foreground">
+          <p className="font-mono text-xs font-medium text-foreground">
             Privacy Policy &amp; Data Scraping Compliance — placeholder pending legal review
           </p>
         </div>
