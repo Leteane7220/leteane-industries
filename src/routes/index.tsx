@@ -150,6 +150,14 @@ function Hero() {
         className="absolute inset-x-0 top-0 h-px accent-line opacity-60"
         aria-hidden="true"
       />
+      <div
+        className="draft-construction pointer-events-none absolute inset-0"
+        aria-hidden="true"
+      />
+      <div
+        className="draft-rule-dashed-v absolute top-28 hidden h-[calc(100%-26rem)] md:left-6 md:block"
+        aria-hidden="true"
+      />
       <div className="relative mx-auto max-w-6xl px-6 pb-24 pt-28 sm:pt-36">
         <div className="flex items-center gap-3">
           <span className="relative flex size-2">
