@@ -117,7 +117,7 @@ function TermsPage() {
           ))}
         </div>
 
-        <p className="mt-8 font-mono text-xs text-muted-foreground/70">
+        <p className="mt-8 font-mono text-xs font-medium text-muted-foreground">
           Questions about these terms? Contact hello@leteane.industries.
         </p>
       </main>
@@ -127,7 +127,7 @@ function TermsPage() {
           <p className="text-sm text-muted-foreground">
             © 2026 Leteane Industries (Pty) Ltd. All rights reserved.
           </p>
-          <p className="font-mono text-xs text-muted-foreground/70">
+          <p className="font-mono text-xs font-medium text-muted-foreground">
             Privacy Policy &amp; Data Scraping Compliance — pending legal review
           </p>
         </div>
