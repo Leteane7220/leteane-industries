@@ -477,10 +477,10 @@ function Showcase() {
                           if (!check) {
                             return (
                               <span
-                                className="inline-flex items-center gap-1 font-mono text-[10px] font-medium text-muted-foreground"
+                                className="inline-flex items-center gap-1 font-mono text-[10px] font-medium text-foreground"
                                 title={`Price re-checked on the source page on ${formatEventDate(event.priceCheckedOn)}`}
                               >
-                                <ShieldCheck className="size-3 text-primary/70" />
+                                <ShieldCheck className="size-3 text-primary" />
                                 price checked {formatEventDate(event.priceCheckedOn)}
                               </span>
                             );
@@ -500,13 +500,13 @@ function Showcase() {
                           const mismatch = check.free !== null && check.free !== event.free;
                           return (
                             <span
-                              className={`inline-flex items-center gap-1 font-mono text-[10px] font-medium ${mismatch ? "text-foreground" : "text-muted-foreground"}`}
+                              className="inline-flex items-center gap-1 font-mono text-[10px] font-medium text-foreground"
                               title={`Source page re-checked live at ${time}`}
                             >
                               {mismatch ? (
                                 <AlertTriangle className="size-3" />
                               ) : (
-                                <ShieldCheck className="size-3 text-primary/70" />
+                                <ShieldCheck className="size-3 text-primary" />
                               )}
                               {mismatch
                                 ? `source now reads ${check.free ? "free" : "paid"} — checked ${time}`
@@ -533,7 +533,7 @@ function Showcase() {
             </table>
           </div>
 
-          <div className="flex items-center justify-between border-t border-border px-5 py-3 font-mono text-[11px] font-medium text-muted-foreground">
+          <div className="flex items-center justify-between border-t border-border px-5 py-3 font-mono text-[11px] font-medium text-foreground">
             <span>
               {results.length} of {campusEvents.length} indexed events shown
               {pastCount > 0 ? ` · ${pastCount} passed ${pastCount === 1 ? "event" : "events"} removed` : ""}
@@ -687,7 +687,7 @@ function About() {
               platforms make decisions on data they previously couldn't reach.
             </p>
           </div>
-          <div className="mt-10 flex flex-wrap gap-x-10 gap-y-4 border-t border-border pt-8 font-mono text-xs font-medium text-muted-foreground">
+          <div className="mt-10 flex flex-wrap gap-x-10 gap-y-4 border-t border-border pt-8 font-mono text-xs font-medium text-foreground">
             <span>Reg. ZA — (Pty) Ltd</span>
             <span>Johannesburg, South Africa</span>
             <span>Est. 2026</span>
@@ -768,7 +768,7 @@ function Footer() {
           </div>
           {columns.map((col) => (
             <div key={col.heading}>
-              <h3 className="font-mono text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
+              <h3 className="font-mono text-[11px] font-semibold uppercase tracking-widest text-foreground">
                 {col.heading}
               </h3>
               <ul className="mt-4 space-y-3">
@@ -796,10 +796,10 @@ function Footer() {
           ))}
         </div>
         <div className="flex flex-col items-start justify-between gap-4 pt-8 sm:flex-row sm:items-center">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm font-medium text-muted-foreground">
             © 2026 Leteane Industries (Pty) Ltd. All rights reserved.
           </p>
-          <p className="font-mono text-xs text-muted-foreground/70">
+          <p className="font-mono text-xs font-medium text-muted-foreground">
             Privacy Policy &amp; Data Scraping Compliance — placeholder pending legal review
           </p>
         </div>
