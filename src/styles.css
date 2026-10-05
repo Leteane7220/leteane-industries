@@ -131,3 +131,66 @@
 @utility panel-sheen {
   box-shadow: none;
 }
+
+/* ---------- Drafting linework ---------- */
+
+/* Faint 45-degree construction lines drawn across the sheet */
+@utility draft-construction {
+  background-image:
+    linear-gradient(
+      45deg,
+      transparent calc(50% - 0.5px),
+      oklch(1 0 0 / 6%) calc(50% - 0.5px),
+      oklch(1 0 0 / 6%) calc(50% + 0.5px),
+      transparent calc(50% + 0.5px)
+    ),
+    linear-gradient(
+      135deg,
+      transparent calc(50% - 0.5px),
+      oklch(1 0 0 / 6%) calc(50% - 0.5px),
+      oklch(1 0 0 / 6%) calc(50% + 0.5px),
+      transparent calc(50% + 0.5px)
+    );
+}
+
+/* Dashed guide rule, vertical */
+@utility draft-rule-dashed-v {
+  width: 1px;
+  background-image: linear-gradient(to bottom, oklch(1 0 0 / 16%) 55%, transparent 55%);
+  background-size: 1px 8px;
+  background-repeat: repeat-y;
+}
+
+/* Dashed guide rule, horizontal */
+@utility draft-rule-dashed-h {
+  height: 1px;
+  background-image: linear-gradient(to right, oklch(1 0 0 / 16%) 55%, transparent 55%);
+  background-size: 8px 1px;
+  background-repeat: repeat-x;
+}
+
+/* Crosshair registration mark */
+@utility draft-cross {
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    background: oklch(1 0 0 / 28%);
+  }
+
+  &::before {
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    transform: translateY(-50%);
+  }
+
+  &::after {
+    left: 50%;
+    top: 0;
+    height: 100%;
+    width: 1px;
+    transform: translateX(-50%);
+  }
+}
