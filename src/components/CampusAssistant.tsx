@@ -82,7 +82,7 @@ export function CampusAssistant() {
         ))}
 
         {status === "submitted" ? (
-          <p className="font-mono text-xs text-muted-foreground">thinking…</p>
+          <p className="font-mono text-xs font-medium text-muted-foreground">thinking…</p>
         ) : null}
         {error ? (
           <p className="font-mono text-xs text-destructive">
@@ -98,7 +98,7 @@ export function CampusAssistant() {
               key={suggestion}
               type="button"
               onClick={() => send(suggestion)}
-              className="rounded-md border border-border bg-background px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:border-primary/50 hover:text-primary"
+              className="rounded-md border border-border bg-background px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/50 hover:text-primary"
             >
               {suggestion}
             </button>
@@ -117,7 +117,7 @@ export function CampusAssistant() {
           value={input}
           onChange={(event) => setInput(event.target.value)}
           placeholder="Ask which events suit you…"
-          className="flex-1 rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground outline-none placeholder:text-muted-foreground focus:border-primary/60"
+          className="flex-1 rounded-md border border-border bg-background px-3 py-2 text-sm font-medium text-foreground outline-none placeholder:text-muted-foreground focus:border-primary/60"
         />
         <button
           type="submit"

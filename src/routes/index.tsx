@@ -300,7 +300,7 @@ function Showcase() {
   );
 
   return (
-    <section id="showcase" className="relative border-b border-border">
+    <section id="showcase" className="relative scroll-mt-24 border-b border-border">
       <span className="draft-cross absolute left-6 -top-2 size-4" aria-hidden="true" />
       <span className="draft-cross absolute right-6 -top-2 size-4" aria-hidden="true" />
       <div className="mx-auto max-w-6xl px-6 py-24 sm:py-32">
@@ -595,7 +595,7 @@ const services = [
 
 function Services() {
   return (
-    <section id="services" className="border-b border-border bg-surface/40">
+    <section id="services" className="scroll-mt-24 border-b border-border bg-surface/40">
       <div className="mx-auto max-w-6xl px-6 py-24 sm:py-32">
         <SectionHeading
           eyebrow="What we do"
@@ -687,7 +687,7 @@ function About() {
               platforms make decisions on data they previously couldn't reach.
             </p>
           </div>
-          <div className="mt-10 flex flex-wrap gap-x-10 gap-y-4 border-t border-border pt-8 font-mono text-xs text-muted-foreground">
+          <div className="mt-10 flex flex-wrap gap-x-10 gap-y-4 border-t border-border pt-8 font-mono text-xs font-medium text-muted-foreground">
             <span>Reg. ZA — (Pty) Ltd</span>
             <span>Johannesburg, South Africa</span>
             <span>Est. 2026</span>
@@ -701,7 +701,7 @@ function About() {
                 <trait.icon className="size-4" />
               </span>
               <div>
-                <h3 className="font-display text-base font-normal text-foreground">
+                <h3 className="font-display text-base font-semibold text-foreground">
                   {trait.title}
                 </h3>
                 <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
