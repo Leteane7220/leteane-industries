@@ -113,13 +113,26 @@ export const campusEvents: CampusEvent[] = [
 
 export const eventSources = Array.from(new Set(campusEvents.map((e) => e.source))).sort();
 
+const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+/** "Sat 26 Sep" — built from fixed tables so the server and the browser render identically. */
 export function formatEventDate(date: string) {
-  const d = new Date(`${date}T00:00:00`);
-  return d.toLocaleDateString("en-ZA", {
-    weekday: "short",
-    day: "numeric",
-    month: "short",
-  });
+  const [year, month, day] = date.split("-").map(Number);
+  const weekday = WEEKDAYS[new Date(Date.UTC(year, month - 1, day)).getUTCDay()];
+  return `${weekday} ${day} ${MONTHS[month - 1]}`;
+}
+
+/** Thousands-grouped count, identical on server and browser. */
+export function formatCount(count: number) {
+  return count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+/** 24-hour "HH:MM" clock, identical on server and browser. */
+export function formatClock(at: Date) {
+  const hh = String(at.getHours()).padStart(2, "0");
+  const mm = String(at.getMinutes()).padStart(2, "0");
+  return `${hh}:${mm}`;
 }
 
 export function formatEventWhen(event: CampusEvent) {

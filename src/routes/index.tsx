@@ -3,6 +3,8 @@ import {
   campusEvents,
   campusLabels,
   eventSources,
+  formatClock,
+  formatCount,
   formatEventDate,
   formatEventWhen,
   mapsUrl,
@@ -336,7 +338,7 @@ function Showcase() {
               {refreshing
                 ? "refreshing…"
                 : lastRefreshed
-                  ? `last refreshed ${lastRefreshed.toLocaleTimeString("en-ZA", { hour: "2-digit", minute: "2-digit" })}`
+                  ? `last refreshed ${formatClock(lastRefreshed)}`
                   : "refresh index"}
             </button>
           </div>
@@ -451,7 +453,7 @@ function Showcase() {
                     <td className="px-5 py-3.5">
                       <span className="inline-flex items-center gap-1.5 font-mono text-xs font-medium text-foreground">
                         <Users className="size-3.5 text-muted-foreground" />
-                        {event.attendees.toLocaleString("en-ZA")}
+                        {formatCount(event.attendees)}
                       </span>
                     </td>
                     <td className="px-5 py-3.5">
@@ -485,10 +487,7 @@ function Showcase() {
                               </span>
                             );
                           }
-                          const time = new Date(check.checkedAt).toLocaleTimeString("en-ZA", {
-                            hour: "2-digit",
-                            minute: "2-digit",
-                          });
+                          const time = formatClock(new Date(check.checkedAt));
                           if (!check.reachable) {
                             return (
                               <span className="inline-flex items-center gap-1 font-mono text-[10px] text-foreground">
