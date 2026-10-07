@@ -35,7 +35,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       {
-        title: "Leteane Industries — Data Engineering & Analytics",
+        title: "Leteane Industries, Data Engineering & Analytics",
       },
       {
         name: "description",
@@ -44,7 +44,7 @@ export const Route = createFileRoute("/")({
       },
       {
         property: "og:title",
-        content: "Leteane Industries — Engineering the Data Pipelines of Tomorrow",
+        content: "Leteane Industries, Engineering the Data Pipelines of Tomorrow",
       },
       {
         property: "og:description",
@@ -52,6 +52,7 @@ export const Route = createFileRoute("/")({
           "Automated data aggregation, custom APIs, and intelligent data architecture for African enterprises and platforms.",
       },
       { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Index,
@@ -141,7 +142,7 @@ function Nav() {
 
 const heroStats = [
   { value: "4+", label: "Data sources unified" },
-  { value: "<60s", label: "Ingest-to-serve latency" },
+  { value: "<60s", label: "Ingest to serve latency" },
   { value: "99.9%", label: "Pipeline uptime target" },
 ];
 
@@ -167,7 +168,7 @@ function Hero() {
             <span className="relative inline-flex size-2 rounded-full bg-primary" />
           </span>
           <p className="font-mono text-xs font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-            Data Engineering — Johannesburg, ZA
+            Data Engineering, Johannesburg, ZA
           </p>
         </div>
 
@@ -233,7 +234,7 @@ const campusOptions: Array<{ value: string; label: string }> = [
   { value: "all", label: "All campuses" },
   ...(Object.keys(campusLabels) as Array<keyof typeof campusLabels>).map((code) => ({
     value: code,
-    label: `${code} — ${campusLabels[code]}`,
+    label: `${code}, ${campusLabels[code]}`,
   })),
 ];
 
@@ -307,13 +308,13 @@ function Showcase() {
       <span className="draft-cross absolute right-6 -top-2 size-4" aria-hidden="true" />
       <div className="mx-auto max-w-6xl px-6 py-24 sm:py-32">
         <SectionHeading
-          eyebrow="Featured Project — Flagship POC"
+          eyebrow="Featured Project, Flagship POC"
           title={
             <>
               <span className="text-uni-blue">UNI</span>FY
             </>
           }
-          intro="Unify, provided by Leteane Industries — an automated, multi-source data pipeline that scrapes, cleans, and centralises fragmented university and social media event data, surfacing everything students need in one real-time, searchable interface."
+          intro="Unify, provided by Leteane Industries, an automated, multi source data pipeline that scrapes, cleans, and centralises fragmented university and social media event data, surfacing everything students need in one real time, searchable interface."
         />
 
         {/* Dashboard */}
@@ -326,7 +327,7 @@ function Showcase() {
               <span className="size-2.5 rounded-full bg-border" />
             </div>
             <p className="font-mono text-xs text-muted-foreground">
-              unify / events — live index
+              unify / events, live index
             </p>
             <button
               type="button"
@@ -480,7 +481,7 @@ function Showcase() {
                             return (
                               <span
                                 className="inline-flex items-center gap-1 font-mono text-[11px] font-medium text-foreground"
-                                title={`Price re-checked on the source page on ${formatEventDate(event.priceCheckedOn)}`}
+                                title={`Price rechecked on the source page on ${formatEventDate(event.priceCheckedOn)}`}
                               >
                                 <ShieldCheck className="size-3 text-primary" />
                                 price checked {formatEventDate(event.priceCheckedOn)}
@@ -500,7 +501,7 @@ function Showcase() {
                           return (
                             <span
                               className="inline-flex items-center gap-1 font-mono text-[11px] font-medium text-foreground"
-                              title={`Source page re-checked live at ${time}`}
+                              title={`Source page rechecked live at ${time}`}
                             >
                               {mismatch ? (
                                 <AlertTriangle className="size-3" />
@@ -508,8 +509,8 @@ function Showcase() {
                                 <ShieldCheck className="size-3 text-primary" />
                               )}
                               {mismatch
-                                ? `source now reads ${check.free ? "free" : "paid"} — checked ${time}`
-                                : `re-verified ${time}`}
+                                ? `source now reads ${check.free ? "free" : "paid"}, checked ${time}`
+                                : `reverified ${time}`}
                             </span>
                           );
                         })()}
@@ -523,7 +524,7 @@ function Showcase() {
                       colSpan={8}
                       className="px-5 py-10 text-center text-sm text-muted-foreground"
                     >
-                      No events match those filters yet — try a different campus, date range
+                      No events match those filters yet, try a different campus, date range
                       or source.
                     </td>
                   </tr>
@@ -573,22 +574,22 @@ const services = [
     icon: Layers,
     num: "01",
     title: "Data Ingestion & Web Scraping",
-    body: "Automated ETL pipelines, custom wrappers, and proxy-backed data extraction built to collect reliably at scale — from static pages to authenticated portals.",
-    points: ["Automated ETL pipelines", "Custom scraper wrappers", "Proxy-backed extraction"],
+    body: "Automated ETL pipelines, custom wrappers, and proxy backed data extraction built to collect reliably at scale, from static pages to authenticated portals.",
+    points: ["Automated ETL pipelines", "Custom scraper wrappers", "Proxy backed extraction"],
   },
   {
     icon: Database,
     num: "02",
     title: "Relational Database Architecture",
-    body: "Scalable SQL and PostgreSQL storage designed around your domain — normalised schemas, aggressive indexing, and warehousing ready for analytics.",
+    body: "Scalable SQL and PostgreSQL storage designed around your domain, normalised schemas, aggressive indexing, and warehousing ready for analytics.",
     points: ["PostgreSQL schema design", "Query tuning & indexing", "Data warehousing"],
   },
   {
     icon: Network,
     num: "03",
     title: "API Deployment & Integration",
-    body: "Fast, secure RESTful APIs built with FastAPI to serve clean, structured data to your front-end apps, dashboards, and partner platforms.",
-    points: ["FastAPI REST services", "Auth & rate limiting", "Front-end integration"],
+    body: "Fast, secure RESTful APIs built with FastAPI to serve clean, structured data to your front end apps, dashboards, and partner platforms.",
+    points: ["FastAPI REST services", "Auth & rate limiting", "Front end integration"],
   },
 ];
 
@@ -599,7 +600,7 @@ function Services() {
         <SectionHeading
           eyebrow="What we do"
           title="From raw web data to production intelligence"
-          intro="Three core commercial capabilities, engineered to slot together as one continuous pipeline — or deliver standalone value on their own."
+          intro="Three core commercial capabilities, engineered to slot together as one continuous pipeline, or deliver standalone value on their own."
         />
 
         <div className="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-border bg-border lg:grid-cols-3">
@@ -648,18 +649,18 @@ function Services() {
 const aboutTraits = [
   {
     icon: Terminal,
-    title: "Engineering-first",
+    title: "Engineering first",
     body: "Every asset we ship is reproducible: versioned, tested, and monitored in production.",
   },
   {
     icon: ShieldCheck,
-    title: "Compliance-conscious",
+    title: "Compliance conscious",
     body: "Scraping and storage practices designed with data governance and POPIA in mind.",
   },
   {
     icon: ArrowUpRight,
     title: "Built for monetisation",
-    body: "We don't just collect data — we structure it into assets that generate revenue.",
+    body: "We don't just collect data, we structure it into assets that generate revenue.",
   },
 ];
 
@@ -681,13 +682,13 @@ function About() {
               business intelligence assets.
             </p>
             <p>
-              We work at the intersection of extraction, storage, and delivery — building
+              We work at the intersection of extraction, storage, and delivery, building
               the pipelines, warehouses, and APIs that let African enterprises and
               platforms make decisions on data they previously couldn't reach.
             </p>
           </div>
           <div className="mt-10 flex flex-wrap gap-x-10 gap-y-4 border-t border-border pt-8 font-mono text-xs font-medium text-foreground">
-            <span>Reg. ZA — (Pty) Ltd</span>
+            <span>Reg. ZA, (Pty) Ltd</span>
             <span>Johannesburg, South Africa</span>
             <span>Est. 2026</span>
           </div>
@@ -799,7 +800,7 @@ function Footer() {
             © 2026 Leteane Industries (Pty) Ltd. All rights reserved.
           </p>
           <p className="font-mono text-xs font-medium text-foreground">
-            Privacy Policy &amp; Data Scraping Compliance — placeholder pending legal review
+            Privacy Policy &amp; Data Scraping Compliance, placeholder pending legal review
           </p>
         </div>
       </div>
