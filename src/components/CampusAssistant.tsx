@@ -4,7 +4,7 @@ import { Bot, Send, Sparkles } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 const suggestions = [
-  "I'm a first-year on APK, what's on this week?",
+  "I'm a first year on APK, what's on this week?",
   "Anything for students into data science?",
   "Help me find career or bursary events",
 ];

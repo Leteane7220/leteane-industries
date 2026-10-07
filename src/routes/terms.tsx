@@ -4,19 +4,20 @@ import { ArrowLeft } from "lucide-react";
 export const Route = createFileRoute("/terms")({
   head: () => ({
     meta: [
-      { title: "Terms of Service — Leteane Industries" },
+      { title: "Terms of Service, Leteane Industries" },
       {
         name: "description",
         content:
-          "Terms of Service for Leteane Industries (Pty) Ltd — governing use of our data engineering, API, and analytics services.",
+          "Terms of Service for Leteane Industries (Pty) Ltd, governing use of our data engineering, API, and analytics services.",
       },
-      { property: "og:title", content: "Terms of Service — Leteane Industries" },
+      { property: "og:title", content: "Terms of Service, Leteane Industries" },
       {
         property: "og:description",
         content:
-          "Terms of Service for Leteane Industries (Pty) Ltd — governing use of our data engineering, API, and analytics services.",
+          "Terms of Service for Leteane Industries (Pty) Ltd, governing use of our data engineering, API, and analytics services.",
       },
       { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: TermsPage,
@@ -29,7 +30,7 @@ const sections = [
   },
   {
     title: "2. Services",
-    body: "Leteane Industries provides automated data ingestion and web scraping, relational database architecture, and API development and integration services. The specific scope, deliverables, timelines, and fees for any engagement will be set out in a separate written agreement, statement of work, or service-level agreement signed by both parties.",
+    body: "Leteane Industries provides automated data ingestion and web scraping, relational database architecture, and API development and integration services. The specific scope, deliverables, timelines, and fees for any engagement will be set out in a separate written agreement, statement of work, or service level agreement signed by both parties.",
   },
   {
     title: "3. Data collection and lawful use",
@@ -41,11 +42,11 @@ const sections = [
   },
   {
     title: "5. Intellectual property",
-    body: "All pipelines, schemas, software, documentation, and other deliverables created by Leteane Industries remain the intellectual property of Leteane Industries unless expressly assigned in writing. Upon full payment, clients receive a perpetual, non-exclusive licence to use the deliverables for their internal business purposes. Pre-existing tools, libraries, and methodologies retained by Leteane Industries remain our sole property.",
+    body: "All pipelines, schemas, software, documentation, and other deliverables created by Leteane Industries remain the intellectual property of Leteane Industries unless expressly assigned in writing. Upon full payment, clients receive a perpetual, nonexclusive licence to use the deliverables for their internal business purposes. Preexisting tools, libraries, and methodologies retained by Leteane Industries remain our sole property.",
   },
   {
     title: "6. Data accuracy and availability",
-    body: "While we engineer our systems for reliability and accuracy, aggregated third-party data may be incomplete, delayed, or change without notice. Unless otherwise agreed in a service-level agreement, services are provided \"as is\", and we make no warranties regarding uninterrupted availability, error-free operation, or fitness for a particular purpose.",
+    body: "While we engineer our systems for reliability and accuracy, aggregated third party data may be incomplete, delayed, or change without notice. Unless otherwise agreed in a service level agreement, services are provided \"as is\", and we make no warranties regarding uninterrupted availability, error free operation, or fitness for a particular purpose.",
   },
   {
     title: "7. Limitation of liability",
@@ -53,7 +54,7 @@ const sections = [
   },
   {
     title: "8. Confidentiality",
-    body: "Each party agrees to keep confidential any non-public business, technical, or commercial information disclosed by the other party, and to use such information solely for the purpose of the engagement. This obligation survives the termination of any agreement for a period of three years.",
+    body: "Each party agrees to keep confidential any nonpublic business, technical, or commercial information disclosed by the other party, and to use such information solely for the purpose of the engagement. This obligation survives the termination of any agreement for a period of three years.",
   },
   {
     title: "9. Termination",
@@ -72,7 +73,7 @@ const sections = [
 function TermsPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <header className="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur-md">
+      <header className="sticky top-0 z-50 border-b border-border bg-background">
         <div className="mx-auto flex h-16 max-w-4xl items-center justify-between px-6">
           <Link to="/" className="flex items-center gap-2.5">
             <span className="flex size-7 items-center justify-center rounded-sm bg-primary font-display text-sm font-normal text-primary-foreground">
@@ -128,7 +129,7 @@ function TermsPage() {
             © 2026 Leteane Industries (Pty) Ltd. All rights reserved.
           </p>
           <p className="font-mono text-xs font-medium text-muted-foreground">
-            Privacy Policy &amp; Data Scraping Compliance — pending legal review
+            Privacy Policy &amp; Data Scraping Compliance, pending legal review
           </p>
         </div>
       </footer>
