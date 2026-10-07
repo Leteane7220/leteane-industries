@@ -1,7 +1,7 @@
 # Roadmap
 
-- [ ] Remove visible hyphens and dash punctuation across the site
-- [ ] Complete visual checks of bold text, solid navigation, and the last event row
+- [x] Remove visible hyphens and dash punctuation across the site
+- [x] Complete visual checks of bold text, solid navigation, and the last event row
 
 - [x] Landing page for Leteane Industries (hero, showcase, services, about, footer)
 - [x] Terms of Service page
