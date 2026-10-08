@@ -2,14 +2,13 @@ import {
   campusEvents,
   entryClass,
   eventNumber,
-  formatCount,
   formatEventWhen,
   mapsUrl,
   type CampusEvent,
 } from "@/lib/campus-events";
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
-import { ArrowUpRight, Bot, MapPin, Send, Sparkles, Users } from "lucide-react";
+import { ArrowUpRight, Bot, MapPin, Send, Sparkles } from "lucide-react";
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 
 const suggestions = [

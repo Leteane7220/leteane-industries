@@ -5,7 +5,6 @@ import {
   entryClass,
   eventSources,
   formatClock,
-  formatCount,
   formatEventDate,
   formatEventWhen,
   mapsUrl,
@@ -28,7 +27,6 @@ import {
   Search,
   ShieldCheck,
   Terminal,
-  Users,
 } from "lucide-react";
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 
