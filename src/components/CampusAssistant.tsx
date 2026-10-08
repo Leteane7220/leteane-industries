@@ -64,10 +64,6 @@ function EventRow({ event }: { event: CampusEvent }) {
       </a>
       <span className="shrink-0">{event.campus}</span>
       <span className="shrink-0">{formatEventWhen(event)}</span>
-      <span className="inline-flex shrink-0 items-center gap-1">
-        <Users className="size-3 text-muted-foreground" />
-        {formatCount(event.attendees)}
-      </span>
       <span
         className={`inline-flex shrink-0 items-center rounded-full border px-2 py-0.5 ${entryClass(event.free)}`}
       >

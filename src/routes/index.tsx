@@ -401,7 +401,6 @@ function Showcase() {
                   <th className="hidden px-5 py-3 font-semibold lg:table-cell">Location</th>
                   <th className="hidden px-5 py-3 font-semibold sm:table-cell">Campus</th>
                   <th className="hidden px-5 py-3 font-semibold md:table-cell">Time</th>
-                  <th className="px-5 py-3 font-semibold">Going</th>
                   <th className="px-5 py-3 font-semibold">Entry</th>
                 </tr>
               </thead>
@@ -442,12 +441,6 @@ function Showcase() {
                     </td>
                     <td className="hidden px-5 py-3.5 font-mono text-xs font-medium text-foreground md:table-cell">
                       {formatEventWhen(event)}
-                    </td>
-                    <td className="px-5 py-3.5">
-                      <span className="inline-flex items-center gap-1.5 font-mono text-xs font-medium text-foreground">
-                        <Users className="size-3.5 text-muted-foreground" />
-                        {formatCount(event.attendees)}
-                      </span>
                     </td>
                     <td className="px-5 py-3.5">
                       <span className="flex flex-col gap-1">
