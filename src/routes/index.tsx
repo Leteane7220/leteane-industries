@@ -139,12 +139,6 @@ function Nav() {
 /* Hero                                                                */
 /* ------------------------------------------------------------------ */
 
-const heroStats = [
-  { value: "4+", label: "Data sources unified" },
-  { value: "<60s", label: "Ingest to serve latency" },
-  { value: "99.9%", label: "Pipeline uptime target" },
-];
-
 function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-border">
@@ -197,23 +191,6 @@ function Hero() {
           </a>
         </div>
 
-        <div
-          className="draft-rule-dashed-h relative mt-20 hidden items-end sm:flex"
-          aria-hidden="true"
-        >
-          <span className="draft-cross absolute -left-2 -top-2 size-4" aria-hidden="true" />
-          <span className="draft-cross absolute -right-2 -top-2 size-4" aria-hidden="true" />
-        </div>
-        <dl className="mt-6 grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-3">
-          {heroStats.map((stat) => (
-            <div key={stat.label} className="bg-surface px-6 py-5">
-              <dt className="font-display text-2xl font-semibold text-foreground">
-                {stat.value}
-              </dt>
-              <dd className="mt-1 text-sm font-medium text-muted-foreground">{stat.label}</dd>
-            </div>
-          ))}
-        </dl>
       </div>
     </section>
   );
