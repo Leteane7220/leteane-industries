@@ -2,6 +2,7 @@ import { CampusAssistant } from "@/components/CampusAssistant";
 import {
   campusEvents,
   campusLabels,
+  entryClass,
   eventSources,
   formatClock,
   formatCount,
@@ -224,11 +225,6 @@ function Hero() {
 /* Featured showcase — Unify by Leteane Industries                       */
 /* ------------------------------------------------------------------ */
 
-function entryClass(free: boolean) {
-  return free
-    ? "border-foreground bg-foreground text-background"
-    : "border-border bg-surface-2 text-muted-foreground";
-}
 
 const campusOptions: Array<{ value: string; label: string }> = [
   { value: "all", label: "All campuses" },
