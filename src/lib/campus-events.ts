@@ -145,6 +145,19 @@ export function mapsUrl(event: CampusEvent) {
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(event.location)}`;
 }
 
+/** Free or paid badge styling, shared by the live index table and the assistant rows. */
+export function entryClass(free: boolean) {
+  return free
+    ? "border-foreground bg-foreground text-background"
+    : "border-border bg-surface-2 text-muted-foreground";
+}
+
+/** Zero padded position of an event in the index, the same number the table shows. */
+export function eventNumber(event: CampusEvent) {
+  const position = campusEvents.findIndex((e) => e.url === event.url);
+  return String((position < 0 ? 0 : position) + 1).padStart(2, "0");
+}
+
 /** True once the event's scheduled start time has passed (Africa/Johannesburg, UTC+02:00). */
 export function isEventPast(event: CampusEvent, at: Date = new Date()): boolean {
   const start = new Date(`${event.date}T${event.time}:00+02:00`);

@@ -10,3 +10,4 @@
 - [x] Table rework: event numbers, always show all events, remove status column, free/paid badge + ticket link
 - [x] Broaden event sources to all social media platforms (Instagram, X, Facebook, TikTok, LinkedIn)
 - [x] Update assistant catalogue with free/paid info
+- [x] Assistant replies show each recommended event as one line in the live index format
