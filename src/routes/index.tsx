@@ -297,10 +297,6 @@ function Showcase() {
       .sort((a, b) => `${a.date}${a.time}`.localeCompare(`${b.date}${b.time}`));
   }, [query, campus, window, source, lastRefreshed]);
 
-  const pastCount = useMemo(
-    () => (lastRefreshed ? campusEvents.filter((event) => isEventPast(event, lastRefreshed)).length : 0),
-    [lastRefreshed],
-  );
 
   return (
     <section id="showcase" className="relative scroll-mt-24 border-b border-border">
@@ -534,10 +530,7 @@ function Showcase() {
           </div>
 
           <div className="flex items-center justify-between border-t border-border px-5 py-3 font-mono text-[11px] font-medium text-foreground">
-            <span>
-              {results.length} of {campusEvents.length} indexed events shown
-              {pastCount > 0 ? ` · ${pastCount} passed ${pastCount === 1 ? "event" : "events"} removed` : ""}
-            </span>
+            <span>{results.length} events shown</span>
             <span className="flex items-center gap-1.5">
               <Terminal className="size-3" />
               pipeline: healthy
