@@ -535,19 +535,21 @@ function Showcase() {
         </div>
 
         {/* AI assistant */}
-        <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-[1fr_1.15fr]">
-          <div>
-            <Eyebrow>Ask the assistant</Eyebrow>
-            <h3 className="mt-3 font-display text-2xl font-semibold tracking-tight text-foreground">
+        <div className="mt-16">
+          <Eyebrow>Ask the assistant</Eyebrow>
+          <div className="mt-3 grid grid-cols-1 items-baseline gap-x-10 gap-y-3 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]">
+            <h3 className="font-display text-2xl font-semibold tracking-tight text-foreground">
               Not sure which events are for you?
             </h3>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              The Unify assistant reads the same live index the table above serves.
-              Tell it your campus, year of study or interests and it will recommend events
-              with dates, venues and links back to the original post.
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              The Unify assistant reads the same live index the table above serves. Tell it your
+              campus, year of study or interests and it recommends events as one line rows with
+              dates, venues and links back to the original post.
             </p>
           </div>
-          <CampusAssistant />
+          <div className="mt-6">
+            <CampusAssistant />
+          </div>
         </div>
       </div>
     </section>

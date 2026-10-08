@@ -4,11 +4,12 @@ import {
   eventNumber,
   formatCount,
   formatEventWhen,
+  mapsUrl,
   type CampusEvent,
 } from "@/lib/campus-events";
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
-import { ArrowUpRight, Bot, Send, Sparkles, Users } from "lucide-react";
+import { ArrowUpRight, Bot, MapPin, Send, Sparkles, Users } from "lucide-react";
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 
 const suggestions = [
@@ -42,12 +43,21 @@ function EventRow({ event }: { event: CampusEvent }) {
         href={event.url}
         target="_blank"
         rel="noopener noreferrer"
-        className="group inline-flex shrink-0 items-center gap-1 font-sans text-xs font-semibold text-foreground transition-colors hover:text-primary"
+        className="group inline-flex min-w-0 items-center gap-1.5 font-sans text-xs font-semibold text-foreground transition-colors hover:text-primary"
       >
-        {event.title}
+        <span className="truncate">{event.title}</span>
         <ArrowUpRight className="size-3 shrink-0 text-muted-foreground transition-colors group-hover:text-primary" />
       </a>
       <span className="shrink-0 text-muted-foreground">{event.source}</span>
+      <a
+        href={mapsUrl(event)}
+        target="_blank"
+        rel="noopener noreferrer"
+        title={event.location}
+        className="shrink-0 text-muted-foreground transition-colors hover:text-primary"
+      >
+        <MapPin className="size-3.5" />
+      </a>
       <span className="shrink-0">{event.campus}</span>
       <span className="shrink-0">{formatEventWhen(event)}</span>
       <span className="inline-flex shrink-0 items-center gap-1">
