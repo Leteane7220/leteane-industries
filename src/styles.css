@@ -85,15 +85,53 @@
   body {
     background-color: var(--color-background);
     background-image:
+      /* scattered pencil construction lines, varied angles, none aligned */
+      linear-gradient(23deg, transparent calc(50% - 0.5px), oklch(1 0 0 / 5%) calc(50% - 0.5px), oklch(1 0 0 / 5%) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+      linear-gradient(67deg, transparent calc(50% - 0.5px), oklch(1 0 0 / 4%) calc(50% - 0.5px), oklch(1 0 0 / 4%) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+      linear-gradient(112deg, transparent calc(50% - 0.5px), oklch(1 0 0 / 5%) calc(50% - 0.5px), oklch(1 0 0 / 5%) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+      linear-gradient(154deg, transparent calc(50% - 0.5px), oklch(1 0 0 / 4%) calc(50% - 0.5px), oklch(1 0 0 / 4%) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+      linear-gradient(81deg, transparent calc(50% - 0.5px), oklch(1 0 0 / 6%) calc(50% - 0.5px), oklch(1 0 0 / 6%) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+      linear-gradient(38deg, transparent calc(50% - 0.5px), oklch(1 0 0 / 4%) calc(50% - 0.5px), oklch(1 0 0 / 4%) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+      linear-gradient(129deg, transparent calc(50% - 0.5px), oklch(1 0 0 / 5%) calc(50% - 0.5px), oklch(1 0 0 / 5%) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+      linear-gradient(172deg, transparent calc(50% - 0.5px), oklch(1 0 0 / 4%) calc(50% - 0.5px), oklch(1 0 0 / 4%) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+      linear-gradient(56deg, transparent calc(50% - 0.5px), oklch(1 0 0 / 5%) calc(50% - 0.5px), oklch(1 0 0 / 5%) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+      linear-gradient(97deg, transparent calc(50% - 0.5px), oklch(1 0 0 / 4%) calc(50% - 0.5px), oklch(1 0 0 / 4%) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+      /* fine grid */
       linear-gradient(to right, oklch(1 0 0 / 5%) 1px, transparent 1px),
       linear-gradient(to bottom, oklch(1 0 0 / 5%) 1px, transparent 1px),
+      /* major grid */
       linear-gradient(to right, oklch(1 0 0 / 9%) 1px, transparent 1px),
       linear-gradient(to bottom, oklch(1 0 0 / 9%) 1px, transparent 1px);
     background-size:
+      613px 431px,
+      447px 569px,
+      283px 641px,
+      547px 311px,
+      373px 487px,
+      683px 227px,
+      257px 547px,
+      431px 613px,
+      337px 293px,
+      509px 367px,
       56px 56px,
       56px 56px,
       280px 280px,
       280px 280px;
+    background-position:
+      97px 41px,
+      211px 173px,
+      53px 311px,
+      359px 89px,
+      149px 263px,
+      17px 197px,
+      287px 71px,
+      419px 347px,
+      131px 139px,
+      239px 229px,
+      0 0,
+      0 0,
+      0 0,
+      0 0;
     background-attachment: fixed;
     color: var(--color-foreground);
     font-family: var(--font-sans);
