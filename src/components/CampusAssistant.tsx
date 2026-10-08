@@ -37,7 +37,10 @@ function eventFromLine(line: string): CampusEvent | null | undefined {
 /** One event, one line, in the same columns as the live index. */
 function EventRow({ event }: { event: CampusEvent }) {
   return (
-    <div className="flex flex-nowrap items-center gap-2 overflow-x-auto whitespace-nowrap border border-border bg-surface-2/70 px-3 py-2 font-mono text-[11px] font-medium text-foreground">
+    <div
+      data-event-row={event.url}
+      className="flex flex-nowrap items-center gap-2 overflow-x-auto whitespace-nowrap border border-border bg-surface-2/70 px-3 py-2 font-mono text-[11px] font-medium text-foreground"
+    >
       <span className="shrink-0 text-muted-foreground">{eventNumber(event)}</span>
       <a
         href={event.url}
