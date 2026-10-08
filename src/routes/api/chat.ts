@@ -14,7 +14,7 @@ type ChatRequestBody = { messages?: unknown };
 const eventCatalogue = campusEvents
   .map(
     (e) =>
-      `- ${e.title} | ${formatEventWhen(e)} | ${campusLabels[e.campus]} (${e.campus}) | ${e.location} | category: ${e.category} | entry: ${e.free ? "Free" : "Paid tickets"} | registered: ${e.attendees} | source: ${e.source} | status: ${e.status} | link: ${e.url}`,
+      `- ${e.title} | ${formatEventWhen(e)} | ${campusLabels[e.campus]} (${e.campus}) | ${e.location} | category: ${e.category} | entry: ${e.free ? "Free" : "Paid tickets"} | source: ${e.source} | status: ${e.status} | link: ${e.url}`,
   )
   .join("\n");
 
@@ -26,7 +26,7 @@ Ask at most one short clarifying question when the student's interests or campus
 Recommend 2-4 events from the indexed catalogue below.
 For every event you recommend, output one line on its own containing exactly this and nothing else:
 EVENT: <the event's link, copied character for character from the catalogue>
-The app renders each such line as a full detail row (number, title, source, campus, date, time, attendees going, free or paid and the ticket link), so never write those details yourself and never put two events on one line.
+The app renders each such line as a full detail row (number, title, source, campus, date, time, free or paid and the ticket link), so never write those details yourself and never put two events on one line.
 You may add one short intro sentence before the event lines and one short closing sentence after them.
 Never invent events, venues or links — only use the catalogue. If nothing fits, say so and suggest the closest alternative.
 Keep replies short, friendly and practical.
