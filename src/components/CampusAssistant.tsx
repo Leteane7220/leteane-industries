@@ -1,7 +1,15 @@
+import {
+  campusEvents,
+  entryClass,
+  eventNumber,
+  formatCount,
+  formatEventWhen,
+  type CampusEvent,
+} from "@/lib/campus-events";
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
-import { Bot, Send, Sparkles } from "lucide-react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { ArrowUpRight, Bot, Send, Sparkles, Users } from "lucide-react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 
 const suggestions = [
   "I'm a first year on APK, what's on this week?",
@@ -13,6 +21,91 @@ function messageText(message: { parts: Array<{ type: string; text?: string }> })
   return message.parts
     .map((part) => (part.type === "text" ? (part.text ?? "") : ""))
     .join("");
+}
+
+/** A catalogue link the assistant emitted, resolved back to a real indexed event. */
+function eventFromLine(line: string): CampusEvent | null | undefined {
+  const trimmed = line.trim();
+  if (!/^EVENT:/i.test(trimmed)) return null;
+  const url = /https?:\/\/\S+/.exec(trimmed)?.[0]?.replace(/[).,]+$/, "");
+  if (!url) return undefined; // still streaming, nothing to show yet
+  const clean = url.replace(/\/+$/, "");
+  return campusEvents.find((event) => event.url.replace(/\/+$/, "") === clean) ?? undefined;
+}
+
+/** One event, one line, in the same columns as the live index. */
+function EventRow({ event }: { event: CampusEvent }) {
+  return (
+    <div className="flex flex-nowrap items-center gap-3 overflow-x-auto whitespace-nowrap border border-border bg-surface-2/70 px-3 py-2 font-mono text-[11px] font-medium text-foreground">
+      <span className="shrink-0 text-muted-foreground">{eventNumber(event)}</span>
+      <a
+        href={event.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group inline-flex shrink-0 items-center gap-1 font-sans text-xs font-semibold text-foreground transition-colors hover:text-primary"
+      >
+        {event.title}
+        <ArrowUpRight className="size-3 shrink-0 text-muted-foreground transition-colors group-hover:text-primary" />
+      </a>
+      <span className="shrink-0 text-muted-foreground">{event.source}</span>
+      <span className="shrink-0">{event.campus}</span>
+      <span className="shrink-0">{formatEventWhen(event)}</span>
+      <span className="inline-flex shrink-0 items-center gap-1">
+        <Users className="size-3 text-muted-foreground" />
+        {formatCount(event.attendees)}
+      </span>
+      <span
+        className={`inline-flex shrink-0 items-center rounded-full border px-2 py-0.5 ${entryClass(event.free)}`}
+      >
+        {event.free ? "Free" : "Paid"}
+      </span>
+      <a
+        href={event.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group inline-flex shrink-0 items-center gap-1 text-muted-foreground transition-colors hover:text-primary"
+      >
+        {event.free ? "Get free ticket" : "Buy tickets"}
+        <ArrowUpRight className="size-2.5 transition-colors group-hover:text-primary" />
+      </a>
+    </div>
+  );
+}
+
+/** Assistant text becomes prose paragraphs plus one detail line per recommended event. */
+function AssistantText({ text }: { text: string }) {
+  const blocks: ReactNode[] = [];
+  let prose: string[] = [];
+
+  const flush = () => {
+    if (prose.length === 0) return;
+    const body = prose.join("\n").trim();
+    prose = [];
+    if (body)
+      blocks.push(
+        <p key={`p-${blocks.length}`} className="whitespace-pre-wrap">
+          {body}
+        </p>,
+      );
+  };
+
+  text.split("\n").forEach((line) => {
+    const event = eventFromLine(line);
+    if (event === undefined) return; // partial event line while streaming
+    if (event) {
+      flush();
+      blocks.push(<EventRow key={`e-${blocks.length}`} event={event} />);
+      return;
+    }
+    if (line.trim() === "") {
+      flush();
+      return;
+    }
+    prose.push(line);
+  });
+  flush();
+
+  return <div className="space-y-2.5">{blocks}</div>;
 }
 
 export function CampusAssistant() {
@@ -73,10 +166,14 @@ export function CampusAssistant() {
               className={
                 message.role === "user"
                   ? "max-w-[80%] rounded-lg rounded-br-sm bg-primary px-4 py-2.5 text-sm text-primary-foreground"
-                  : "max-w-[85%] whitespace-pre-wrap text-sm leading-relaxed text-foreground"
+                  : "max-w-[85%] text-sm leading-relaxed text-foreground"
               }
             >
-              {messageText(message)}
+              {message.role === "assistant" ? (
+                <AssistantText text={messageText(message)} />
+              ) : (
+                messageText(message)
+              )}
             </div>
           </div>
         ))}
