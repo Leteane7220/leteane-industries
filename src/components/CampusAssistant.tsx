@@ -37,12 +37,13 @@ function eventFromLine(line: string): CampusEvent | null | undefined {
 /** One event, one line, in the same columns as the live index. */
 function EventRow({ event }: { event: CampusEvent }) {
   return (
-    <div className="flex flex-nowrap items-center gap-3 overflow-x-auto whitespace-nowrap border border-border bg-surface-2/70 px-3 py-2 font-mono text-[11px] font-medium text-foreground">
+    <div className="flex flex-nowrap items-center gap-2 overflow-x-auto whitespace-nowrap border border-border bg-surface-2/70 px-3 py-2 font-mono text-[11px] font-medium text-foreground">
       <span className="shrink-0 text-muted-foreground">{eventNumber(event)}</span>
       <a
         href={event.url}
         target="_blank"
         rel="noopener noreferrer"
+        title={event.title}
         className="group inline-flex min-w-0 items-center gap-1.5 font-sans text-xs font-semibold text-foreground transition-colors hover:text-primary"
       >
         <span className="truncate">{event.title}</span>
@@ -75,7 +76,7 @@ function EventRow({ event }: { event: CampusEvent }) {
         rel="noopener noreferrer"
         className="group inline-flex shrink-0 items-center gap-1 text-muted-foreground transition-colors hover:text-primary"
       >
-        {event.free ? "Get free ticket" : "Buy tickets"}
+        {event.free ? "Free ticket" : "Buy tickets"}
         <ArrowUpRight className="size-2.5 transition-colors group-hover:text-primary" />
       </a>
     </div>
@@ -176,7 +177,7 @@ export function CampusAssistant() {
               className={
                 message.role === "user"
                   ? "max-w-[80%] rounded-lg rounded-br-sm bg-primary px-4 py-2.5 text-sm text-primary-foreground"
-                  : "max-w-[85%] text-sm leading-relaxed text-foreground"
+                  : "w-full text-sm leading-relaxed text-foreground"
               }
             >
               {message.role === "assistant" ? (
