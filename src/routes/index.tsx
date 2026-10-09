@@ -399,7 +399,14 @@ function Showcase() {
                         <ArrowUpRight className="size-3.5 text-muted-foreground transition-colors group-hover:text-primary" />
                       </a>
                     </td>
-                    <td className="px-5 py-3.5 font-medium text-foreground">{event.source}</td>
+                    <td className="px-5 py-3.5 font-medium text-foreground">
+                      {socialPlatformOf(event.url) && (
+                        <span className="mr-1.5 inline-block border border-foreground px-1.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wider">
+                          {socialPlatformOf(event.url)} post
+                        </span>
+                      )}
+                      {event.source}
+                    </td>
                     <td className="hidden max-w-80 px-5 py-3.5 font-medium text-foreground lg:table-cell">
                       <a
                         href={mapsUrl(event)}
