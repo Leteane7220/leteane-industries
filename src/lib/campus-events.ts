@@ -2,7 +2,7 @@ export type CampusEvent = {
   title: string;
   source: string;
   location: string;
-  campus: "APK" | "APB" | "SWC" | "DFC";
+  campus: "APK" | "APB" | "JBS" | "SWC" | "DFC";
   /** ISO date (Africa/Johannesburg local day) */
   date: string;
   time: string;
@@ -20,6 +20,7 @@ export type CampusEvent = {
 export const campusLabels: Record<CampusEvent["campus"], string> = {
   APK: "Auckland Park Kingsway",
   APB: "Auckland Park Bunting Road",
+  JBS: "Johannesburg Business School",
   SWC: "Soweto Campus",
   DFC: "Doornfontein Campus",
 };
@@ -56,8 +57,8 @@ const webEvents: CampusEvent[] = [
   {
     title: "Future Economy Conference & Career Expo 2026",
     source: "Quicket, Educonnect Media SA",
-    location: "Johannesburg Business School, UJ Auckland Park Bunting Road Campus, Bunting Road, Auckland Park, Johannesburg",
-    campus: "APB",
+    location: "Johannesburg Business School, 69 Kingsway Avenue, Auckland Park, Johannesburg",
+    campus: "JBS",
     date: "2026-09-28",
     time: "09:00",
     status: "Verified",
