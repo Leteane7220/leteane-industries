@@ -24,7 +24,7 @@ export const campusLabels: Record<CampusEvent["campus"], string> = {
   DFC: "Doornfontein Campus",
 };
 
-export const campusEvents: CampusEvent[] = [
+const webEvents: CampusEvent[] = [
   {
     title: "Joburg Moves Junior",
     source: "Quicket, UJ Arts & Culture",
@@ -110,6 +110,65 @@ export const campusEvents: CampusEvent[] = [
     url: "https://www.quicket.co.za/events/397037-arts-academy-showcase-2026/",
   },
 ];
+
+export type SocialPlatform = "Instagram" | "X" | "Facebook" | "TikTok" | "LinkedIn";
+
+const SOCIAL_HOSTS: [RegExp, SocialPlatform][] = [
+  [/(^|\.)instagram\.com$/, "Instagram"],
+  [/(^|\.)(x|twitter)\.com$/, "X"],
+  [/(^|\.)(facebook|fb)\.com$/, "Facebook"],
+  [/(^|\.)tiktok\.com$/, "TikTok"],
+  [/(^|\.)linkedin\.com$/, "LinkedIn"],
+];
+
+/** Which social platform an event link points to, or null for ticketing and university sites. */
+export function socialPlatformOf(url: string): SocialPlatform | null {
+  try {
+    const host = new URL(url).hostname.replace(/^www\./, "");
+    return SOCIAL_HOSTS.find(([re]) => re.test(host))?.[1] ?? null;
+  } catch {
+    return null;
+  }
+}
+
+/** True when the link opens one specific post, not just an account profile. */
+export function isSpecificSocialPost(url: string): boolean {
+  const platform = socialPlatformOf(url);
+  if (!platform) return false;
+  const path = new URL(url).pathname;
+  switch (platform) {
+    case "Instagram":
+      return /^\/(p|reel)\/[\w-]+/.test(path);
+    case "X":
+      return /^\/[\w]+\/status\/\d+/.test(path);
+    case "Facebook":
+      return /^\/(events\/\d+|[\w.]+\/posts\/[\w]+)/.test(path);
+    case "TikTok":
+      return /^\/@[\w.]+\/video\/\d+/.test(path);
+    case "LinkedIn":
+      return /^\/(events\/[\w-]+|posts\/[\w-]+|feed\/update\/)/.test(path);
+  }
+}
+
+/**
+ * Events announced on social media. Add one entry per real post, using the link to the
+ * exact post (for example instagram.com/p/..., x.com/<account>/status/<id>), never a profile page.
+ * Example shape:
+ * {
+ *   title: "CV and LinkedIn Clinic",
+ *   source: "Instagram, @uj_careerservices",
+ *   location: "Library Auditorium, UJ Auckland Park Kingsway Campus, Kingsway Avenue, Rossmore, Johannesburg",
+ *   campus: "APK", date: "2026-10-14", time: "12:00", status: "Verified", category: "Careers",
+ *   free: true, priceCheckedOn: "2026-10-09", attendees: 0,
+ *   url: "https://www.instagram.com/p/<post id>/",
+ * }
+ */
+const socialEventEntries: CampusEvent[] = [];
+
+/** Only keep social entries that point at a specific post. */
+export const socialEvents = socialEventEntries.filter((e) => isSpecificSocialPost(e.url));
+
+export const campusEvents: CampusEvent[] = [...webEvents, ...socialEvents];
 
 export const eventSources = Array.from(new Set(campusEvents.map((e) => e.source))).sort();
 
