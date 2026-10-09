@@ -86,16 +86,16 @@
     background-color: var(--color-background);
     background-image:
       /* scattered pencil construction lines, varied angles, none aligned */
-      linear-gradient(23deg, transparent calc(50% - 0.5px), oklch(1 0 0 / 5%) calc(50% - 0.5px), oklch(1 0 0 / 5%) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
-      linear-gradient(67deg, transparent calc(50% - 0.5px), oklch(1 0 0 / 4%) calc(50% - 0.5px), oklch(1 0 0 / 4%) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
-      linear-gradient(112deg, transparent calc(50% - 0.5px), oklch(1 0 0 / 5%) calc(50% - 0.5px), oklch(1 0 0 / 5%) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
-      linear-gradient(154deg, transparent calc(50% - 0.5px), oklch(1 0 0 / 4%) calc(50% - 0.5px), oklch(1 0 0 / 4%) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
-      linear-gradient(81deg, transparent calc(50% - 0.5px), oklch(1 0 0 / 6%) calc(50% - 0.5px), oklch(1 0 0 / 6%) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
-      linear-gradient(38deg, transparent calc(50% - 0.5px), oklch(1 0 0 / 4%) calc(50% - 0.5px), oklch(1 0 0 / 4%) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
-      linear-gradient(129deg, transparent calc(50% - 0.5px), oklch(1 0 0 / 5%) calc(50% - 0.5px), oklch(1 0 0 / 5%) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
-      linear-gradient(172deg, transparent calc(50% - 0.5px), oklch(1 0 0 / 4%) calc(50% - 0.5px), oklch(1 0 0 / 4%) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
-      linear-gradient(56deg, transparent calc(50% - 0.5px), oklch(1 0 0 / 5%) calc(50% - 0.5px), oklch(1 0 0 / 5%) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
-      linear-gradient(97deg, transparent calc(50% - 0.5px), oklch(1 0 0 / 4%) calc(50% - 0.5px), oklch(1 0 0 / 4%) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+      linear-gradient(23deg, transparent calc(50% - 0.5px), oklch(1 0 0 / 9%) calc(50% - 0.5px), oklch(1 0 0 / 9%) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+      linear-gradient(67deg, transparent calc(50% - 0.5px), oklch(1 0 0 / 7%) calc(50% - 0.5px), oklch(1 0 0 / 7%) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+      linear-gradient(112deg, transparent calc(50% - 0.5px), oklch(1 0 0 / 9%) calc(50% - 0.5px), oklch(1 0 0 / 9%) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+      linear-gradient(154deg, transparent calc(50% - 0.5px), oklch(1 0 0 / 7%) calc(50% - 0.5px), oklch(1 0 0 / 7%) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+      linear-gradient(81deg, transparent calc(50% - 0.5px), oklch(1 0 0 / 10%) calc(50% - 0.5px), oklch(1 0 0 / 10%) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+      linear-gradient(38deg, transparent calc(50% - 0.5px), oklch(1 0 0 / 7%) calc(50% - 0.5px), oklch(1 0 0 / 7%) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+      linear-gradient(129deg, transparent calc(50% - 0.5px), oklch(1 0 0 / 9%) calc(50% - 0.5px), oklch(1 0 0 / 9%) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+      linear-gradient(172deg, transparent calc(50% - 0.5px), oklch(1 0 0 / 7%) calc(50% - 0.5px), oklch(1 0 0 / 7%) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+      linear-gradient(56deg, transparent calc(50% - 0.5px), oklch(1 0 0 / 9%) calc(50% - 0.5px), oklch(1 0 0 / 9%) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+      linear-gradient(97deg, transparent calc(50% - 0.5px), oklch(1 0 0 / 7%) calc(50% - 0.5px), oklch(1 0 0 / 7%) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
       /* fine grid */
       linear-gradient(to right, oklch(1 0 0 / 5%) 1px, transparent 1px),
       linear-gradient(to bottom, oklch(1 0 0 / 5%) 1px, transparent 1px),
