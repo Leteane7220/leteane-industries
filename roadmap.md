@@ -11,3 +11,4 @@
 - [x] Broaden event sources to all social media platforms (Instagram, X, Facebook, TikTok, LinkedIn)
 - [x] Update assistant catalogue with free/paid info
 - [x] Assistant replies show each recommended event as one line in the live index format
+- [x] Johannesburg Business School added as a campus with a verified upcoming event

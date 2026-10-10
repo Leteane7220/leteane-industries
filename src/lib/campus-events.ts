@@ -110,6 +110,20 @@ const webEvents: CampusEvent[] = [
     attendees: 241,
     url: "https://www.quicket.co.za/events/397037-arts-academy-showcase-2026/",
   },
+  {
+    title: "JBS Open Day",
+    source: "Quicket, UJ Johannesburg Business School",
+    location: "Johannesburg Business School, 69 Kingsway Avenue, Auckland Park, Johannesburg",
+    campus: "JBS",
+    date: "2026-10-24",
+    time: "08:00",
+    status: "Verified",
+    category: "Open Day",
+    free: true,
+    priceCheckedOn: "2026-10-09",
+    attendees: 0,
+    url: "https://www.quicket.co.za/events/382273-jbs-open-day/",
+  },
 ];
 
 export type SocialPlatform = "Instagram" | "X" | "Facebook" | "TikTok" | "LinkedIn";
@@ -225,7 +239,7 @@ export function isEventPast(event: CampusEvent, at: Date = new Date()): boolean 
 }
 
 /** Reference "today" for the index. */
-export const indexToday = "2026-09-23";
+export const indexToday = "2026-10-09";
 
 export type TimeWindow = "any" | "today" | "week" | "month";
 
