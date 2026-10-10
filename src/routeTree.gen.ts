@@ -10,12 +10,42 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CareersRouteImport } from './routes/careers'
+import { Route as DataScrapingComplianceRouteImport } from './routes/data-scraping-compliance'
+import { Route as LegalRouteImport } from './routes/legal'
+import { Route as PaiaRouteImport } from './routes/paia'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CareersRoute = CareersRouteImport.update({
+  id: '/careers',
+  path: '/careers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DataScrapingComplianceRoute = DataScrapingComplianceRouteImport.update({
+  id: '/data-scraping-compliance',
+  path: '/data-scraping-compliance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LegalRoute = LegalRouteImport.update({
+  id: '/legal',
+  path: '/legal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PaiaRoute = PaiaRouteImport.update({
+  id: '/paia',
+  path: '/paia',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TermsRoute = TermsRouteImport.update({
@@ -31,30 +61,75 @@ const ApiChatRoute = ApiChatRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/careers': typeof CareersRoute
+  '/data-scraping-compliance': typeof DataScrapingComplianceRoute
+  '/legal': typeof LegalRoute
+  '/paia': typeof PaiaRoute
+  '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
   '/api/chat': typeof ApiChatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/careers': typeof CareersRoute
+  '/data-scraping-compliance': typeof DataScrapingComplianceRoute
+  '/legal': typeof LegalRoute
+  '/paia': typeof PaiaRoute
+  '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
   '/api/chat': typeof ApiChatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/careers': typeof CareersRoute
+  '/data-scraping-compliance': typeof DataScrapingComplianceRoute
+  '/legal': typeof LegalRoute
+  '/paia': typeof PaiaRoute
+  '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
   '/api/chat': typeof ApiChatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/terms' | '/api/chat'
+  fullPaths:
+    | '/'
+    | '/careers'
+    | '/data-scraping-compliance'
+    | '/legal'
+    | '/paia'
+    | '/privacy'
+    | '/terms'
+    | '/api/chat'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/terms' | '/api/chat'
-  id: '__root__' | '/' | '/terms' | '/api/chat'
+  to:
+    | '/'
+    | '/careers'
+    | '/data-scraping-compliance'
+    | '/legal'
+    | '/paia'
+    | '/privacy'
+    | '/terms'
+    | '/api/chat'
+  id:
+    | '__root__'
+    | '/'
+    | '/careers'
+    | '/data-scraping-compliance'
+    | '/legal'
+    | '/paia'
+    | '/privacy'
+    | '/terms'
+    | '/api/chat'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CareersRoute: typeof CareersRoute
+  DataScrapingComplianceRoute: typeof DataScrapingComplianceRoute
+  LegalRoute: typeof LegalRoute
+  PaiaRoute: typeof PaiaRoute
+  PrivacyRoute: typeof PrivacyRoute
   TermsRoute: typeof TermsRoute
   ApiChatRoute: typeof ApiChatRoute
 }
@@ -66,6 +141,41 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/careers': {
+      id: '/careers'
+      path: '/careers'
+      fullPath: '/careers'
+      preLoaderRoute: typeof CareersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/data-scraping-compliance': {
+      id: '/data-scraping-compliance'
+      path: '/data-scraping-compliance'
+      fullPath: '/data-scraping-compliance'
+      preLoaderRoute: typeof DataScrapingComplianceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/legal': {
+      id: '/legal'
+      path: '/legal'
+      fullPath: '/legal'
+      preLoaderRoute: typeof LegalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/paia': {
+      id: '/paia'
+      path: '/paia'
+      fullPath: '/paia'
+      preLoaderRoute: typeof PaiaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/terms': {
@@ -87,6 +197,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CareersRoute: CareersRoute,
+  DataScrapingComplianceRoute: DataScrapingComplianceRoute,
+  LegalRoute: LegalRoute,
+  PaiaRoute: PaiaRoute,
+  PrivacyRoute: PrivacyRoute,
   TermsRoute: TermsRoute,
   ApiChatRoute: ApiChatRoute,
 }
