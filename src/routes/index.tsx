@@ -541,22 +541,22 @@ const services = [
     icon: Layers,
     num: "01",
     title: "Data Ingestion & Web Scraping",
-    body: "Automated ETL pipelines, custom wrappers, and proxy backed data extraction built to collect reliably at scale, from static pages to authenticated portals.",
-    points: ["Automated ETL pipelines", "Custom scraper wrappers", "Proxy backed extraction"],
+    body: "Bring scattered information into a consistent format through authorised source collection, validation and repeatable data pipelines. Each engagement starts with a review of source access, purpose and data handling requirements.",
+    points: ["Source assessment and ingestion", "Cleaning and validation", "Scheduled pipeline monitoring"],
   },
   {
     icon: Database,
     num: "02",
     title: "Relational Database Architecture",
-    body: "Scalable SQL and PostgreSQL storage designed around your domain, normalised schemas, aggressive indexing, and warehousing ready for analytics.",
-    points: ["PostgreSQL schema design", "Query tuning & indexing", "Data warehousing"],
+    body: "Design SQL and PostgreSQL databases around your business records, relationships and reporting needs, with clear schemas, efficient queries and a practical approach to maintenance.",
+    points: ["PostgreSQL schema design", "Query tuning and indexing", "Reporting ready data models"],
   },
   {
     icon: Network,
     num: "03",
     title: "API Deployment & Integration",
-    body: "Fast, secure RESTful APIs built with FastAPI to serve clean, structured data to your front end apps, dashboards, and partner platforms.",
-    points: ["FastAPI REST services", "Auth & rate limiting", "Front end integration"],
+    body: "Connect structured data to applications and partner systems through documented APIs. FastAPI services can include access controls, input validation and deployment support according to the agreed project scope.",
+    points: ["FastAPI REST services", "Access controls and validation", "Application integration"],
   },
 ];
 
@@ -567,7 +567,7 @@ function Services() {
         <SectionHeading
           eyebrow="What we do"
           title="From raw web data to production intelligence"
-          intro="Three core commercial capabilities, engineered to slot together as one continuous pipeline, or deliver standalone value on their own."
+          intro="From collection to storage and delivery, our proposed service offering brings practical data engineering into one connected workflow. Scope, timelines and deliverables are agreed for each engagement."
         />
 
         <div className="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-border bg-border lg:grid-cols-3">
@@ -617,17 +617,17 @@ const aboutTraits = [
   {
     icon: Terminal,
     title: "Engineering first",
-    body: "Every asset we ship is reproducible: versioned, tested, and monitored in production.",
+    body: "We prioritise understandable systems, clear documentation and repeatable workflows that can be maintained as requirements evolve.",
   },
   {
     icon: ShieldCheck,
     title: "Compliance conscious",
-    body: "Scraping and storage practices designed with data governance and POPIA in mind.",
+    body: "Source permissions, personal information and intended use are part of project planning, not an afterthought.",
   },
   {
     icon: ArrowUpRight,
-    title: "Built for monetisation",
-    body: "We don't just collect data, we structure it into assets that generate revenue.",
+    title: "Practical outcomes",
+    body: "Our focus is usable information, simpler operations and data that supports better decisions, rather than collection for its own sake.",
   },
 ];
 
@@ -640,24 +640,24 @@ function About() {
         <div>
           <SectionHeading
             eyebrow="About the company"
-            title="A registered South African technology umbrella firm"
+            title="Leteane Industries"
           />
           <div className="mt-6 space-y-5 text-base leading-relaxed text-muted-foreground">
             <p>
-              Leteane Industries is a registered South African technology umbrella firm
-              focused on turning raw, unstructured web data into structured, monetisable
-              business intelligence assets.
+              Leteane Industries is a South African technology and data engineering
+              startup focused on making fragmented information more useful, accessible
+              and easier to work with.
             </p>
             <p>
-              We work at the intersection of extraction, storage, and delivery, building
-              the pipelines, warehouses, and APIs that let African enterprises and
-              platforms make decisions on data they previously couldn't reach.
+              Our work connects data collection, database architecture and API delivery.
+              Unify is our proof of concept for bringing university event information
+              into a searchable index, with links back to the original sources.
             </p>
           </div>
           <div className="mt-10 flex flex-wrap gap-x-10 gap-y-4 border-t border-border pt-8 font-mono text-xs font-medium text-foreground">
-            <span>Reg. ZA, (Pty) Ltd</span>
+            <span>Technology and data engineering</span>
             <span>Johannesburg, South Africa</span>
-            <span>Est. 2026</span>
+            <span>Company overview, draft for review</span>
           </div>
         </div>
 
@@ -695,15 +695,17 @@ function Footer() {
         { label: "Showcase", href: "#showcase" },
         { label: "Services", href: "#services" },
         { label: "About", href: "#company" },
-        { label: "Careers", href: "#" },
+        { label: "Careers", href: "/careers" },
       ],
     },
     {
       heading: "Legal",
       links: [
-        { label: "Privacy Policy & Data Scraping Compliance", href: "#" },
+        { label: "Legal overview", href: "/legal" },
+        { label: "Privacy Policy", href: "/privacy" },
+        { label: "Data Scraping Compliance", href: "/data-scraping-compliance" },
         { label: "Terms of Service", href: "/terms" },
-        { label: "PAIA Manual", href: "#" },
+        { label: "PAIA Manual", href: "/paia" },
       ],
     },
     {
@@ -741,9 +743,9 @@ function Footer() {
               <ul className="mt-4 space-y-3">
                 {col.links.map((link) => (
                   <li key={link.label}>
-                    {link.href === "#" ? (
+                    {link.href.startsWith("#") ? (
                       <a
-                        href="#"
+                        href={link.href}
                         className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
                       >
                         {link.label}
@@ -767,7 +769,7 @@ function Footer() {
             © 2026 Leteane Industries (Pty) Ltd. All rights reserved.
           </p>
           <p className="font-mono text-xs font-medium text-foreground">
-            Privacy Policy &amp; Data Scraping Compliance, placeholder pending legal review
+            Company and legal content, drafts for review
           </p>
         </div>
       </div>

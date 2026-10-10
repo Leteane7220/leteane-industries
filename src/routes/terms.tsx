@@ -101,8 +101,7 @@ function TermsPage() {
           Terms of Service
         </h1>
         <p className="mt-4 text-sm text-muted-foreground">
-          Effective date: 18 September 2026 · Leteane Industries (Pty) Ltd, Johannesburg, South
-          Africa
+          Review draft, effective date pending approval. Company particulars and these terms require confirmation and qualified South African legal review before adoption.
         </p>
 
         <div className="mt-12 space-y-px overflow-hidden rounded-xl border border-border bg-border">
@@ -119,7 +118,7 @@ function TermsPage() {
         </div>
 
         <p className="mt-8 font-mono text-xs font-medium text-muted-foreground">
-          Questions about these terms? Contact hello@leteane.industries.
+          Legal contact: to be confirmed before adoption.
         </p>
       </main>
 
@@ -129,7 +128,7 @@ function TermsPage() {
             © 2026 Leteane Industries (Pty) Ltd. All rights reserved.
           </p>
           <p className="font-mono text-xs font-medium text-muted-foreground">
-            Privacy Policy &amp; Data Scraping Compliance, pending legal review
+            <Link to="/legal" className="underline underline-offset-4">Legal documents, drafts for review</Link>
           </p>
         </div>
       </footer>
