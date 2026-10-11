@@ -365,14 +365,26 @@ function Showcase() {
           <div className="overflow-x-auto lg:overflow-x-visible">
             <table className="w-full min-w-160 text-left text-sm">
               <thead>
-                <tr className="border-b border-border font-mono text-[11px] font-semibold uppercase tracking-widest text-foreground">
-                  <th className="px-5 py-3 font-semibold">#</th>
-                  <th className="px-5 py-3 font-semibold">Event</th>
-                  <th className="px-5 py-3 font-semibold">Source</th>
-                  <th className="hidden px-5 py-3 font-semibold lg:table-cell">Location</th>
-                  <th className="hidden px-5 py-3 font-semibold sm:table-cell">Campus</th>
-                  <th className="hidden px-5 py-3 font-semibold md:table-cell">Time</th>
-                  <th className="px-5 py-3 font-semibold">Entry</th>
+                <tr className="font-mono text-[11px] font-semibold uppercase tracking-widest text-foreground">
+                  <th className="sticky top-16 z-20 bg-surface-2 px-5 py-3 font-semibold shadow-[inset_0_-1px_0_var(--color-border)]">#</th>
+                  <th className="sticky top-16 z-20 bg-surface-2 px-5 py-3 font-semibold shadow-[inset_0_-1px_0_var(--color-border)]">
+                    Event
+                  </th>
+                  <th className="sticky top-16 z-20 bg-surface-2 px-5 py-3 font-semibold shadow-[inset_0_-1px_0_var(--color-border)]">
+                    Source
+                  </th>
+                  <th className="sticky top-16 z-20 hidden bg-surface-2 px-5 py-3 font-semibold shadow-[inset_0_-1px_0_var(--color-border)] lg:table-cell">
+                    Location
+                  </th>
+                  <th className="sticky top-16 z-20 hidden bg-surface-2 px-5 py-3 font-semibold shadow-[inset_0_-1px_0_var(--color-border)] sm:table-cell">
+                    Campus
+                  </th>
+                  <th className="sticky top-16 z-20 hidden bg-surface-2 px-5 py-3 font-semibold shadow-[inset_0_-1px_0_var(--color-border)] md:table-cell">
+                    Time
+                  </th>
+                  <th className="sticky top-16 z-20 bg-surface-2 px-5 py-3 font-semibold shadow-[inset_0_-1px_0_var(--color-border)]">
+                    Entry
+                  </th>
                 </tr>
               </thead>
               <tbody>
