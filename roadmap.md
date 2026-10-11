@@ -12,6 +12,6 @@
 - [x] Update assistant catalogue with free/paid info
 - [x] Assistant replies show each recommended event as one line in the live index format
 - [x] Johannesburg Business School added as a campus with a verified upcoming event
-- [ ] Draft Services and About copy
-- [ ] Add Careers and linked Legal, Privacy, Data Scraping Compliance and PAIA pages
-- [ ] Check all draft pages and navigation
+- [x] Draft Services and About copy
+- [x] Add Careers and linked Legal, Privacy, Data Scraping Compliance and PAIA pages
+- [x] Check all draft pages and navigation
