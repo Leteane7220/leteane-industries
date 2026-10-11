@@ -363,7 +363,7 @@ function Showcase() {
 
           {/* Table */}
           <div className="overflow-x-auto lg:overflow-x-visible">
-            <table className="w-full min-w-160 text-left text-sm">
+            <table className="w-full min-w-160 border-separate border-spacing-0 text-left text-sm">
               <thead>
                 <tr className="font-mono text-[11px] font-semibold uppercase tracking-widest text-foreground">
                   <th className="sticky top-16 z-20 bg-surface-2 px-5 py-3 font-semibold shadow-[inset_0_-1px_0_var(--color-border)]">#</th>
