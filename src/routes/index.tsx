@@ -281,9 +281,9 @@ function Showcase() {
         />
 
         {/* Dashboard */}
-        <div className="panel-sheen mt-10 overflow-hidden rounded-xl border border-border bg-surface">
+        <div className="panel-sheen mt-10 rounded-xl border border-border bg-surface">
           {/* Window chrome */}
-          <div className="flex items-center justify-between border-b border-border bg-surface-2 px-5 py-3">
+          <div className="flex items-center justify-between rounded-t-xl border-b border-border bg-surface-2 px-5 py-3">
             <div className="flex items-center gap-2">
               <span className="size-2.5 rounded-full bg-border" />
               <span className="size-2.5 rounded-full bg-border" />
@@ -362,7 +362,7 @@ function Showcase() {
           </div>
 
           {/* Table */}
-          <div className="max-h-[26rem] overflow-auto">
+          <div className="overflow-x-auto lg:overflow-x-visible">
             <table className="w-full min-w-160 text-left text-sm">
               <thead>
                 <tr className="border-b border-border font-mono text-[11px] font-semibold uppercase tracking-widest text-foreground">
@@ -496,7 +496,7 @@ function Showcase() {
             </table>
           </div>
 
-          <div className="flex items-center justify-between border-t border-border px-5 py-3 font-mono text-[11px] font-medium text-foreground">
+          <div className="flex items-center justify-between rounded-b-xl border-t border-border px-5 py-3 font-mono text-[11px] font-medium text-foreground">
             <span>{results.length} events shown</span>
             <span className="flex items-center gap-1.5">
               <Terminal className="size-3" />
