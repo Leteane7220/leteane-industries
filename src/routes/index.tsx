@@ -281,9 +281,9 @@ function Showcase() {
         />
 
         {/* Dashboard */}
-        <div className="panel-sheen mt-10 overflow-hidden rounded-xl border border-border bg-surface">
+        <div className="panel-sheen mt-10 rounded-xl border border-border bg-surface">
           {/* Window chrome */}
-          <div className="flex items-center justify-between border-b border-border bg-surface-2 px-5 py-3">
+          <div className="flex items-center justify-between rounded-t-xl border-b border-border bg-surface-2 px-5 py-3">
             <div className="flex items-center gap-2">
               <span className="size-2.5 rounded-full bg-border" />
               <span className="size-2.5 rounded-full bg-border" />
@@ -362,24 +362,36 @@ function Showcase() {
           </div>
 
           {/* Table */}
-          <div className="max-h-[26rem] overflow-auto">
-            <table className="w-full min-w-160 text-left text-sm">
+          <div className="overflow-x-auto lg:overflow-x-visible">
+            <table className="w-full min-w-160 border-separate border-spacing-0 text-left text-sm">
               <thead>
-                <tr className="border-b border-border font-mono text-[11px] font-semibold uppercase tracking-widest text-foreground">
-                  <th className="px-5 py-3 font-semibold">#</th>
-                  <th className="px-5 py-3 font-semibold">Event</th>
-                  <th className="px-5 py-3 font-semibold">Source</th>
-                  <th className="hidden px-5 py-3 font-semibold lg:table-cell">Location</th>
-                  <th className="hidden px-5 py-3 font-semibold sm:table-cell">Campus</th>
-                  <th className="hidden px-5 py-3 font-semibold md:table-cell">Time</th>
-                  <th className="px-5 py-3 font-semibold">Entry</th>
+                <tr className="font-mono text-[11px] font-semibold uppercase tracking-widest text-foreground">
+                  <th className="sticky top-16 z-20 bg-surface-2 px-5 py-3 font-semibold shadow-[inset_0_-1px_0_var(--color-border)]">#</th>
+                  <th className="sticky top-16 z-20 bg-surface-2 px-5 py-3 font-semibold shadow-[inset_0_-1px_0_var(--color-border)]">
+                    Event
+                  </th>
+                  <th className="sticky top-16 z-20 bg-surface-2 px-5 py-3 font-semibold shadow-[inset_0_-1px_0_var(--color-border)]">
+                    Source
+                  </th>
+                  <th className="sticky top-16 z-20 hidden bg-surface-2 px-5 py-3 font-semibold shadow-[inset_0_-1px_0_var(--color-border)] lg:table-cell">
+                    Location
+                  </th>
+                  <th className="sticky top-16 z-20 hidden bg-surface-2 px-5 py-3 font-semibold shadow-[inset_0_-1px_0_var(--color-border)] sm:table-cell">
+                    Campus
+                  </th>
+                  <th className="sticky top-16 z-20 hidden bg-surface-2 px-5 py-3 font-semibold shadow-[inset_0_-1px_0_var(--color-border)] md:table-cell">
+                    Time
+                  </th>
+                  <th className="sticky top-16 z-20 bg-surface-2 px-5 py-3 font-semibold shadow-[inset_0_-1px_0_var(--color-border)]">
+                    Entry
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 {results.map((event, index) => (
                   <tr
                     key={event.title}
-                    className="border-b border-border/60 transition-colors last:border-0 hover:bg-surface-2/60"
+                    className="transition-colors hover:bg-surface-2/60 [&>td]:border-b [&>td]:border-border/60 [&:last-child>td]:border-b-0"
                   >
                     <td className="px-5 py-3.5 font-mono text-xs font-medium text-muted-foreground">
                       {String(index + 1).padStart(2, "0")}
@@ -496,7 +508,7 @@ function Showcase() {
             </table>
           </div>
 
-          <div className="flex items-center justify-between border-t border-border px-5 py-3 font-mono text-[11px] font-medium text-foreground">
+          <div className="flex items-center justify-between rounded-b-xl border-t border-border px-5 py-3 font-mono text-[11px] font-medium text-foreground">
             <span>{results.length} events shown</span>
             <span className="flex items-center gap-1.5">
               <Terminal className="size-3" />
