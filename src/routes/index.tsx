@@ -156,15 +156,10 @@ function Hero() {
         aria-hidden="true"
       />
       <div className="relative mx-auto max-w-6xl px-6 pb-24 pt-28 sm:pt-36">
-        <div className="flex items-center gap-3">
-          <span className="relative flex size-2">
-            <span className="absolute inline-flex size-full animate-ping rounded-full bg-primary opacity-60" />
-            <span className="relative inline-flex size-2 rounded-full bg-primary" />
-          </span>
-          <p className="font-mono text-xs font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-            Data Engineering, Johannesburg, ZA
-          </p>
-        </div>
+        <p className="font-mono text-xs font-semibold uppercase tracking-[0.22em] text-muted-foreground">
+          Data Engineering, Johannesburg, ZA
+        </p>
+
 
         <h1 className="mt-8 max-w-4xl font-display text-5xl font-semibold leading-[1.05] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
           Engineering the{" "}
