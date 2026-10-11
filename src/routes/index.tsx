@@ -391,7 +391,7 @@ function Showcase() {
                 {results.map((event, index) => (
                   <tr
                     key={event.title}
-                    className="border-b border-border/60 transition-colors last:border-0 hover:bg-surface-2/60"
+                    className="transition-colors hover:bg-surface-2/60 [&>td]:border-b [&>td]:border-border/60 [&:last-child>td]:border-b-0"
                   >
                     <td className="px-5 py-3.5 font-mono text-xs font-medium text-muted-foreground">
                       {String(index + 1).padStart(2, "0")}
