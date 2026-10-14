@@ -24,23 +24,23 @@ function messageText(message: { parts: Array<{ type: string; text?: string }> })
 }
 
 /** A catalogue link the assistant emitted, resolved back to a real indexed event. */
-function eventFromLine(line: string): CampusEvent | null | undefined {
+function eventFromLine(line: string, eventList: CampusEvent[]): CampusEvent | null | undefined {
   const trimmed = line.trim();
   if (!/^EVENT:/i.test(trimmed)) return null;
   const url = /https?:\/\/\S+/.exec(trimmed)?.[0]?.replace(/[).,]+$/, "");
   if (!url) return undefined; // still streaming, nothing to show yet
   const clean = url.replace(/\/+$/, "");
-  return campusEvents.find((event) => event.url.replace(/\/+$/, "") === clean) ?? undefined;
+  return eventList.find((event) => event.url.replace(/\/+$/, "") === clean) ?? undefined;
 }
 
 /** One event, one line, in the same columns as the live index. */
-function EventRow({ event }: { event: CampusEvent }) {
+function EventRow({ event, events }: { event: CampusEvent; events: CampusEvent[] }) {
   return (
     <div
       data-event-row={event.url}
       className="flex flex-nowrap items-center gap-2 overflow-x-auto whitespace-nowrap border border-border bg-surface-2/70 px-3 py-2 font-mono text-[11px] font-medium text-foreground"
     >
-      <span className="shrink-0 text-muted-foreground">{eventNumber(event)}</span>
+      <span className="shrink-0 text-muted-foreground">{eventNumber(event, events)}</span>
       <a
         href={event.url}
         target="_blank"
@@ -82,7 +82,7 @@ function EventRow({ event }: { event: CampusEvent }) {
 }
 
 /** Assistant text becomes prose paragraphs plus one detail line per recommended event. */
-function AssistantText({ text }: { text: string }) {
+function AssistantText({ text, events }: { text: string; events: CampusEvent[] }) {
   const blocks: ReactNode[] = [];
   let prose: string[] = [];
 
@@ -99,11 +99,11 @@ function AssistantText({ text }: { text: string }) {
   };
 
   text.split("\n").forEach((line) => {
-    const event = eventFromLine(line);
+    const event = eventFromLine(line, events);
     if (event === undefined) return; // partial event line while streaming
     if (event) {
       flush();
-      blocks.push(<EventRow key={`e-${blocks.length}`} event={event} />);
+      blocks.push(<EventRow key={`e-${blocks.length}`} event={event} events={events} />);
       return;
     }
     if (line.trim() === "") {
@@ -117,7 +117,8 @@ function AssistantText({ text }: { text: string }) {
   return <div className="space-y-2.5">{blocks}</div>;
 }
 
-export function CampusAssistant() {
+export function CampusAssistant({ events = campusEvents }: { events?: CampusEvent[] } = {}) {
+
   const transport = useMemo(() => new DefaultChatTransport({ api: "/api/chat" }), []);
   const { messages, sendMessage, status, error } = useChat({ transport });
   const [input, setInput] = useState("");
@@ -179,7 +180,7 @@ export function CampusAssistant() {
               }
             >
               {message.role === "assistant" ? (
-                <AssistantText text={messageText(message)} />
+                <AssistantText text={messageText(message)} events={events} />
               ) : (
                 messageText(message)
               )}

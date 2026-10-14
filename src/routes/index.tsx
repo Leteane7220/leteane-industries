@@ -11,8 +11,10 @@ import {
   isEventPast,
   withinWindow,
   type TimeWindow,
+  type CampusEvent,
   socialPlatformOf,
 } from "@/lib/campus-events";
+import { getLiveCampusEvents } from "@/lib/supabase";
 import { verifyEvents, type EventVerification } from "@/lib/verify-events.functions";
 import { useServerFn } from "@tanstack/react-start";
 import { createFileRoute, Link } from "@tanstack/react-router";
@@ -216,6 +218,7 @@ const selectClass =
   "rounded-md border border-border bg-background px-3 py-2 font-mono text-xs text-muted-foreground outline-none transition-colors focus:border-primary/60";
 
 function Showcase() {
+  const [events, setEvents] = useState<CampusEvent[]>(campusEvents);
   const [query, setQuery] = useState("");
   const [campus, setCampus] = useState("all");
   const [window, setWindow] = useState<TimeWindow>("any");
@@ -228,12 +231,22 @@ function Showcase() {
   const handleRefresh = async () => {
     setRefreshing(true);
     try {
-      const data = await runVerification({});
+      const [data, liveEvents] = await Promise.all([
+        runVerification({}),
+        getLiveCampusEvents(),
+      ]);
+      setEvents(liveEvents);
       const next: Record<string, EventVerification> = {};
       for (const result of data.results) next[result.url] = result;
       setChecks(next);
       setLastRefreshed(new Date(data.checkedAt));
     } catch {
+      try {
+        const liveEvents = await getLiveCampusEvents();
+        setEvents(liveEvents);
+      } catch {
+        // preserve current events
+      }
       setLastRefreshed(new Date());
     } finally {
       setRefreshing(false);
@@ -245,9 +258,13 @@ function Showcase() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const allSources = useMemo(() => {
+    return Array.from(new Set(events.map((e) => e.source))).sort();
+  }, [events]);
+
   const results = useMemo(() => {
     const q = query.trim().toLowerCase();
-    return campusEvents
+    return events
       // After each refresh, events whose date and time have passed are removed.
       .filter((event) => (lastRefreshed ? !isEventPast(event, lastRefreshed) : true))
       .filter((event) => (campus === "all" ? true : event.campus === campus))
@@ -262,7 +279,8 @@ function Showcase() {
           : true,
       )
       .sort((a, b) => `${a.date}${a.time}`.localeCompare(`${b.date}${b.time}`));
-  }, [query, campus, window, source, lastRefreshed]);
+  }, [events, query, campus, window, source, lastRefreshed]);
+
 
 
   return (
@@ -353,7 +371,7 @@ function Showcase() {
               className={selectClass}
             >
               <option value="any">Source: any</option>
-              {eventSources.map((item) => (
+              {allSources.map((item) => (
                 <option key={item} value={item}>
                   {item}
                 </option>
@@ -390,7 +408,7 @@ function Showcase() {
               <tbody>
                 {results.map((event, index) => (
                   <tr
-                    key={event.title}
+                    key={event.url}
                     className="transition-colors hover:bg-surface-2/60 [&>td]:border-b [&>td]:border-border/60 [&:last-child>td]:border-b-0"
                   >
                     <td className="px-5 py-3.5 font-mono text-xs font-medium text-muted-foreground">
@@ -531,7 +549,7 @@ function Showcase() {
             </p>
           </div>
           <div className="mt-6">
-            <CampusAssistant />
+            <CampusAssistant events={events} />
           </div>
         </div>
       </div>

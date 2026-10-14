@@ -4,21 +4,23 @@ import {
   getLovableAiGatewayRunId,
   withLovableAiGatewayRunIdHeader,
 } from "@/lib/ai-gateway.server";
-import { campusEvents, campusLabels, formatEventWhen, indexToday } from "@/lib/campus-events";
+import { campusLabels, formatEventWhen, indexToday, type CampusEvent } from "@/lib/campus-events";
+import { getLiveCampusEvents } from "@/lib/supabase";
 import { createOpenAI } from "@ai-sdk/openai";
 import { createFileRoute } from "@tanstack/react-router";
 import { convertToModelMessages, streamText, type UIMessage } from "ai";
 
 type ChatRequestBody = { messages?: unknown };
 
-const eventCatalogue = campusEvents
-  .map(
-    (e) =>
-      `- ${e.title} | ${formatEventWhen(e)} | ${campusLabels[e.campus]} (${e.campus}) | ${e.location} | category: ${e.category} | entry: ${e.free ? "Free" : "Paid tickets"} | source: ${e.source} | status: ${e.status} | link: ${e.url}`,
-  )
-  .join("\n");
+function buildSystemPrompt(events: CampusEvent[]): string {
+  const eventCatalogue = events
+    .map(
+      (e) =>
+        `- ${e.title} | ${formatEventWhen(e)} | ${campusLabels[e.campus]} (${e.campus}) | ${e.location} | category: ${e.category} | entry: ${e.free ? "Free" : "Paid tickets"} | source: ${e.source} | status: ${e.status} | link: ${e.url}`,
+    )
+    .join("\n");
 
-const systemPrompt = `You are the Unify assistant, provided by Leteane Industries.
+  return `You are the Unify assistant, provided by Leteane Industries.
 You help University of Johannesburg students find events that suit them.
 Today's date in the index is ${indexToday} (Africa/Johannesburg).
 
@@ -33,6 +35,7 @@ Keep replies short, friendly and practical.
 
 INDEXED EVENTS:
 ${eventCatalogue}`;
+}
 
 export const Route = createFileRoute("/api/chat")({
   server: {
@@ -54,6 +57,9 @@ export const Route = createFileRoute("/api/chat")({
           headers: { "Lovable-API-Key": key, "X-Lovable-AIG-SDK": "vercel-ai-sdk" },
           fetch: runIdFetch.fetch,
         });
+
+        const liveEvents = await getLiveCampusEvents();
+        const systemPrompt = buildSystemPrompt(liveEvents);
 
         const result = streamText({
           model: lovable.responses("openai/gpt-6-astra"),

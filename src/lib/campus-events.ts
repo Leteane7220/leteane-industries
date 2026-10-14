@@ -25,7 +25,7 @@ export const campusLabels: Record<CampusEvent["campus"], string> = {
   DFC: "Doornfontein Campus",
 };
 
-const webEvents: CampusEvent[] = [
+export const webEvents: CampusEvent[] = [
   {
     title: "Joburg Moves Junior",
     source: "Quicket, UJ Arts & Culture",
@@ -227,8 +227,8 @@ export function entryClass(free: boolean) {
 }
 
 /** Zero padded position of an event in the index, the same number the table shows. */
-export function eventNumber(event: CampusEvent) {
-  const position = campusEvents.findIndex((e) => e.url === event.url);
+export function eventNumber(event: CampusEvent, list: CampusEvent[] = campusEvents) {
+  const position = list.findIndex((e) => e.url === event.url);
   return String((position < 0 ? 0 : position) + 1).padStart(2, "0");
 }
 

@@ -1,5 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
-import { campusEvents } from "./campus-events";
+import { getLiveCampusEvents } from "./supabase";
+
 
 export type EventVerification = {
   url: string;
@@ -58,6 +59,7 @@ async function verifyOne(url: string): Promise<EventVerification> {
 
 /** Re-visits every indexed event's source page to confirm it still exists and whether entry is free. */
 export const verifyEvents = createServerFn({ method: "POST" }).handler(async () => {
-  const results = await Promise.all(campusEvents.map((event) => verifyOne(event.url)));
+  const events = await getLiveCampusEvents();
+  const results = await Promise.all(events.map((event) => verifyOne(event.url)));
   return { checkedAt: new Date().toISOString(), results };
 });
