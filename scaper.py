@@ -213,6 +213,11 @@ def isolate_campus_event(
     }
 
 
+# Real Instagram shortcodes are 9-12 alphanumeric/hyphen/underscore characters.
+# This guards against test codes (e.g. 'C_TEST_IG01') producing broken /p/ URLs.
+_IG_CODE_RE = re.compile(r'^[A-Za-z0-9_-]{9,12}$')
+
+
 def parse_instagram_raw(raw_data: Any, handle: str = "@uj_university") -> List[Dict[str, Any]]:
     """Parses raw EnsembleData Instagram JSON and extracts CampusEvents."""
     events = []
@@ -227,6 +232,12 @@ def parse_instagram_raw(raw_data: Any, handle: str = "@uj_university") -> List[D
         code = item.get("code") or item.get("id")
         taken_at = item.get("taken_at")
         if not code or not caption:
+            continue
+
+        # Skip any code that doesn't look like a real Instagram shortcode.
+        # Real codes: 9-12 chars, only letters, digits, hyphens, underscores.
+        if not _IG_CODE_RE.match(str(code)):
+            print(f"[Instagram] Skipping post with invalid shortcode: '{code}' — would produce a broken URL.")
             continue
 
         url = f"https://www.instagram.com/p/{code}/"
