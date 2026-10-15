@@ -1,0 +1,32 @@
+name: Daily Campus Events Scraper
+
+on:
+  schedule:
+    # Runs daily at 06:00 UTC (08:00 AM South Africa Standard Time)
+    - cron: '0 6 * * *'
+  # Allows triggering manually anytime from the GitHub Actions tab
+  workflow_dispatch:
+
+jobs:
+  scrape-and-sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install dependencies
+        run: |
+          pip install requests
+
+      - name: Run Scraper and Upload to Supabase
+        env:
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmemRmenB2bHNndWFjamZmaXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIwMDU1NzgsImV4cCI6MjEwNzU4MTU3OH0.aUq_7Wdp-l_cyxpznl-m3GvwAxM4uVajbX5VYgiRU9U' }}
+          ENSEMBLEDATA_TOKEN: ${{ secrets.ENSEMBLEDATA_TOKEN || '5f6K4GBvvLwvSViO' }}
+        run: |
+          python scaper.py --token "${ENSEMBLEDATA_TOKEN}" --supabase-key "${SUPABASE_KEY}" --no-sync
