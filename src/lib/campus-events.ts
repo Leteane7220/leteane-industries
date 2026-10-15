@@ -239,7 +239,7 @@ export function isEventPast(event: CampusEvent, at: Date = new Date()): boolean 
 }
 
 /** Reference "today" for the index. */
-export const indexToday = "2026-10-09";
+export const indexToday = "2026-10-15";
 
 export type TimeWindow = "any" | "today" | "week" | "month";
 

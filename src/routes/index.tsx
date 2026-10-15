@@ -266,7 +266,14 @@ function Showcase() {
     const q = query.trim().toLowerCase();
     return events
       // After each refresh, events whose date and time have passed are removed.
-      .filter((event) => (lastRefreshed ? !isEventPast(event, lastRefreshed) : true))
+      // Keep events that haven't started yet, are happening today, or ended within
+      // the last 2 days — so events don't vanish the moment they start.
+      .filter((event) => {
+        if (!lastRefreshed) return true;
+        const start = new Date(`${event.date}T${event.time}:00+02:00`);
+        const twoDaysAgo = new Date(lastRefreshed.getTime() - 2 * 24 * 60 * 60 * 1000);
+        return start.getTime() >= twoDaysAgo.getTime();
+      })
       .filter((event) => (campus === "all" ? true : event.campus === campus))
       .filter((event) => (source === "any" ? true : event.source === source))
       .filter((event) => withinWindow(event, window))
