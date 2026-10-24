@@ -1,9 +1,9 @@
-import {
   campusEvents,
   entryClass,
   eventNumber,
   formatEventWhen,
   mapsUrl,
+  socialPlatformOf,
   type CampusEvent,
 } from "@/lib/campus-events";
 import { useChat } from "@ai-sdk/react";
@@ -74,7 +74,11 @@ function EventRow({ event, events }: { event: CampusEvent; events: CampusEvent[]
         rel="noopener noreferrer"
         className="group inline-flex shrink-0 items-center gap-1 text-muted-foreground transition-colors hover:text-primary"
       >
-        {event.free ? "Free ticket" : "Buy tickets"}
+        {socialPlatformOf(event.url)
+          ? `Open ${socialPlatformOf(event.url)}`
+          : event.free
+            ? "Free ticket"
+            : "Buy tickets"}
         <ArrowUpRight className="size-2.5 transition-colors group-hover:text-primary" />
       </a>
     </div>

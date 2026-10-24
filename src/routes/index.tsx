@@ -3,6 +3,7 @@ import {
   campusEvents,
   campusLabels,
   entryClass,
+  eventNumber,
   eventSources,
   formatClock,
   formatEventDate,
@@ -262,21 +263,17 @@ function Showcase() {
     return Array.from(new Set(events.map((e) => e.source))).sort();
   }, [events]);
 
+  // Master sorted catalogue: chronological order by date and time
+  const sortedCatalogue = useMemo(() => {
+    return [...events].sort((a, b) => `${a.date}${a.time}`.localeCompare(`${b.date}${b.time}`));
+  }, [events]);
+
   const results = useMemo(() => {
     const q = query.trim().toLowerCase();
-    return events
-      // After each refresh, events whose date and time have passed are removed.
-      // Keep events that haven't started yet, are happening today, or ended within
-      // the last 2 days — so events don't vanish the moment they start.
-      .filter((event) => {
-        if (!lastRefreshed) return true;
-        const start = new Date(`${event.date}T${event.time}:00+02:00`);
-        const twoDaysAgo = new Date(lastRefreshed.getTime() - 2 * 24 * 60 * 60 * 1000);
-        return start.getTime() >= twoDaysAgo.getTime();
-      })
+    return sortedCatalogue
+      .filter((event) => withinWindow(event, window))
       .filter((event) => (campus === "all" ? true : event.campus === campus))
       .filter((event) => (source === "any" ? true : event.source === source))
-      .filter((event) => withinWindow(event, window))
       .filter((event) =>
         q
           ? [event.title, event.location, event.source, event.category, event.campus]
@@ -284,9 +281,8 @@ function Showcase() {
               .toLowerCase()
               .includes(q)
           : true,
-      )
-      .sort((a, b) => `${a.date}${a.time}`.localeCompare(`${b.date}${b.time}`));
-  }, [events, query, campus, window, source, lastRefreshed]);
+      );
+  }, [sortedCatalogue, query, campus, window, source]);
 
 
 
@@ -413,13 +409,13 @@ function Showcase() {
                 </tr>
               </thead>
               <tbody>
-                {results.map((event, index) => (
+                {results.map((event) => (
                   <tr
                     key={event.url}
                     className="transition-colors hover:bg-surface-2/60 [&>td]:border-b [&>td]:border-border/60 [&:last-child>td]:border-b-0"
                   >
                     <td className="px-5 py-3.5 font-mono text-xs font-medium text-muted-foreground">
-                      {String(index + 1).padStart(2, "0")}
+                      {eventNumber(event, sortedCatalogue)}
                     </td>
                     <td className="px-5 py-3.5 font-semibold text-foreground">
                       <a
@@ -433,12 +429,20 @@ function Showcase() {
                       </a>
                     </td>
                     <td className="px-5 py-3.5 font-medium text-foreground">
-                      {socialPlatformOf(event.url) && (
-                        <span className="mr-1.5 inline-block border border-foreground px-1.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wider">
-                          {socialPlatformOf(event.url)} post
-                        </span>
-                      )}
-                      {event.source}
+                      <a
+                        href={event.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group inline-flex items-center gap-1.5 transition-colors hover:text-primary"
+                      >
+                        {socialPlatformOf(event.url) && (
+                          <span className="inline-block border border-foreground px-1.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wider">
+                            {socialPlatformOf(event.url)} page
+                          </span>
+                        )}
+                        <span>{event.source}</span>
+                        <ArrowUpRight className="size-3 text-muted-foreground transition-colors group-hover:text-primary" />
+                      </a>
                     </td>
                     <td className="hidden max-w-80 px-5 py-3.5 font-medium text-foreground lg:table-cell">
                       <a
@@ -471,7 +475,11 @@ function Showcase() {
                             rel="noopener noreferrer"
                             className="group inline-flex items-center gap-1 font-mono text-[11px] font-medium text-muted-foreground transition-colors hover:text-primary"
                           >
-                            {event.free ? "Get free ticket" : "Buy tickets"}
+                            {socialPlatformOf(event.url)
+                              ? `Open ${socialPlatformOf(event.url)}`
+                              : event.free
+                                ? "Get free ticket"
+                                : "Buy tickets"}
                             <ArrowUpRight className="size-3 transition-colors group-hover:text-primary" />
                           </a>
                         </span>
@@ -556,7 +564,7 @@ function Showcase() {
             </p>
           </div>
           <div className="mt-6">
-            <CampusAssistant events={events} />
+            <CampusAssistant events={sortedCatalogue} />
           </div>
         </div>
       </div>

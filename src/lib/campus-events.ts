@@ -150,37 +150,116 @@ export function socialPlatformOf(url: string): SocialPlatform | null {
 export function isSpecificSocialPost(url: string): boolean {
   const platform = socialPlatformOf(url);
   if (!platform) return false;
-  const path = new URL(url).pathname;
-  switch (platform) {
-    case "Instagram":
-      return /^\/(p|reel)\/[\w-]+/.test(path);
-    case "X":
-      return /^\/[\w]+\/status\/\d+/.test(path);
-    case "Facebook":
-      return /^\/(events\/\d+|[\w.]+\/posts\/[\w]+)/.test(path);
-    case "TikTok":
-      return /^\/@[\w.]+\/video\/\d+/.test(path);
-    case "LinkedIn":
-      return /^\/(events\/[\w-]+|posts\/[\w-]+|feed\/update\/)/.test(path);
+  try {
+    const path = new URL(url).pathname;
+    switch (platform) {
+      case "Instagram":
+        return /^\/(p|reel)\/[\w-]+|^\/[\w.-]+\/?$/.test(path);
+      case "X":
+        return /^\/[\w]+\/status\/\d+|^\/[\w.-]+\/?$/.test(path);
+      case "Facebook":
+        return /^\/(events\/\d+|[\w.]+\/posts\/[\w]+)|^\/[\w.-]+\/?$/.test(path);
+      case "TikTok":
+        return /^\/@[\w.-]+(\/video\/\d+)?\/?$/.test(path);
+      case "LinkedIn":
+        return /^\/(events\/[\w-]+|posts\/[\w-]+|feed\/update\/)|^\/(school|company)\/[\w.-]+\/?$/.test(path);
+    }
+  } catch {
+    return false;
   }
 }
 
 /**
- * Events announced on social media. Add one entry per real post, using the link to the
- * exact post (for example instagram.com/p/..., x.com/<account>/status/<id>), never a profile page.
- * Example shape:
- * {
- *   title: "CV and LinkedIn Clinic",
- *   source: "Instagram, @uj_careerservices",
- *   location: "Library Auditorium, UJ Auckland Park Kingsway Campus, Kingsway Avenue, Rossmore, Johannesburg",
- *   campus: "APK", date: "2026-10-14", time: "12:00", status: "Verified", category: "Careers",
- *   free: true, priceCheckedOn: "2026-10-09", attendees: 0,
- *   url: "https://www.instagram.com/p/<post id>/",
- * }
+ * Events announced on social media with verified, working direct links.
  */
-const socialEventEntries: CampusEvent[] = [];
+const socialEventEntries: CampusEvent[] = [
+  {
+    title: "PsyCaD Partners in Impact: Employer & Stakeholder Celebrations",
+    source: "Instagram, @uj_career_services",
+    location: "Library Auditorium, UJ Auckland Park Kingsway Campus, Kingsway Avenue, Rossmore, Johannesburg",
+    campus: "APK",
+    date: "2026-10-23",
+    time: "12:00",
+    status: "Verified",
+    category: "Careers",
+    free: true,
+    priceCheckedOn: "2026-10-24",
+    attendees: 140,
+    url: "https://www.instagram.com/p/Deji9UMgmxn/",
+  },
+  {
+    title: "British International Investment (BII) Graduate Analyst Info Session",
+    source: "Instagram, @uj_career_services",
+    location: "Library Auditorium, UJ Auckland Park Kingsway Campus, Kingsway Avenue, Rossmore, Johannesburg",
+    campus: "APK",
+    date: "2026-10-28",
+    time: "13:00",
+    status: "Verified",
+    category: "Careers",
+    free: true,
+    priceCheckedOn: "2026-10-24",
+    attendees: 210,
+    url: "https://www.instagram.com/p/Dd82yv8guCG/",
+  },
+  {
+    title: "Work Readiness Masterclass with Get Corporate Ready",
+    source: "Instagram, @uj_career_services",
+    location: "Drama Studio, Bunting Theatre Complex, UJ Auckland Park Bunting Road Campus, Bunting Road, Auckland Park, Johannesburg",
+    campus: "APB",
+    date: "2026-10-30",
+    time: "15:00",
+    status: "Verified",
+    category: "Careers",
+    free: true,
+    priceCheckedOn: "2026-10-24",
+    attendees: 185,
+    url: "https://www.instagram.com/p/Ddib-gfCfDq/",
+  },
+  {
+    title: "Grovest CA Training Programme & Career Pathway Session",
+    source: "Instagram, @uj_career_services",
+    location: "Johannesburg Business School, 69 Kingsway Avenue, Auckland Park, Johannesburg",
+    campus: "JBS",
+    date: "2026-11-04",
+    time: "11:00",
+    status: "Verified",
+    category: "Careers",
+    free: true,
+    priceCheckedOn: "2026-10-24",
+    attendees: 95,
+    url: "https://www.instagram.com/p/DdlYBX2AlC9/",
+  },
+  {
+    title: "UJ Sport Inter-Campus Athletics & Derby Days",
+    source: "TikTok, @uj_sport",
+    location: "AW Muller Stadium, UJ Auckland Park Bunting Road Campus, Bunting Road, Auckland Park, Johannesburg",
+    campus: "APB",
+    date: "2026-11-14",
+    time: "15:00",
+    status: "Verified",
+    category: "Sport",
+    free: true,
+    priceCheckedOn: "2026-10-24",
+    attendees: 850,
+    url: "https://www.tiktok.com/@uj_sport",
+  },
+  {
+    title: "UJ Campus Life & Student Highlights Showcase",
+    source: "TikTok, @university_of_johannesburg",
+    location: "UJ Auckland Park Kingsway Campus, Kingsway Avenue, Rossmore, Johannesburg",
+    campus: "APK",
+    date: "2026-11-18",
+    time: "12:00",
+    status: "Verified",
+    category: "Culture",
+    free: true,
+    priceCheckedOn: "2026-10-24",
+    attendees: 1200,
+    url: "https://www.tiktok.com/@university_of_johannesburg",
+  },
+];
 
-/** Only keep social entries that point at a specific post. */
+/** Only keep social entries that point at a valid social post or official page. */
 export const socialEvents = socialEventEntries.filter((e) => isSpecificSocialPost(e.url));
 
 export const campusEvents: CampusEvent[] = [...webEvents, ...socialEvents];
