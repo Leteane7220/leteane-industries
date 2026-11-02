@@ -46,6 +46,8 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
   --color-uni-blue: var(--uni-blue);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-deep: var(--sidebar-deep);
 }
 
 :root {
@@ -82,6 +84,11 @@
   --ink-mark: oklch(1 0 0 / 6%);
   --ink-rule: oklch(1 0 0 / 16%);
   --ink-cross: oklch(1 0 0 / 28%);
+
+  /* Dashboard sidebar surface, blueprint blue mixed with white */
+  --sidebar: color-mix(in oklab, var(--background) 78%, white);
+  --sidebar-deep: color-mix(in oklab, var(--background) 66%, white);
+  --wash: color-mix(in oklab, var(--sidebar) 55%, transparent);
 }
 
 /* Light theme: white drafting paper, blue ink */
@@ -117,6 +124,9 @@
   --ink-mark: oklch(0.3 0.07 258 / 6%);
   --ink-rule: oklch(0.3 0.07 258 / 18%);
   --ink-cross: oklch(0.3 0.07 258 / 30%);
+
+  --sidebar: color-mix(in oklab, var(--background) 93%, oklch(0.36 0.075 256));
+  --sidebar-deep: color-mix(in oklab, var(--background) 84%, oklch(0.36 0.075 256));
 }
 
 @layer base {
@@ -215,6 +225,16 @@
 /* Subtle top highlight on panels */
 @utility panel-sheen {
   box-shadow: none;
+}
+
+/* Sidebar sheet: blue paper mixed toward white, deeper at the top */
+@utility sidebar-sheen {
+  background-image: linear-gradient(
+    180deg,
+    var(--sidebar-deep) 0%,
+    var(--sidebar) 30%,
+    var(--sidebar) 100%
+  );
 }
 
 /* ---------- Drafting linework ---------- */
