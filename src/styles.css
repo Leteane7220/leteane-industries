@@ -8,7 +8,8 @@
  * Letane Industries — Design System
  *
  * Direction: blueprint drafting aesthetic. Deep blueprint-blue paper with a
- * fine white grid, white "ink" linework for type, borders and accents.
+ * fine white grid, white "ink" linework for type, borders and accents. The
+ * light theme flips the sheet: white drafting paper with blue ink linework.
  * Typography: IBM Plex Sans (body), Source Serif 4 (display), JetBrains Mono (labels).
  */
 
@@ -71,6 +72,51 @@
   --input: oklch(0.96 0.01 250 / 32%);
   --ring: oklch(0.96 0.01 250);
   --uni-blue: oklch(0.2 0.09 264);
+
+  /* Ink used by the drafting linework and the paper grid */
+  --ink-line-1: oklch(1 0 0 / 9%);
+  --ink-line-2: oklch(1 0 0 / 7%);
+  --ink-line-3: oklch(1 0 0 / 10%);
+  --ink-grid-fine: oklch(1 0 0 / 5%);
+  --ink-grid-major: oklch(1 0 0 / 9%);
+  --ink-mark: oklch(1 0 0 / 6%);
+  --ink-rule: oklch(1 0 0 / 16%);
+  --ink-cross: oklch(1 0 0 / 28%);
+}
+
+/* Light theme: white drafting paper, blue ink */
+:root[data-theme="light"] {
+  --background: oklch(0.965 0.008 250);
+  --foreground: oklch(0.24 0.06 258);
+  --surface: oklch(0.985 0.005 250);
+  --surface-2: oklch(0.94 0.012 252);
+  --card: oklch(0.985 0.005 250);
+  --card-foreground: oklch(0.24 0.06 258);
+  --popover: oklch(0.985 0.005 250);
+  --popover-foreground: oklch(0.24 0.06 258);
+  --primary: oklch(0.24 0.06 258);
+  --primary-foreground: oklch(0.97 0.005 250);
+  --secondary: oklch(0.93 0.015 252);
+  --secondary-foreground: oklch(0.24 0.06 258);
+  --muted: oklch(0.93 0.012 252);
+  --muted-foreground: oklch(0.3 0.05 258 / 88%);
+  --accent: oklch(0.9 0.02 252);
+  --accent-foreground: oklch(0.24 0.06 258);
+  --destructive: oklch(0.55 0.2 25);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.24 0.06 258 / 22%);
+  --input: oklch(0.24 0.06 258 / 32%);
+  --ring: oklch(0.24 0.06 258);
+  --uni-blue: oklch(0.2 0.09 264);
+
+  --ink-line-1: oklch(0.3 0.07 258 / 8%);
+  --ink-line-2: oklch(0.3 0.07 258 / 6%);
+  --ink-line-3: oklch(0.3 0.07 258 / 9%);
+  --ink-grid-fine: oklch(0.3 0.07 258 / 6%);
+  --ink-grid-major: oklch(0.3 0.07 258 / 10%);
+  --ink-mark: oklch(0.3 0.07 258 / 6%);
+  --ink-rule: oklch(0.3 0.07 258 / 18%);
+  --ink-cross: oklch(0.3 0.07 258 / 30%);
 }
 
 @layer base {
@@ -86,22 +132,22 @@
     background-color: var(--color-background);
     background-image:
       /* scattered pencil construction lines, varied angles, none aligned */
-      linear-gradient(23deg, transparent calc(50% - 0.5px), oklch(1 0 0 / 9%) calc(50% - 0.5px), oklch(1 0 0 / 9%) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
-      linear-gradient(67deg, transparent calc(50% - 0.5px), oklch(1 0 0 / 7%) calc(50% - 0.5px), oklch(1 0 0 / 7%) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
-      linear-gradient(112deg, transparent calc(50% - 0.5px), oklch(1 0 0 / 9%) calc(50% - 0.5px), oklch(1 0 0 / 9%) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
-      linear-gradient(154deg, transparent calc(50% - 0.5px), oklch(1 0 0 / 7%) calc(50% - 0.5px), oklch(1 0 0 / 7%) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
-      linear-gradient(81deg, transparent calc(50% - 0.5px), oklch(1 0 0 / 10%) calc(50% - 0.5px), oklch(1 0 0 / 10%) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
-      linear-gradient(38deg, transparent calc(50% - 0.5px), oklch(1 0 0 / 7%) calc(50% - 0.5px), oklch(1 0 0 / 7%) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
-      linear-gradient(129deg, transparent calc(50% - 0.5px), oklch(1 0 0 / 9%) calc(50% - 0.5px), oklch(1 0 0 / 9%) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
-      linear-gradient(172deg, transparent calc(50% - 0.5px), oklch(1 0 0 / 7%) calc(50% - 0.5px), oklch(1 0 0 / 7%) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
-      linear-gradient(56deg, transparent calc(50% - 0.5px), oklch(1 0 0 / 9%) calc(50% - 0.5px), oklch(1 0 0 / 9%) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
-      linear-gradient(97deg, transparent calc(50% - 0.5px), oklch(1 0 0 / 7%) calc(50% - 0.5px), oklch(1 0 0 / 7%) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+      linear-gradient(23deg, transparent calc(50% - 0.5px), var(--ink-line-1) calc(50% - 0.5px), var(--ink-line-1) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+      linear-gradient(67deg, transparent calc(50% - 0.5px), var(--ink-line-2) calc(50% - 0.5px), var(--ink-line-2) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+      linear-gradient(112deg, transparent calc(50% - 0.5px), var(--ink-line-1) calc(50% - 0.5px), var(--ink-line-1) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+      linear-gradient(154deg, transparent calc(50% - 0.5px), var(--ink-line-2) calc(50% - 0.5px), var(--ink-line-2) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+      linear-gradient(81deg, transparent calc(50% - 0.5px), var(--ink-line-3) calc(50% - 0.5px), var(--ink-line-3) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+      linear-gradient(38deg, transparent calc(50% - 0.5px), var(--ink-line-2) calc(50% - 0.5px), var(--ink-line-2) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+      linear-gradient(129deg, transparent calc(50% - 0.5px), var(--ink-line-1) calc(50% - 0.5px), var(--ink-line-1) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+      linear-gradient(172deg, transparent calc(50% - 0.5px), var(--ink-line-2) calc(50% - 0.5px), var(--ink-line-2) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+      linear-gradient(56deg, transparent calc(50% - 0.5px), var(--ink-line-1) calc(50% - 0.5px), var(--ink-line-1) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+      linear-gradient(97deg, transparent calc(50% - 0.5px), var(--ink-line-2) calc(50% - 0.5px), var(--ink-line-2) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
       /* fine grid */
-      linear-gradient(to right, oklch(1 0 0 / 5%) 1px, transparent 1px),
-      linear-gradient(to bottom, oklch(1 0 0 / 5%) 1px, transparent 1px),
+      linear-gradient(to right, var(--ink-grid-fine) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--ink-grid-fine) 1px, transparent 1px),
       /* major grid */
-      linear-gradient(to right, oklch(1 0 0 / 9%) 1px, transparent 1px),
-      linear-gradient(to bottom, oklch(1 0 0 / 9%) 1px, transparent 1px);
+      linear-gradient(to right, var(--ink-grid-major) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--ink-grid-major) 1px, transparent 1px);
     background-size:
       613px 431px,
       447px 569px,
@@ -151,8 +197,8 @@
 /* Blueprint grid backdrop for panels that sit on the page paper */
 @utility grid-blueprint {
   background-image:
-    linear-gradient(to right, oklch(1 0 0 / 5%) 1px, transparent 1px),
-    linear-gradient(to bottom, oklch(1 0 0 / 5%) 1px, transparent 1px);
+    linear-gradient(to right, var(--ink-grid-fine) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--ink-grid-fine) 1px, transparent 1px);
   background-size: 56px 56px;
 }
 
@@ -179,15 +225,15 @@
     linear-gradient(
       45deg,
       transparent calc(50% - 0.5px),
-      oklch(1 0 0 / 6%) calc(50% - 0.5px),
-      oklch(1 0 0 / 6%) calc(50% + 0.5px),
+      var(--ink-mark) calc(50% - 0.5px),
+      var(--ink-mark) calc(50% + 0.5px),
       transparent calc(50% + 0.5px)
     ),
     linear-gradient(
       135deg,
       transparent calc(50% - 0.5px),
-      oklch(1 0 0 / 6%) calc(50% - 0.5px),
-      oklch(1 0 0 / 6%) calc(50% + 0.5px),
+      var(--ink-mark) calc(50% - 0.5px),
+      var(--ink-mark) calc(50% + 0.5px),
       transparent calc(50% + 0.5px)
     );
 }
@@ -195,7 +241,7 @@
 /* Dashed guide rule, vertical */
 @utility draft-rule-dashed-v {
   width: 1px;
-  background-image: linear-gradient(to bottom, oklch(1 0 0 / 16%) 55%, transparent 55%);
+  background-image: linear-gradient(to bottom, var(--ink-rule) 55%, transparent 55%);
   background-size: 1px 8px;
   background-repeat: repeat-y;
 }
@@ -203,7 +249,7 @@
 /* Dashed guide rule, horizontal */
 @utility draft-rule-dashed-h {
   height: 1px;
-  background-image: linear-gradient(to right, oklch(1 0 0 / 16%) 55%, transparent 55%);
+  background-image: linear-gradient(to right, var(--ink-rule) 55%, transparent 55%);
   background-size: 8px 1px;
   background-repeat: repeat-x;
 }
@@ -214,7 +260,7 @@
   &::after {
     content: "";
     position: absolute;
-    background: oklch(1 0 0 / 28%);
+    background: var(--ink-cross);
   }
 
   &::before {

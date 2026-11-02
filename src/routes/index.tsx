@@ -26,13 +26,17 @@ import {
   Layers,
   MapPin,
   AlertTriangle,
+  MoreVertical,
+  Moon,
   Network,
   RefreshCw,
   Search,
   ShieldCheck,
+  Sun,
   Terminal,
 } from "lucide-react";
-import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { useTheme } from "@/hooks/use-theme";
 
 export const Route = createFileRoute("/")({
   head: () => ({
