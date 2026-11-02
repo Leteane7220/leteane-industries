@@ -16,3 +16,4 @@
 - [x] Add Careers and linked Legal, Privacy, Data Scraping Compliance and PAIA pages
 - [x] Check all draft pages and navigation
 - [x] Column header row stays pinned while scrolling the event index
+- [x] Nav dropdown: three dots menu left of the logo with Showcase, Services, Company, Help and a dark to light mode toggle; top right links removed
