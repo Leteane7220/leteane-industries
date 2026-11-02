@@ -34,3 +34,8 @@ dist-ssr
 # Python
 __pycache__/
 *.pyc
+
+# Scraper output artifacts
+instagram_posts.json
+tiktok_posts.json
+isolated_campus_events.json

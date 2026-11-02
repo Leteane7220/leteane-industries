@@ -55,11 +55,38 @@ PAID_PATTERNS = [
 ]
 
 CATEGORY_KEYWORDS = {
-    "Culture": ["art", "theatre", "music", "choir", "dance", "exhibition", "creative", "fada", "culture", "showcase"],
-    "Sport": ["run", "race", "marathon", "football", "rugby", "cricket", "basketball", "sport", "stadium", "tournament"],
-    "Careers": ["career", "cv", "resume", "clinic", "interview", "hiring", "internship", "job", "expo", "work"],
-    "Academic": ["lecture", "symposium", "conference", "research", "faculty", "seminar", "workshop", "webinar"],
-    "Open Day": ["open day", "campus tour", "orientation", "prospective"],
+    "Careers": [
+        "career", "careers", "cv", "resume", "clinic", "interview", "interviews",
+        "hiring", "recruitment", "recruiter", "recruit", "internship", "internships",
+        "intern", "interns", "job", "jobs", "employment", "employer", "employers",
+        "expo", "work readiness", "workplace", "corporate", "graduate", "graduates",
+        "analyst", "trainee", "fellowship", "bursary", "bursaries", "scholarship",
+        "psycad", "masterclass", "mentorship", "networking", "pathway", "placement",
+    ],
+    "Sport": [
+        "sport", "sports", "run", "running", "race", "marathon", "athletics",
+        "football", "soccer", "rugby", "cricket", "basketball", "netball",
+        "stadium", "tournament", "derby", "fitness", "gym", "match",
+        "championship", "league", "varsity cup", "varsity sports", "uj sport",
+        "swimming", "tennis", "volleyball", "squash",
+    ],
+    "Academic": [
+        "lecture", "lectures", "symposium", "conference", "research", "faculty",
+        "seminar", "seminars", "workshop", "workshops", "webinar", "webinars",
+        "colloquium", "panel discussion", "roundtable", "keynote", "summit",
+        "inaugural lecture", "academic", "defense", "phd", "postgraduate",
+        "masters", "dean's lecture", "deans lecture",
+    ],
+    "Open Day": [
+        "open day", "campus tour", "orientation", "prospective", "welcome day",
+        "first-year", "first year", "registration", "admissions", "open days",
+    ],
+    "Culture": [
+        "art", "arts", "theatre", "theater", "music", "musical", "choir",
+        "dance", "dancing", "exhibition", "creative", "fada", "culture",
+        "cultural", "showcase", "poetry", "drama", "festival", "concert",
+        "gallery", "orchestra", "film", "cinema", "performance",
+    ],
 }
 
 
@@ -136,27 +163,72 @@ def detect_date(text: str, fallback_timestamp: Optional[int] = None) -> str:
     return datetime.now().strftime("%Y-%m-%d")
 
 
+KNOWN_VENUES = [
+    "Drama Studio, Bunting Theatre Complex",
+    "Bunting Theatre Complex",
+    "Drama Studio",
+    "Library Auditorium",
+    "Sanlam Auditorium",
+    "AW Muller Stadium",
+    "A.W. Muller Stadium",
+    "Johannesburg Business School",
+    "Con Cowan Theatre",
+    "FADA Gallery",
+    "UJ Arts Centre",
+    "Great Hall",
+    "Kingsway Hall",
+]
+
+
 def detect_category(text: str) -> str:
-    """Categorizes the event."""
+    """Categorizes the event using word-boundary scoring across all keyword categories."""
     text_lower = text.lower()
+    scores: Dict[str, int] = {}
+
     for cat, kws in CATEGORY_KEYWORDS.items():
-        if any(kw in text_lower for kw in kws):
-            return cat
+        score = 0
+        for kw in kws:
+            pattern = rf"\b{re.escape(kw.lower())}\b"
+            matches = len(re.findall(pattern, text_lower))
+            score += matches
+        if score > 0:
+            scores[cat] = score
+
+    if scores:
+        return max(scores, key=scores.get)
     return "Culture"
 
 
 def detect_venue(text: str, campus: str) -> str:
     """Extracts venue/room or combines with campus location."""
+    campus_full = CAMPUS_FULL_NAMES.get(campus, CAMPUS_FULL_NAMES["APK"])
+
+    # 1. Match against known campus venues
+    for kv in KNOWN_VENUES:
+        if re.search(rf"\b{re.escape(kv)}\b", text, re.I):
+            return f"{kv}, {campus_full}"
+
+    # 2. Extract venue phrases following markers like 'at', 'venue', 'location'
     venue_matches = re.findall(
-        r"\b(?:at|venue|location|room|auditorium|theatre|hall|complex|centre|gallery)\b[:\s]+([^.,\n]+)",
+        r"\b(?:at|venue|location)\b[:\s]+([^.,\n!]+)",
         text,
         re.I,
     )
-    campus_full = CAMPUS_FULL_NAMES.get(campus, CAMPUS_FULL_NAMES["APK"])
-    if venue_matches:
-        specific = venue_matches[0].strip().title()
-        if len(specific) > 3:
+    for match in venue_matches:
+        candidate = match.strip()
+        # Reject times (e.g. 15:00, 2pm, 14h00), dates, days of week, or numbers
+        if re.match(r"^\d{1,2}(?:[:.]\d{2}|h\d{2}|\s*(?:am|pm))\b", candidate, re.I):
+            continue
+        if re.match(r"^(?:monday|tuesday|wednesday|thursday|friday|saturday|sunday)\b", candidate, re.I):
+            continue
+        if re.match(r"^\d{1,2}\s+(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)", candidate, re.I):
+            continue
+        # Strip campus references already handled in campus_full
+        cleaned = re.sub(r"\s*,\s*(?:kingsway|bunting|apk|apb|jbs|swc|dfc).*$", "", candidate, flags=re.I).strip()
+        specific = cleaned.title()
+        if len(specific) > 3 and not re.match(r"^(?:free|admission|all|join|welcome)", specific, re.I):
             return f"{specific}, {campus_full}"
+
     return campus_full
 
 
@@ -192,10 +264,16 @@ def isolate_campus_event(
     ).strip()
 
     first_sentence = re.split(r"[.!?\n]", clean_title_source or clean_text)[0].strip()
-    if len(first_sentence) > 80:
-        title = first_sentence[:80].rsplit(" ", 1)[0]
+    t = re.split(r"\s+\b(?:at|venue:?)\b\s+", first_sentence, flags=re.I)[0].strip()
+    if len(t) > 85:
+        title = t[:85].rsplit(" ", 1)[0]
     else:
-        title = first_sentence or "Campus Event"
+        title = t or "Campus Event"
+
+    # Clean dangling punctuation and trailing conjunctions
+    title = re.sub(r"[\s,&:;-]+$", "", title).strip()
+    title = re.sub(r"\b(?:and|for|with|at|on|the|in|to)\b$", "", title, flags=re.I).strip()
+    title = re.sub(r"[\s,&:;-]+$", "", title).strip()
 
     campus = detect_campus(clean_text)
     venue = detect_venue(clean_text, campus)
