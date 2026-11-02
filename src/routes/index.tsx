@@ -26,13 +26,17 @@ import {
   Layers,
   MapPin,
   AlertTriangle,
+  MoreVertical,
+  Moon,
   Network,
   RefreshCw,
   Search,
   ShieldCheck,
+  Sun,
   Terminal,
 } from "lucide-react";
-import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { useTheme } from "@/hooks/use-theme";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -100,14 +104,75 @@ function SectionHeading({
 /* ------------------------------------------------------------------ */
 
 function Nav() {
-  const links = [
+  const { theme, toggleTheme } = useTheme();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  // Close the dropdown on outside clicks and Escape.
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onPointerDown = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setMenuOpen(false);
+      }
+    };
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+    document.addEventListener("mousedown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [menuOpen]);
+
+  const menuLinks = [
     { label: "Showcase", href: "#showcase" },
     { label: "Services", href: "#services" },
     { label: "Company", href: "#company" },
+    { label: "Help", href: "#help" },
   ];
+
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
+      <div className="mx-auto flex h-16 max-w-6xl items-center gap-4 px-6">
+        <div ref={menuRef} className="relative">
+          <button
+            type="button"
+            aria-label="Open menu"
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((open) => !open)}
+            className="flex size-9 items-center justify-center border border-border text-foreground transition-colors hover:border-primary/50 hover:text-primary"
+          >
+            <MoreVertical className="size-4" />
+          </button>
+          {menuOpen ? (
+            <div className="absolute left-0 top-[calc(100%+8px)] z-50 w-56 border border-border bg-surface shadow-lg">
+              <nav className="flex flex-col py-2">
+                {menuLinks.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setMenuOpen(false)}
+                    className="px-4 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-surface-2 hover:text-foreground"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </nav>
+              <div className="border-t border-border" />
+              <button
+                type="button"
+                onClick={toggleTheme}
+                className="flex w-full items-center gap-2.5 px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-surface-2 hover:text-foreground"
+              >
+                {theme === "dark" ? <Sun className="size-4" /> : <Moon className="size-4" />}
+                {theme === "dark" ? "Light mode" : "Dark mode"}
+              </button>
+            </div>
+          ) : null}
+        </div>
         <a href="/" className="flex items-center gap-2.5">
           <span className="flex size-7 items-center justify-center rounded-sm bg-primary font-display text-sm font-semibold text-primary-foreground">
             L
@@ -116,20 +181,9 @@ function Nav() {
             Leteane Industries
           </span>
         </a>
-        <nav className="hidden items-center gap-8 md:flex">
-          {links.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-            >
-              {link.label}
-            </a>
-          ))}
-        </nav>
         <a
           href="#showcase"
-          className="hidden items-center gap-1.5 rounded-md border border-border px-4 py-2 text-sm font-medium text-foreground transition-colors hover:border-primary/50 hover:text-primary sm:inline-flex"
+          className="ml-auto hidden items-center gap-1.5 rounded-md border border-border px-4 py-2 text-sm font-medium text-foreground transition-colors hover:border-primary/50 hover:text-primary sm:inline-flex"
         >
           Work with us
           <ArrowUpRight className="size-4" />
@@ -551,7 +605,7 @@ function Showcase() {
         </div>
 
         {/* AI assistant */}
-        <div className="mt-16">
+        <div id="help" className="mt-16 scroll-mt-24">
           <Eyebrow>Ask the assistant</Eyebrow>
           <div className="mt-3 grid grid-cols-1 items-baseline gap-x-10 gap-y-3 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]">
             <h3 className="font-display text-2xl font-semibold tracking-tight text-foreground">
@@ -735,6 +789,7 @@ function Footer() {
         { label: "Showcase", href: "#showcase" },
         { label: "Services", href: "#services" },
         { label: "About", href: "#company" },
+        { label: "Help", href: "#help" },
         { label: "Careers", href: "/careers" },
       ],
     },
