@@ -52,10 +52,10 @@
 
 :root {
   --radius: 0rem;
-  --background: oklch(0.36 0.075 256);
+  --background: oklch(0.31 0.075 256);
   --foreground: oklch(0.96 0.01 250);
-  --surface: oklch(0.325 0.08 256);
-  --surface-2: oklch(0.295 0.085 256);
+  --surface: oklch(0.34 0.08 256);
+  --surface-2: oklch(0.25 0.07 256);
   --card: oklch(0.325 0.08 256);
   --card-foreground: oklch(0.96 0.01 250);
   --popover: oklch(0.325 0.08 256);
@@ -66,7 +66,7 @@
   --secondary-foreground: oklch(0.96 0.01 250);
   --muted: oklch(0.305 0.08 256);
   --muted-foreground: oklch(0.98 0.006 250 / 88%);
-  --accent: oklch(0.43 0.07 256);
+  --accent: oklch(0.5 0.09 252);
   --accent-foreground: oklch(0.96 0.01 250);
   --destructive: oklch(0.65 0.2 25);
   --destructive-foreground: oklch(1 0 0);
@@ -85,35 +85,35 @@
   --ink-rule: oklch(1 0 0 / 16%);
   --ink-cross: oklch(1 0 0 / 28%);
 
-  /* Dashboard sidebar surface, blueprint blue mixed with white */
-  --sidebar: color-mix(in oklab, var(--background) 78%, white);
-  --sidebar-deep: color-mix(in oklab, var(--background) 66%, white);
-  --wash: color-mix(in oklab, var(--sidebar) 55%, transparent);
+  /* Dashboard sidebar surface: blueprint blue shaded toward black, white wash for light */
+  --sidebar: color-mix(in oklab, var(--background) 70%, black);
+  --sidebar-deep: color-mix(in oklab, var(--background) 50%, black);
+  --wash: color-mix(in oklab, white 18%, transparent);
 }
 
 /* Light theme: white drafting paper, blue ink */
 :root[data-theme="light"] {
-  --background: oklch(0.965 0.008 250);
+  --background: oklch(0.985 0.006 250);
   --foreground: oklch(0.24 0.06 258);
-  --surface: oklch(0.985 0.005 250);
-  --surface-2: oklch(0.94 0.012 252);
+  --surface: oklch(1 0 0);
+  --surface-2: oklch(0.955 0.02 250);
   --card: oklch(0.985 0.005 250);
   --card-foreground: oklch(0.24 0.06 258);
   --popover: oklch(0.985 0.005 250);
   --popover-foreground: oklch(0.24 0.06 258);
-  --primary: oklch(0.24 0.06 258);
+  --primary: oklch(0.36 0.075 256);
   --primary-foreground: oklch(0.97 0.005 250);
   --secondary: oklch(0.93 0.015 252);
   --secondary-foreground: oklch(0.24 0.06 258);
   --muted: oklch(0.93 0.012 252);
   --muted-foreground: oklch(0.3 0.05 258 / 88%);
-  --accent: oklch(0.9 0.02 252);
+  --accent: oklch(0.9 0.04 250);
   --accent-foreground: oklch(0.24 0.06 258);
   --destructive: oklch(0.55 0.2 25);
   --destructive-foreground: oklch(1 0 0);
   --border: oklch(0.24 0.06 258 / 22%);
   --input: oklch(0.24 0.06 258 / 32%);
-  --ring: oklch(0.24 0.06 258);
+  --ring: oklch(0.36 0.075 256);
   --uni-blue: oklch(0.2 0.09 264);
 
   --ink-line-1: oklch(0.3 0.07 258 / 8%);
@@ -125,8 +125,9 @@
   --ink-rule: oklch(0.3 0.07 258 / 18%);
   --ink-cross: oklch(0.3 0.07 258 / 30%);
 
-  --sidebar: color-mix(in oklab, var(--background) 93%, oklch(0.36 0.075 256));
-  --sidebar-deep: color-mix(in oklab, var(--background) 84%, oklch(0.36 0.075 256));
+  --sidebar: color-mix(in oklab, var(--background) 86%, oklch(0.36 0.075 256));
+  --sidebar-deep: color-mix(in oklab, var(--background) 74%, oklch(0.36 0.075 256));
+  --wash: color-mix(in oklab, oklch(0.36 0.075 256) 14%, transparent);
 }
 
 @layer base {
@@ -212,14 +213,26 @@
   background-size: 56px 56px;
 }
 
-/* Indigo glow accent line */
+/* Shimmering accent line */
 @utility accent-line {
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--primary),
-    transparent
-  );
+  background: linear-gradient(90deg, transparent, var(--primary), var(--wash), var(--primary), transparent);
+  background-size: 200% 100%;
+  animation: accent-shimmer 6s linear infinite;
+}
+
+@keyframes accent-shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .accent-line {
+    animation: none;
+  }
 }
 
 /* Subtle top highlight on panels */

@@ -26,17 +26,14 @@ import {
   Layers,
   MapPin,
   AlertTriangle,
-  MoreVertical,
-  Moon,
   Network,
   RefreshCw,
   Search,
   ShieldCheck,
-  Sun,
   Terminal,
 } from "lucide-react";
-import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import { useTheme } from "@/hooks/use-theme";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { DashboardSidebar } from "@/components/DashboardSidebar";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -103,77 +100,31 @@ function SectionHeading({
 /* Navigation                                                          */
 /* ------------------------------------------------------------------ */
 
-const menuLinks = [
-  { label: "Showcase", href: "#showcase", icon: Layers },
-  { label: "Services", href: "#services", icon: Network },
-  { label: "Company", href: "#company", icon: Database },
-  { label: "Help", href: "#help", icon: Terminal },
-];
-
-function Nav() {
-  const { theme, toggleTheme } = useTheme();
-  const [menuOpen, setMenuOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
-
-  // Close the dropdown on outside clicks and Escape.
-  useEffect(() => {
-    if (!menuOpen) return;
-    const onPointerDown = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setMenuOpen(false);
-      }
-    };
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setMenuOpen(false);
-    };
-    document.addEventListener("mousedown", onPointerDown);
-    document.addEventListener("keydown", onKeyDown);
-    return () => {
-      document.removeEventListener("mousedown", onPointerDown);
-      document.removeEventListener("keydown", onKeyDown);
-    };
-  }, [menuOpen]);
-
+function Nav({
+  sidebarOpen,
+  onToggleSidebar,
+}: {
+  sidebarOpen: boolean;
+  onToggleSidebar: () => void;
+}) {
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background">
+    <header className="sticky top-0 z-40 border-b border-border bg-background">
       <div className="mx-auto flex h-16 max-w-6xl items-center gap-4 px-6">
-        <div ref={menuRef} className="relative md:hidden">
-          <button
-            type="button"
-            aria-label="Open menu"
-            aria-expanded={menuOpen}
-            onClick={() => setMenuOpen((open) => !open)}
-            className="flex size-9 items-center justify-center border border-border text-foreground transition-colors hover:border-primary/50 hover:text-primary"
-          >
-            <MoreVertical className="size-4" />
-          </button>
-          {menuOpen ? (
-            <div className="absolute left-0 top-[calc(100%+8px)] z-50 w-56 border border-border bg-surface shadow-lg">
-              <nav className="flex flex-col py-2">
-                {menuLinks.map((link) => (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setMenuOpen(false)}
-                    className="px-4 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-surface-2 hover:text-foreground"
-                  >
-                    {link.label}
-                  </a>
-                ))}
-              </nav>
-              <div className="border-t border-border" />
-              <button
-                type="button"
-                onClick={toggleTheme}
-                className="flex w-full items-center gap-2.5 px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-surface-2 hover:text-foreground"
-              >
-                {theme === "dark" ? <Sun className="size-4" /> : <Moon className="size-4" />}
-                {theme === "dark" ? "Light mode" : "Dark mode"}
-              </button>
-            </div>
-          ) : null}
-        </div>
-        <a href="/" className="flex items-center gap-2.5 md:hidden">
+        <button
+          type="button"
+          aria-label={sidebarOpen ? "Hide dashboard" : "Show dashboard"}
+          aria-expanded={sidebarOpen}
+          onClick={onToggleSidebar}
+          className="group flex size-9 shrink-0 flex-col items-center justify-center gap-[5px] border border-border text-foreground transition-colors hover:border-primary/50 hover:text-primary"
+        >
+          <span className="block h-0.5 w-4 bg-current transition-transform duration-300 group-hover:w-5" />
+          <span className="block h-0.5 w-4 bg-current transition-transform duration-300 group-hover:w-5" />
+          <span className="block h-0.5 w-4 bg-current transition-transform duration-300 group-hover:w-5" />
+        </button>
+        <a
+          href="/"
+          className={`items-center gap-2.5 ${sidebarOpen ? "hidden md:hidden" : "flex md:flex"}`}
+        >
           <span className="flex size-7 items-center justify-center rounded-sm bg-primary font-display text-sm font-semibold text-primary-foreground">
             L
           </span>
@@ -190,51 +141,6 @@ function Nav() {
         </a>
       </div>
     </header>
-  );
-}
-
-/* Dashboard sidebar: full height on the left, holds the menu and the theme toggle */
-function Sidebar() {
-  const { theme, toggleTheme } = useTheme();
-  return (
-    <aside className="sidebar-sheen fixed inset-y-0 left-0 z-50 hidden w-60 flex-col border-r border-border md:flex">
-      <a
-        href="/"
-        className="flex h-16 shrink-0 items-center gap-2.5 border-b border-border px-5"
-      >
-        <span className="flex size-7 items-center justify-center rounded-sm bg-primary font-display text-sm font-semibold text-primary-foreground">
-          L
-        </span>
-        <span className="font-display text-sm font-semibold tracking-wide text-foreground">
-          Leteane Industries
-        </span>
-      </a>
-      <nav className="flex flex-1 flex-col gap-1 overflow-y-auto px-3 py-6">
-        <span className="px-2 pb-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
-          Menu
-        </span>
-        {menuLinks.map((link) => (
-          <a
-            key={link.href}
-            href={link.href}
-            className="flex items-center gap-3 border border-transparent px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:border-primary/40 hover:bg-sidebar-deep/60 hover:text-foreground"
-          >
-            <link.icon className="size-4" />
-            {link.label}
-          </a>
-        ))}
-      </nav>
-      <div className="border-t border-border px-3 py-4">
-        <button
-          type="button"
-          onClick={toggleTheme}
-          className="flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-sidebar-deep/60 hover:text-foreground"
-        >
-          {theme === "dark" ? <Sun className="size-4" /> : <Moon className="size-4" />}
-          {theme === "dark" ? "Light mode" : "Dark mode"}
-        </button>
-      </div>
-    </aside>
   );
 }
 
@@ -925,11 +831,26 @@ function Footer() {
 /* ------------------------------------------------------------------ */
 
 function Index() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  useEffect(() => {
+    setSidebarOpen(window.matchMedia("(min-width: 768px)").matches);
+  }, []);
+
+  const closeSidebarOnMobile = () => {
+    if (window.matchMedia("(max-width: 767px)").matches) setSidebarOpen(false);
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Sidebar />
-      <div className="md:pl-60">
-        <Nav />
+      <DashboardSidebar open={sidebarOpen} onNavigate={closeSidebarOnMobile} />
+      <div
+        className={`transition-[padding] duration-300 ease-out ${sidebarOpen ? "md:pl-60" : "md:pl-0"}`}
+      >
+        <Nav
+          sidebarOpen={sidebarOpen}
+          onToggleSidebar={() => setSidebarOpen((open) => !open)}
+        />
         <main>
           <Hero />
           <Showcase />
