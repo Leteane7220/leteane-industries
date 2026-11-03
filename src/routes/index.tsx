@@ -249,6 +249,11 @@ function Hero() {
         className="absolute inset-x-0 top-0 h-px accent-line opacity-60"
         aria-hidden="true"
       />
+      {/* Blue and white bloom over the hero paper */}
+      <div
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_60%_at_85%_0%,var(--wash),transparent_70%)]"
+        aria-hidden="true"
+      />
       <div
         className="draft-construction pointer-events-none absolute inset-0"
         aria-hidden="true"
