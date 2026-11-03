@@ -1,5 +1,6 @@
 import { CampusAssistant } from "@/components/CampusAssistant";
 import {
+  campusEvents,
   campusLabels,
   entryClass,
   eventNumber,
@@ -11,10 +12,12 @@ import {
   isEventPast,
   withinWindow,
   type TimeWindow,
+  type CampusEvent,
   socialPlatformOf,
 } from "@/lib/campus-events";
-import { DashboardSidebar, menuLinks } from "@/components/DashboardSidebar";
-import { useCampusFeed, type CampusFeed } from "@/hooks/use-campus-feed";
+import { getLiveCampusEvents } from "@/lib/supabase";
+import { verifyEvents, type EventVerification } from "@/lib/verify-events.functions";
+import { useServerFn } from "@tanstack/react-start";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
@@ -100,6 +103,13 @@ function SectionHeading({
 /* Navigation                                                          */
 /* ------------------------------------------------------------------ */
 
+const menuLinks = [
+  { label: "Showcase", href: "#showcase", icon: Layers },
+  { label: "Services", href: "#services", icon: Network },
+  { label: "Company", href: "#company", icon: Database },
+  { label: "Help", href: "#help", icon: Terminal },
+];
+
 function Nav() {
   const { theme, toggleTheme } = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -180,6 +190,51 @@ function Nav() {
         </a>
       </div>
     </header>
+  );
+}
+
+/* Dashboard sidebar: full height on the left, holds the menu and the theme toggle */
+function Sidebar() {
+  const { theme, toggleTheme } = useTheme();
+  return (
+    <aside className="sidebar-sheen fixed inset-y-0 left-0 z-50 hidden w-60 flex-col border-r border-border md:flex">
+      <a
+        href="/"
+        className="flex h-16 shrink-0 items-center gap-2.5 border-b border-border px-5"
+      >
+        <span className="flex size-7 items-center justify-center rounded-sm bg-primary font-display text-sm font-semibold text-primary-foreground">
+          L
+        </span>
+        <span className="font-display text-sm font-semibold tracking-wide text-foreground">
+          Leteane Industries
+        </span>
+      </a>
+      <nav className="flex flex-1 flex-col gap-1 overflow-y-auto px-3 py-6">
+        <span className="px-2 pb-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
+          Menu
+        </span>
+        {menuLinks.map((link) => (
+          <a
+            key={link.href}
+            href={link.href}
+            className="flex items-center gap-3 border border-transparent px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:border-primary/40 hover:bg-sidebar-deep/60 hover:text-foreground"
+          >
+            <link.icon className="size-4" />
+            {link.label}
+          </a>
+        ))}
+      </nav>
+      <div className="border-t border-border px-3 py-4">
+        <button
+          type="button"
+          onClick={toggleTheme}
+          className="flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-sidebar-deep/60 hover:text-foreground"
+        >
+          {theme === "dark" ? <Sun className="size-4" /> : <Moon className="size-4" />}
+          {theme === "dark" ? "Light mode" : "Dark mode"}
+        </button>
+      </div>
+    </aside>
   );
 }
 
@@ -267,12 +322,46 @@ const windowOptions: Array<{ value: TimeWindow; label: string }> = [
 const selectClass =
   "rounded-md border border-border bg-background px-3 py-2 font-mono text-xs text-muted-foreground outline-none transition-colors focus:border-primary/60";
 
-function Showcase({ feed }: { feed: CampusFeed }) {
-  const { events, checks, lastRefreshed, refreshing, refresh: handleRefresh } = feed;
+function Showcase() {
+  const [events, setEvents] = useState<CampusEvent[]>(campusEvents);
   const [query, setQuery] = useState("");
   const [campus, setCampus] = useState("all");
   const [window, setWindow] = useState<TimeWindow>("any");
   const [source, setSource] = useState("any");
+  const [lastRefreshed, setLastRefreshed] = useState<Date | null>(null);
+  const [refreshing, setRefreshing] = useState(false);
+  const [checks, setChecks] = useState<Record<string, EventVerification>>({});
+  const runVerification = useServerFn(verifyEvents);
+
+  const handleRefresh = async () => {
+    setRefreshing(true);
+    try {
+      const [data, liveEvents] = await Promise.all([
+        runVerification({}),
+        getLiveCampusEvents(),
+      ]);
+      setEvents(liveEvents);
+      const next: Record<string, EventVerification> = {};
+      for (const result of data.results) next[result.url] = result;
+      setChecks(next);
+      setLastRefreshed(new Date(data.checkedAt));
+    } catch {
+      try {
+        const liveEvents = await getLiveCampusEvents();
+        setEvents(liveEvents);
+      } catch {
+        // preserve current events
+      }
+      setLastRefreshed(new Date());
+    } finally {
+      setRefreshing(false);
+    }
+  };
+
+  useEffect(() => {
+    void handleRefresh();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const allSources = useMemo(() => {
     return Array.from(new Set(events.map((e) => e.source))).sort();
@@ -836,15 +925,14 @@ function Footer() {
 /* ------------------------------------------------------------------ */
 
 function Index() {
-  const feed = useCampusFeed();
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <DashboardSidebar feed={feed} />
+      <Sidebar />
       <div className="md:pl-60">
         <Nav />
         <main>
           <Hero />
-          <Showcase feed={feed} />
+          <Showcase />
           <Services />
           <About />
         </main>
