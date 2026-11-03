@@ -39,3 +39,4 @@ __pycache__/
 instagram_posts.json
 tiktok_posts.json
 isolated_campus_events.json
+.env
