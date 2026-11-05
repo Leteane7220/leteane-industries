@@ -307,7 +307,7 @@ export function entryClass(free: boolean) {
 
 /** Zero padded position of an event in the index, the same number the table shows. */
 export function eventNumber(event: CampusEvent, list: CampusEvent[] = campusEvents) {
-  const position = list.findIndex((e) => e.url === event.url);
+  const position = list.indexOf(event);
   return String((position < 0 ? 0 : position) + 1).padStart(2, "0");
 }
 
